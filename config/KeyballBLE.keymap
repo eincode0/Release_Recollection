@@ -101,6 +101,16 @@
             bindings = <&kp LEFT_SHIFT>;
             key-positions = <8 9>;
         };
+
+        tab {
+            bindings = <&kp TAB>;
+            key-positions = <11 12>;
+        };
+
+        lctab {
+            bindings = <&kp LS(TAB)>;
+            key-positions = <1 2>;
+        };
     };
 
     macros {
