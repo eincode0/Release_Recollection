@@ -1,0 +1,14 @@
+/* config/boards/seeeduino_xiao_ble.overlay
+ * uart0_sleep / uart0_default が DT 生成で
+ * "lacks #binding-cells" になる対策（L/R 両方に効く）
+ */
+
+&pinctrl {
+    uart0_default: uart0_default {
+        #binding-cells = <0>;
+    };
+
+    uart0_sleep: uart0_sleep {
+        #binding-cells = <0>;
+    };
+};
