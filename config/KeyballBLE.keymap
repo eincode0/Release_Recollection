@@ -18,8 +18,7 @@
  *   14 GESTURE_W
  *   15 SCROLL_SNAP
  *   16 SNIPE（キーで遅いスクロール：MOVE_X/Y(8)）
- *  - overlay 側で gesture を 7/8/9/10/11/12/13/14 に紐付け
- *  - mm_l*_dir は overlay の zip_mouse_gesture_* から呼ばれる
+ *  - overlay 側で gesture を 7..14 に紐付け（gE/gR/gS/gM/gT/gA/gD/gW）
  * =============================== */
 
 #define ZMK_POINTING_DEFAULT_SCRL_VAL 80
@@ -57,60 +56,21 @@
     combos {
         compatible = "zmk,combos";
 
-        mb2_combo {
-            bindings = <&mkp MB2>;
-            key-positions = <19 18>;
-        };
+        mb2_combo { bindings = <&mkp MB2>; key-positions = <19 18>; };
+        scroll_combos { bindings = <&tog 5>; key-positions = <7 8>; };
+        drag_off_combo { bindings = <&drag_off>; key-positions = <20 19>; };
 
-        scroll_combos {
-            bindings = <&tog 5>;
-            key-positions = <7 8>;
-        };
+        key1 { bindings = <&kp EXCLAMATION>; key-positions = <17 18>; };
+        key2 { bindings = <&kp QUESTION>; key-positions = <29 30>; };
 
-        drag_off_combo {
-            bindings = <&drag_off>;
-            key-positions = <20 19>;
-        };
+        scrl_up { bindings = <&msc MOVE_UP>; key-positions = <21 33>; };
+        scrl_down { bindings = <&msc MOVE_DOWN>; key-positions = <33 42>; };
 
-        key1 {
-            bindings = <&kp EXCLAMATION>;
-            key-positions = <17 18>;
-        };
+        left_shift { bindings = <&kp LEFT_SHIFT>; key-positions = <0 1>; };
+        right_shift { bindings = <&kp RIGHT_SHIFT>; key-positions = <8 9>; };
 
-        key2 {
-            bindings = <&kp QUESTION>;
-            key-positions = <29 30>;
-        };
-
-        scrl_up {
-            bindings = <&msc MOVE_UP>;
-            key-positions = <21 33>;
-        };
-
-        scrl_down {
-            bindings = <&msc MOVE_DOWN>;
-            key-positions = <33 42>;
-        };
-
-        left_shift {
-            bindings = <&kp LEFT_SHIFT>;
-            key-positions = <0 1>;
-        };
-
-        right_shift {
-            bindings = <&kp LEFT_SHIFT>;
-            key-positions = <8 9>;
-        };
-
-        tab {
-            bindings = <&kp TAB>;
-            key-positions = <11 12>;
-        };
-
-        lctab {
-            bindings = <&kp LS(TAB)>;
-            key-positions = <1 2>;
-        };
+        tab { bindings = <&kp TAB>; key-positions = <11 12>; };
+        lctab { bindings = <&kp LS(TAB)>; key-positions = <1 2>; };
     };
 
     macros {
@@ -118,13 +78,7 @@
             compatible = "zmk,behavior-macro";
             label = "SAFARI_RELOAD_ONCE";
             #binding-cells = <0>;
-            bindings =
-                <&macro_press>,
-                <&kp LGUI>,
-                <&macro_tap>,
-                <&kp R>,
-                <&macro_release>,
-                <&kp LGUI>;
+            bindings = <&macro_press>, <&kp LGUI>, <&macro_tap>, <&kp R>, <&macro_release>, <&kp LGUI>;
         };
 
         to_layer_0: to_layer_0 {
@@ -134,19 +88,8 @@
             bindings = <&to 0 &macro_param_1to1 &kp MACRO_PLACEHOLDER>;
         };
 
-        drag_on: drag_on {
-            compatible = "zmk,behavior-macro";
-            label = "DRAG_ON";
-            #binding-cells = <0>;
-            bindings = <&macro_press>, <&mkp MB1>;
-        };
-
-        drag_off: drag_off {
-            compatible = "zmk,behavior-macro";
-            label = "DRAG_OFF";
-            #binding-cells = <0>;
-            bindings = <&macro_release>, <&mkp MB1>;
-        };
+        drag_on: drag_on { compatible = "zmk,behavior-macro"; label = "DRAG_ON"; #binding-cells = <0>; bindings = <&macro_press>, <&mkp MB1>; };
+        drag_off: drag_off { compatible = "zmk,behavior-macro"; label = "DRAG_OFF"; #binding-cells = <0>; bindings = <&macro_release>, <&mkp MB1>; };
 
         lm: lm {
             compatible = "zmk,behavior-macro-two-param";
@@ -173,11 +116,7 @@
             compatible = "zmk,behavior-hold-tap";
             label = "GESTURE_MO_KP";
             bindings = <&mo>, <&kp>;
-
             #binding-cells = <2>;
-
-            /* タップ優先（キー入力寄り） */
-
             flavor = "tap-preferred";
             tapping-term-ms = <210>;
             quick-tap-ms = <150>;
@@ -188,46 +127,22 @@
             compatible = "zmk,behavior-hold-tap";
             label = "LAYER_TAP_TO_0";
             bindings = <&mo>, <&to_layer_0>;
-
             #binding-cells = <2>;
-            tapping-term-ms = <210>;
             flavor = "tap-preferred";
+            tapping-term-ms = <210>;
             quick-tap-ms = <150>;
             require-prior-idle-ms = <350>;
         };
 
-        rotate: rotate {
-            compatible = "zmk,behavior-sensor-rotate";
-            label = "ROTATE";
-            #sensor-binding-cells = <0>;
-            bindings = <&msc MOVE_UP>, <&msc MOVE_DOWN>;
+        rotate: rotate { compatible = "zmk,behavior-sensor-rotate"; label = "ROTATE"; #sensor-binding-cells = <0>; bindings = <&msc MOVE_UP>, <&msc MOVE_DOWN>; tap-ms = <20>; };
 
-            tap-ms = <20>;
-        };
-
-        lt_mkp: lt_mkp {
-            compatible = "zmk,behavior-hold-tap";
-            label = "LT_MKP";
-            bindings = <&mo>, <&mkp>;
-
-            #binding-cells = <2>;
-            tapping-term-ms = <200>;
-        };
-
-        mod_mkp: mod_mkp {
-            compatible = "zmk,behavior-hold-tap";
-            label = "MOD_MKP";
-            bindings = <&kp>, <&mkp>;
-
-            #binding-cells = <2>;
-            tapping-term-ms = <200>;
-        };
+        lt_mkp: lt_mkp { compatible = "zmk,behavior-hold-tap"; label = "LT_MKP"; bindings = <&mo>, <&mkp>; #binding-cells = <2>; tapping-term-ms = <200>; };
+        mod_mkp: mod_mkp { compatible = "zmk,behavior-hold-tap"; label = "MOD_MKP"; bindings = <&kp>, <&mkp>; #binding-cells = <2>; tapping-term-ms = <200>; };
 
         dragkey: dragkey {
             compatible = "zmk,behavior-hold-tap";
             label = "DRAGKEY";
             bindings = <&drag_on>, <&mkp>;
-
             #binding-cells = <2>;
             tapping-term-ms = <200>;
             require-prior-idle-ms = <150>;
@@ -235,236 +150,52 @@
             quick-tap-ms = <100>;
         };
 
-        g_shft: g_shft {
-            compatible = "zmk,behavior-sticky-key";
-            #binding-cells = <1>;
-            release-after-ms = <1000>;
-            bindings = <&kp>;
-        };
+        g_shft: g_shft { compatible = "zmk,behavior-sticky-key"; #binding-cells = <1>; release-after-ms = <1000>; bindings = <&kp>; };
 
-        mm_l1_up: mm_l1_up {
-            compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <0>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-            bindings = <&kp LC(B)>, <&kp LC(LA(LG(NUMBER_1)))>;
-        };
+        /* ===== gesture mappings (readable names) =====
+         * gE / gR / gS / gM / gT / gA / gD / gW
+         * ↑↓←→ は overlay の zip_g* が呼ぶ
+         */
 
-        mm_l1_down: mm_l1_down {
-            compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <0>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-            bindings = <&kp LG(SPACE)>, <&kp LC(LA(LG(NUMBER_4)))>;
-        };
+        gA_up: gA_up { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp LC(B)>, <&kp LC(LA(LG(NUMBER_1)))>; };
+        gA_down: gA_down { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp LG(SPACE)>, <&kp LC(LA(LG(NUMBER_4)))>; };
+        gA_left: gA_left { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp LG(LS(TAB))>, <&kp LC(LA(LG(NUMBER_3)))>; };
+        gA_right: gA_right { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp LG(TAB)>, <&kp LC(LA(LG(NUMBER_2)))>; };
 
-        mm_l1_left: mm_l1_left {
-            compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <0>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-            bindings = <&kp LG(LS(TAB))>, <&kp LC(LA(LG(NUMBER_3)))>;
-        };
+        gD_up: gD_up { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp LC(UP_ARROW)>, <&kp F12>; };
+        gD_down: gD_down { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp LG(H)>, <&kp F16>; };
+        gD_left: gD_left { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp F15>, <&kp F11>; };
+        gD_right: gD_right { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp F14>, <&kp F20>; };
 
-        mm_l1_right: mm_l1_right {
-            compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <0>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-            bindings = <&kp LG(TAB)>, <&kp LC(LA(LG(NUMBER_2)))>;
-        };
+        gW_up: gW_up { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp F3>, <&kp HOME>; };
+        gW_down: gW_down { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp LG(M)>, <&kp END>; };
+        gW_left: gW_left { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&mkp MB4>, <&kp LG(Q)>; };
+        gW_right: gW_right { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&mkp MB5>, <&kp LG(W)>; };
 
-        mm_l2_up: mm_l2_up {
-            compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <0>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-            bindings = <&kp LC(UP_ARROW)>, <&kp F12>;
-        };
+        gT_up: gT_up { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp LG(T)>, <&kp LG(R)>; };
+        gT_down: gT_down { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp LG(W)>, <&kp LG(F)>; };
+        gT_left: gT_left { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp LC(LS(TAB))>, <&kp LG(MINUS)>; };
+        gT_right: gT_right { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp LC(TAB)>, <&kp LG(PLUS)>; };
 
-        mm_l2_down: mm_l2_down {
-            compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <0>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-            bindings = <&kp LG(H)>, <&kp F16>;
-        };
+        gE_up: gE_up { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp LG(C)>, <&kp LG(X)>; };
+        gE_down: gE_down { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp LG(V)>, <&kp LG(V)>; };
+        gE_left: gE_left { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp LG(Z)>, <&kp LG(P)>; };
+        gE_right: gE_right { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp LG(LS(Z))>, <&kp LG(RET)>; };
 
-        mm_l2_left: mm_l2_left {
-            compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <0>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-            bindings = <&kp F15>, <&kp F11>;
-        };
+        gR_up: gR_up { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp LG(A)>, <&kp LG(LS(UP_ARROW))>; };
+        gR_down: gR_down { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp LG(X)>, <&kp LG(LS(DOWN_ARROW))>; };
+        gR_left: gR_left { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp LA(LS(LEFT_ARROW))>, <&kp LG(LS(LEFT_ARROW))>; };
+        gR_right: gR_right { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp LA(LS(RIGHT_ARROW))>, <&kp LG(LS(RIGHT_ARROW))>; };
 
-        mm_l2_right: mm_l2_right {
-            compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <0>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-            bindings = <&kp F14>, <&kp F20>;
-        };
+        gS_up: gS_up { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp LG(LS(NUMBER_3))>, <&kp LC(LG(LS(NUMBER_3)))>; };
+        gS_down: gS_down { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp ESC>, <&kp ESC>; };
+        gS_left: gS_left { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp LG(LS(NUMBER_4))>, <&kp LC(LG(LS(NUMBER_4)))>; };
+        gS_right: gS_right { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp LG(LS(NUMBER_5))>, <&kp LG(LS(NUMBER_5))>; };
 
-        mm_l3_up: mm_l3_up {
-            compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <0>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-            bindings = <&kp F3>, <&kp HOME>;
-        };
-
-        mm_l3_down: mm_l3_down {
-            compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <0>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-            bindings = <&kp LG(M)>, <&kp END>;
-        };
-
-        mm_l3_left: mm_l3_left {
-            compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <0>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-            bindings = <&mkp MB4>, <&kp LG(Q)>;
-        };
-
-        mm_l3_right: mm_l3_right {
-            compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <0>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-            bindings = <&mkp MB5>, <&kp LG(W)>;
-        };
-
-        mm_l7_up: mm_l7_up {
-            compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <0>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-            bindings = <&kp LG(T)>, <&kp LG(R)>;
-        };
-
-        mm_l7_down: mm_l7_down {
-            compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <0>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-            bindings = <&kp LG(W)>, <&kp LG(F)>;
-        };
-
-        mm_l7_left: mm_l7_left {
-            compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <0>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-            bindings = <&kp LC(LS(TAB))>, <&kp LG(MINUS)>;
-        };
-
-        mm_l7_right: mm_l7_right {
-            compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <0>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-            bindings = <&kp LC(TAB)>, <&kp LG(PLUS)>;
-        };
-
-        mm_l11_up: mm_l11_up {
-            compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <0>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-            bindings = <&kp LG(C)>, <&kp LG(X)>;
-        };
-
-        mm_l11_down: mm_l11_down {
-            compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <0>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-            bindings = <&kp LG(V)>, <&kp LG(V)>;
-        };
-
-        mm_l11_left: mm_l11_left {
-            compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <0>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-            bindings = <&kp LG(Z)>, <&kp LG(P)>;
-        };
-
-        mm_l11_right: mm_l11_right {
-            compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <0>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-            bindings = <&kp LG(LS(Z))>, <&kp LG(RET)>;
-        };
-
-        mm_l12_up: mm_l12_up {
-            compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <0>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-            bindings = <&kp LG(A)>, <&kp LG(LS(UP_ARROW))>;
-        };
-
-        mm_l12_down: mm_l12_down {
-            compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <0>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-            bindings = <&kp LG(X)>, <&kp LG(LS(DOWN_ARROW))>;
-        };
-
-        mm_l12_left: mm_l12_left {
-            compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <0>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-            bindings = <&kp LA(LS(LEFT_ARROW))>, <&kp LG(LS(LEFT_ARROW))>;
-        };
-
-        mm_l12_right: mm_l12_right {
-            compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <0>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-            bindings = <&kp LA(LS(RIGHT_ARROW))>, <&kp LG(LS(RIGHT_ARROW))>;
-        };
-
-        mm_l13_up: mm_l13_up {
-            compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <0>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-            bindings = <&kp LG(LS(NUMBER_3))>, <&kp LC(LG(LS(NUMBER_3)))>;
-        };
-
-        mm_l13_down: mm_l13_down {
-            compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <0>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-            bindings = <&kp ESC>, <&kp ESC>;
-        };
-
-        mm_l13_left: mm_l13_left {
-            compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <0>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-            bindings = <&kp LG(LS(NUMBER_4))>, <&kp LC(LG(LS(NUMBER_4)))>;
-        };
-
-        mm_l13_right: mm_l13_right {
-            compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <0>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-            bindings = <&kp LG(LS(NUMBER_5))>, <&kp LG(LS(NUMBER_5))>;
-        };
-
-        mm_l14_up: mm_l14_up {
-            compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <0>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-            bindings = <&kp C_VOLUME_UP>, <&kp F13>;
-        };
-
-        mm_l14_down: mm_l14_down {
-            compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <0>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-            bindings = <&kp C_VOLUME_DOWN>, <&kp C_MUTE>;
-        };
-
-        mm_l14_left: mm_l14_left {
-            compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <0>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-            bindings = <&kp C_BRI_DN>, <&kp F19>;
-        };
-
-        mm_l14_right: mm_l14_right {
-            compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <0>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-            bindings = <&kp C_BRI_UP>, <&kp F18>;
-        };
+        gM_up: gM_up { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp C_VOLUME_UP>, <&kp F13>; };
+        gM_down: gM_down { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp C_VOLUME_DOWN>, <&kp C_MUTE>; };
+        gM_left: gM_left { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp C_BRI_DN>, <&kp F19>; };
+        gM_right: gM_right { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp C_BRI_UP>, <&kp F18>; };
     };
 
     keymap {
@@ -622,8 +353,6 @@
 &trans  &trans  &trans  &kp LEFT_SHIFT  &kp LEFT_SHIFT  &trans      &trans  &trans                                          &trans
             >;
         };
-
-        /* layer16：キーで遅いスクロール（縦＋横） */
 
         SNIPE {
             bindings = <
