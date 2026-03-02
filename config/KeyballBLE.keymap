@@ -1,5 +1,5 @@
 /* ===============================
- * KeyballBLE.keymap（全置き換え / 整理版）
+ * KeyballBLE.keymap（コメント整理）
  *  - レイヤー順＝番号（0起算）
  *    0 default_layer
  *    1 FUNCTION
@@ -16,8 +16,7 @@
  *   12 GESTURE_A
  *   13 GESTURE_D
  *   14 GESTURE_W
- *   15 SCROLL_SNAP
- *   16 SNIPE（キーで遅いスクロール：MOVE_X/Y(8)）
+ *   15 SNIPE（キーで遅いスクロール：MOVE_X/Y(8)）
  *  - overlay 側で gesture を 7..14 に紐付け（gE/gR/gS/gM/gT/gA/gD/gW）
  * =============================== */
 
