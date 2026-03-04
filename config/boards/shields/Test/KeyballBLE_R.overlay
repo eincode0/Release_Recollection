@@ -233,7 +233,7 @@
         reg = <0>;
         spi-max-frequency = <2000000>;
         /* (GPIO_ACTIVE_LOW | GPIO_PULL_UP) はやめる：構文エラー回避 */
-        irq-gpios = <&gpio0 2 GPIO_ACTIVE_LOW>;
+        irq-gpios = <&gpio0 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
         scroll-layers = <5>;
     };
 };
