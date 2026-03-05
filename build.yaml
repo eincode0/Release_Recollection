@@ -17,12 +17,11 @@
 #     artifact-name: corne_left_with_logging
 #
 ---
----
 include:
- - board: xiao_ble
+ - board: xiao_ble/nrf52840/zmk
    shield: KeyballBLE_R rgbled_adapter
    snippet: studio-rpc-usb-uart
- - board: xiao_ble
+ - board: xiao_ble/nrf52840/zmk
    shield: KeyballBLE_L rgbled_adapter
- - board: xiao_ble
+ - board: xiao_ble/nrf52840/zmk
    shield: settings_reset
