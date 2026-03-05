@@ -20,14 +20,16 @@
  *  - overlay 側で gesture を 7..14 に紐付け（gE/gR/gS/gM/gT/gA/gD/gW）
  * =============================== */
 
-#define ZMK_POINTING_DEFAULT_SCRL_VAL 80
-
 #include "dts/mouse-gesture.local.dtsi"
-#include <dt-bindings/zmk/mouse.h>
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/pointing.h>
+#include <dt-bindings/zmk/mouse.h>
+
+/* pointing.h の定義（デフォルト10）を上書き */
+#undef ZMK_POINTING_DEFAULT_SCRL_VAL
+#define ZMK_POINTING_DEFAULT_SCRL_VAL 80
 
 &msc {
     time-to-max-speed-ms = <0>;
@@ -237,10 +239,7 @@
             bindings = <&kp>;
         };
 
-        /* ===== gesture mappings (readable names) =====
-         * gE / gR / gS / gM / gT / gA / gD / gW
-         * ↑↓←→ は overlay の zip_g* が呼ぶ
-         */
+        /* ===== gesture mappings ===== */
 
         gA_up: gA_up {
             compatible = "zmk,behavior-mod-morph";
