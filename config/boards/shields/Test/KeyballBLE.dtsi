@@ -112,3 +112,8 @@
         triggers-per-rotation = <10>;
     };
 };
+
+/* NFCピンをGPIOとして使用する設定（CONFIG_NFCT_PINS_AS_GPIOS廃止対応） */
+&uicr {
+    nfct-pins-as-gpios;
+};
