@@ -187,8 +187,8 @@
         /* 常時：端数繰り越し */
         input-processors = <&tb_wheel_rema 1 1 &tb_hwheel_rema 1 1>;
 
-        /* SCROLL(layer5)：通常スクロール */
-        scroller_5 { layers = <5>; input-processors = <&tb_wheel_rema 1 1 &tb_hwheel_rema 1 1>; };
+        /* SCROLL(layer5)：REL_X/Y → WHEEL/HWHEEL 変換してスクロール */
+        scroller_5 { layers = <5>; input-processors = <&zip_xy_to_scroll_mapper &tb_wheel_rema 1 1 &tb_hwheel_rema 1 1>; };
 
         /* SNIPE(layer15)：REL_X/Y のみ減速 */
         snipe_15 { layers = <15>; input-processors = <&tb_snipe_xy 1 4>; };
@@ -233,7 +233,6 @@
         reg = <0>;
         spi-max-frequency = <2000000>;
         irq-gpios = <&gpio0 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
-        scroll-layers = <5>;
         cpi = <800>;
         invert-y;
         evt-type = <INPUT_EV_REL>;
