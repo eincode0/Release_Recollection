@@ -1,14 +1,17 @@
 /* ===============================
- * KeyballBLE_R.overlay（全置き換え / gE..gW に統一 / SNIPE=15）
+ * KeyballBLE_R.overlay
  *
- * KeyballBLE.keymap と整合するレイヤー
- *  - SCROLL : layer 5（scroll-layers = <5>）
- *  - GESTURE_E..W : layer 7..14（zip_g* → g*_up/down/left/right）
- *  - SNIPE : layer 15（REL_X/Y のみ減速）
- *
- * 既存挙動（維持）
- *  - WHEEL/HWHEEL 端数繰り越し（常時）
- *  - ジェスチャ中は drop_all で REL を止める
+ * レイヤー対応:
+ *  - SCROLL    : layer 5  → REL_X/Y を WHEEL/HWHEEL に変換
+ *  - GESTURE_E : layer 7  → gE_up/down/left/right
+ *  - GESTURE_R : layer 8  → gR_up/down/left/right
+ *  - GESTURE_S : layer 9  → gS_up/down/left/right
+ *  - GESTURE_M : layer 10 → gM_up/down/left/right
+ *  - GESTURE_T : layer 11 → gT_up/down/left/right
+ *  - GESTURE_A : layer 12 → gA_up/down/left/right
+ *  - GESTURE_D : layer 13 → gD_up/down/left/right
+ *  - GESTURE_W : layer 14 → gW_up/down/left/right
+ *  - SNIPE     : layer 15 → REL_X/Y を 1/4 に減速
  * =============================== */
 
 #include "KeyballBLE.dtsi"
@@ -26,14 +29,15 @@
 &kscan0 {
     col-gpios =
         <&xiao_d 10 GPIO_ACTIVE_HIGH>,
-        <&xiao_d 9 GPIO_ACTIVE_HIGH>,
-        <&xiao_d 8 GPIO_ACTIVE_HIGH>,
-        <&xiao_d 7 GPIO_ACTIVE_HIGH>,
-        <&gpio0 10 GPIO_ACTIVE_HIGH>;
+        <&xiao_d 9  GPIO_ACTIVE_HIGH>,
+        <&xiao_d 8  GPIO_ACTIVE_HIGH>,
+        <&xiao_d 7  GPIO_ACTIVE_HIGH>,
+        <&gpio0  10 GPIO_ACTIVE_HIGH>;
 };
 
 / {
     input_processors {
+        /* 端数繰り越し：WHEEL */
         tb_wheel_rema: tb_wheel_rema {
             compatible = "zmk,input-processor-scaler";
             #input-processor-cells = <2>;
@@ -42,6 +46,7 @@
             track-remainders;
         };
 
+        /* 端数繰り越し：HWHEEL */
         tb_hwheel_rema: tb_hwheel_rema {
             compatible = "zmk,input-processor-scaler";
             #input-processor-cells = <2>;
@@ -58,7 +63,7 @@
             codes = <INPUT_REL_X INPUT_REL_Y INPUT_REL_WHEEL INPUT_REL_HWHEEL>;
         };
 
-        /* SNIPE(layer15)：カーソルだけ減速（例：1/4） */
+        /* SNIPE(layer15)：カーソル 1/4 減速 */
         tb_snipe_xy: tb_snipe_xy {
             compatible = "zmk,input-processor-scaler";
             #input-processor-cells = <2>;
@@ -66,7 +71,7 @@
             codes = <INPUT_REL_X INPUT_REL_Y>;
         };
 
-        /* ===== gestures : zip_g* -> g*_up/down/left/right ===== */
+        /* ===== ジェスチャプロセッサ ===== */
         zip_gE: zip_gE {
             compatible = "zmk,input-processor-mouse-gesture";
             #input-processor-cells = <0>;
@@ -75,9 +80,9 @@
             idle-timeout-ms = <110>;
             gesture-cooldown-ms = <130>;
             enable-eager-mode;
-            up { pattern = <GESTURE_UP>; bindings = <&gE_up>; };
-            down { pattern = <GESTURE_DOWN>; bindings = <&gE_down>; };
-            left { pattern = <GESTURE_LEFT>; bindings = <&gE_left>; };
+            up    { pattern = <GESTURE_UP>;    bindings = <&gE_up>;    };
+            down  { pattern = <GESTURE_DOWN>;  bindings = <&gE_down>;  };
+            left  { pattern = <GESTURE_LEFT>;  bindings = <&gE_left>;  };
             right { pattern = <GESTURE_RIGHT>; bindings = <&gE_right>; };
         };
 
@@ -89,9 +94,9 @@
             idle-timeout-ms = <110>;
             gesture-cooldown-ms = <130>;
             enable-eager-mode;
-            up { pattern = <GESTURE_UP>; bindings = <&gR_up>; };
-            down { pattern = <GESTURE_DOWN>; bindings = <&gR_down>; };
-            left { pattern = <GESTURE_LEFT>; bindings = <&gR_left>; };
+            up    { pattern = <GESTURE_UP>;    bindings = <&gR_up>;    };
+            down  { pattern = <GESTURE_DOWN>;  bindings = <&gR_down>;  };
+            left  { pattern = <GESTURE_LEFT>;  bindings = <&gR_left>;  };
             right { pattern = <GESTURE_RIGHT>; bindings = <&gR_right>; };
         };
 
@@ -103,9 +108,9 @@
             idle-timeout-ms = <110>;
             gesture-cooldown-ms = <130>;
             enable-eager-mode;
-            up { pattern = <GESTURE_UP>; bindings = <&gS_up>; };
-            down { pattern = <GESTURE_DOWN>; bindings = <&gS_down>; };
-            left { pattern = <GESTURE_LEFT>; bindings = <&gS_left>; };
+            up    { pattern = <GESTURE_UP>;    bindings = <&gS_up>;    };
+            down  { pattern = <GESTURE_DOWN>;  bindings = <&gS_down>;  };
+            left  { pattern = <GESTURE_LEFT>;  bindings = <&gS_left>;  };
             right { pattern = <GESTURE_RIGHT>; bindings = <&gS_right>; };
         };
 
@@ -117,9 +122,9 @@
             idle-timeout-ms = <110>;
             gesture-cooldown-ms = <130>;
             enable-eager-mode;
-            up { pattern = <GESTURE_UP>; bindings = <&gM_up>; };
-            down { pattern = <GESTURE_DOWN>; bindings = <&gM_down>; };
-            left { pattern = <GESTURE_LEFT>; bindings = <&gM_left>; };
+            up    { pattern = <GESTURE_UP>;    bindings = <&gM_up>;    };
+            down  { pattern = <GESTURE_DOWN>;  bindings = <&gM_down>;  };
+            left  { pattern = <GESTURE_LEFT>;  bindings = <&gM_left>;  };
             right { pattern = <GESTURE_RIGHT>; bindings = <&gM_right>; };
         };
 
@@ -131,9 +136,9 @@
             idle-timeout-ms = <110>;
             gesture-cooldown-ms = <130>;
             enable-eager-mode;
-            up { pattern = <GESTURE_UP>; bindings = <&gT_up>; };
-            down { pattern = <GESTURE_DOWN>; bindings = <&gT_down>; };
-            left { pattern = <GESTURE_LEFT>; bindings = <&gT_left>; };
+            up    { pattern = <GESTURE_UP>;    bindings = <&gT_up>;    };
+            down  { pattern = <GESTURE_DOWN>;  bindings = <&gT_down>;  };
+            left  { pattern = <GESTURE_LEFT>;  bindings = <&gT_left>;  };
             right { pattern = <GESTURE_RIGHT>; bindings = <&gT_right>; };
         };
 
@@ -145,9 +150,9 @@
             idle-timeout-ms = <110>;
             gesture-cooldown-ms = <130>;
             enable-eager-mode;
-            up { pattern = <GESTURE_UP>; bindings = <&gA_up>; };
-            down { pattern = <GESTURE_DOWN>; bindings = <&gA_down>; };
-            left { pattern = <GESTURE_LEFT>; bindings = <&gA_left>; };
+            up    { pattern = <GESTURE_UP>;    bindings = <&gA_up>;    };
+            down  { pattern = <GESTURE_DOWN>;  bindings = <&gA_down>;  };
+            left  { pattern = <GESTURE_LEFT>;  bindings = <&gA_left>;  };
             right { pattern = <GESTURE_RIGHT>; bindings = <&gA_right>; };
         };
 
@@ -159,9 +164,9 @@
             idle-timeout-ms = <110>;
             gesture-cooldown-ms = <130>;
             enable-eager-mode;
-            up { pattern = <GESTURE_UP>; bindings = <&gD_up>; };
-            down { pattern = <GESTURE_DOWN>; bindings = <&gD_down>; };
-            left { pattern = <GESTURE_LEFT>; bindings = <&gD_left>; };
+            up    { pattern = <GESTURE_UP>;    bindings = <&gD_up>;    };
+            down  { pattern = <GESTURE_DOWN>;  bindings = <&gD_down>;  };
+            left  { pattern = <GESTURE_LEFT>;  bindings = <&gD_left>;  };
             right { pattern = <GESTURE_RIGHT>; bindings = <&gD_right>; };
         };
 
@@ -173,9 +178,9 @@
             idle-timeout-ms = <110>;
             gesture-cooldown-ms = <130>;
             enable-eager-mode;
-            up { pattern = <GESTURE_UP>; bindings = <&gW_up>; };
-            down { pattern = <GESTURE_DOWN>; bindings = <&gW_down>; };
-            left { pattern = <GESTURE_LEFT>; bindings = <&gW_left>; };
+            up    { pattern = <GESTURE_UP>;    bindings = <&gW_up>;    };
+            down  { pattern = <GESTURE_DOWN>;  bindings = <&gW_down>;  };
+            left  { pattern = <GESTURE_LEFT>;  bindings = <&gW_left>;  };
             right { pattern = <GESTURE_RIGHT>; bindings = <&gW_right>; };
         };
     };
@@ -187,21 +192,21 @@
         /* 常時：端数繰り越し */
         input-processors = <&tb_wheel_rema 1 1 &tb_hwheel_rema 1 1>;
 
-        /* SCROLL(layer5)：REL_X/Y → WHEEL/HWHEEL 変換してスクロール */
-        scroller_5 { layers = <5>; input-processors = <&zip_xy_to_scroll_mapper &tb_wheel_rema 1 1 &tb_hwheel_rema 1 1>; };
+        /* SCROLL(layer5)：REL_X/Y → WHEEL/HWHEEL */
+        scroller_5  { layers = <5>;  input-processors = <&zip_xy_to_scroll_mapper &tb_wheel_rema 1 1 &tb_hwheel_rema 1 1>; };
 
-        /* SNIPE(layer15)：REL_X/Y のみ減速 */
-        snipe_15 { layers = <15>; input-processors = <&tb_snipe_xy 1 4>; };
+        /* SNIPE(layer15)：1/4 減速 */
+        snipe_15    { layers = <15>; input-processors = <&tb_snipe_xy 1 4>; };
 
-        /* gestures(layer7..14)：ジェスチャ + REL停止 */
-        gesture_e { layers = <7>;  input-processors = <&zip_gE &tb_drop_all 0 1>; };
-        gesture_r { layers = <8>;  input-processors = <&zip_gR &tb_drop_all 0 1>; };
-        gesture_s { layers = <9>;  input-processors = <&zip_gS &tb_drop_all 0 1>; };
-        gesture_m { layers = <10>; input-processors = <&zip_gM &tb_drop_all 0 1>; };
-        gesture_t { layers = <11>; input-processors = <&zip_gT &tb_drop_all 0 1>; };
-        gesture_a { layers = <12>; input-processors = <&zip_gA &tb_drop_all 0 1>; };
-        gesture_d { layers = <13>; input-processors = <&zip_gD &tb_drop_all 0 1>; };
-        gesture_w { layers = <14>; input-processors = <&zip_gW &tb_drop_all 0 1>; };
+        /* ジェスチャ(layer7-14)：ジェスチャ認識 + REL停止 */
+        gesture_e   { layers = <7>;  input-processors = <&zip_gE &tb_drop_all 0 1>; };
+        gesture_r   { layers = <8>;  input-processors = <&zip_gR &tb_drop_all 0 1>; };
+        gesture_s   { layers = <9>;  input-processors = <&zip_gS &tb_drop_all 0 1>; };
+        gesture_m   { layers = <10>; input-processors = <&zip_gM &tb_drop_all 0 1>; };
+        gesture_t   { layers = <11>; input-processors = <&zip_gT &tb_drop_all 0 1>; };
+        gesture_a   { layers = <12>; input-processors = <&zip_gA &tb_drop_all 0 1>; };
+        gesture_d   { layers = <13>; input-processors = <&zip_gD &tb_drop_all 0 1>; };
+        gesture_w   { layers = <14>; input-processors = <&zip_gW &tb_drop_all 0 1>; };
     };
 
     layer_listeners {
@@ -232,11 +237,10 @@
         compatible = "pixart,pmw3610-alt";
         reg = <0>;
         spi-max-frequency = <2000000>;
-        irq-gpios = <&gpio0 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
-        motion-gpios = <&gpio0 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+        irq-gpios    = <&gpio0 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
         cpi = <800>;
         invert-y;
-        evt-type = <INPUT_EV_REL>;
+        evt-type     = <INPUT_EV_REL>;
         x-input-code = <INPUT_REL_X>;
         y-input-code = <INPUT_REL_Y>;
     };
