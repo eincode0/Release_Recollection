@@ -1,14 +1,14 @@
 #include "KeyballBLE.dtsi"
 
 &kscan0 {
-        col-gpios
-            = <&xiao_d 10 GPIO_ACTIVE_HIGH>
-            , <&xiao_d 9 GPIO_ACTIVE_HIGH> 
-            , <&xiao_d 8 GPIO_ACTIVE_HIGH> 
-            , <&xiao_d 7 GPIO_ACTIVE_HIGH> 
-            , <&gpio0 10 GPIO_ACTIVE_HIGH>
-            , <&gpio0 9 GPIO_ACTIVE_HIGH>
-            ;
+    col-gpios
+        = <&xiao_d 10 GPIO_ACTIVE_HIGH>
+        , <&xiao_d 9  GPIO_ACTIVE_HIGH>
+        , <&xiao_d 8  GPIO_ACTIVE_HIGH>
+        , <&xiao_d 7  GPIO_ACTIVE_HIGH>
+        , <&gpio0  10 GPIO_ACTIVE_HIGH>
+        , <&gpio0  9  GPIO_ACTIVE_HIGH>
+        ;
 };
 
 &left_encoder {
@@ -17,15 +17,4 @@
 
 &sensors {
     status = "okay";
-};
-
-/* ZMK Studio snippet (studio-rpc-usb-uart) が追加する uart0_* が
- * Zephyr側で “#binding-cells が無い” と言われて落ちる対策
- */
-&uart0_default {
-    #binding-cells = <0>;
-};
-
-&uart0_sleep {
-    #binding-cells = <0>;
 };
