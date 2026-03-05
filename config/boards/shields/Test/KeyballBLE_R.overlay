@@ -236,5 +236,8 @@
         scroll-layers = <5>;
         cpi = <800>;
         invert-y;
+        evt-type = <INPUT_EV_REL>;
+        x-input-code = <INPUT_REL_X>;
+        y-input-code = <INPUT_REL_Y>;
     };
 };
