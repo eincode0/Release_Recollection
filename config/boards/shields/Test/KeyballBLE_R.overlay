@@ -63,12 +63,12 @@
             codes = <INPUT_REL_X INPUT_REL_Y INPUT_REL_WHEEL INPUT_REL_HWHEEL>;
         };
 
-        /* カーソル Y 反転 */
-        tb_invert_y: tb_invert_y {
+        /* スクロール Y 反転（WHEEL軸） */
+        tb_invert_wheel: tb_invert_wheel {
             compatible = "zmk,input-processor-scaler";
             #input-processor-cells = <2>;
             type = <INPUT_EV_REL>;
-            codes = <INPUT_REL_Y>;
+            codes = <INPUT_REL_WHEEL>;
         };
 
         /* SNIPE(layer15)：カーソル 1/4 減速 */
@@ -197,11 +197,11 @@
         compatible = "zmk,input-listener";
         device = <&trackball>;
 
-        /* 常時：Y反転 + 端数繰り越し */
-        input-processors = <&tb_invert_y (-1) 1 &tb_wheel_rema 1 1 &tb_hwheel_rema 1 1>;
+        /* 常時：端数繰り越し */
+        input-processors = <&tb_wheel_rema 1 1 &tb_hwheel_rema 1 1>;
 
-        /* SCROLL(layer5)：REL_X/Y → WHEEL/HWHEEL */
-        scroller_5  { layers = <5>;  input-processors = <&zip_xy_to_scroll_mapper &tb_wheel_rema 1 1 &tb_hwheel_rema 1 1>; };
+        /* SCROLL(layer5)：REL_X/Y → WHEEL/HWHEEL → WHEEL反転 */
+        scroller_5  { layers = <5>;  input-processors = <&zip_xy_to_scroll_mapper &tb_invert_wheel 0xFFFFFFFF 1 &tb_wheel_rema 1 1 &tb_hwheel_rema 1 1>; };
 
         /* SNIPE(layer15)：1/4 減速 */
         snipe_15    { layers = <15>; input-processors = <&tb_snipe_xy 1 4>; };
@@ -247,6 +247,7 @@
         spi-max-frequency = <2000000>;
         irq-gpios    = <&gpio0 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
         cpi = <800>;
+        invert-y;
         force-awake;                  /* スリープ抑制：初動遅延を防ぐ */
         evt-type     = <INPUT_EV_REL>;
         x-input-code = <INPUT_REL_X>;
