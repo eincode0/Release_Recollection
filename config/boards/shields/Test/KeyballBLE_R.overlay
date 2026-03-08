@@ -38,22 +38,38 @@
 
 / {
     input_processors {
-        /* 端数繰り越し：WHEEL */
+        /* カーソル端数繰り越し：X */
+        tb_cursor_x: tb_cursor_x {
+            compatible = "zmk,input-processor-scaler";
+            #input-processor-cells = <2>;
+            type = <INPUT_EV_REL>;
+            codes = <INPUT_REL_X>;
+            track-remainders;
+        };
+
+        /* カーソル端数繰り越し：Y */
+        tb_cursor_y: tb_cursor_y {
+            compatible = "zmk,input-processor-scaler";
+            #input-processor-cells = <2>;
+            type = <INPUT_EV_REL>;
+            codes = <INPUT_REL_Y>;
+            track-remainders;
+        };
+
+        /* スケール：WHEEL */
         tb_wheel_rema: tb_wheel_rema {
             compatible = "zmk,input-processor-scaler";
             #input-processor-cells = <2>;
             type = <INPUT_EV_REL>;
             codes = <INPUT_REL_WHEEL>;
-            track-remainders;
         };
 
-        /* 端数繰り越し：HWHEEL */
+        /* スケール：HWHEEL */
         tb_hwheel_rema: tb_hwheel_rema {
             compatible = "zmk,input-processor-scaler";
             #input-processor-cells = <2>;
             type = <INPUT_EV_REL>;
             codes = <INPUT_REL_HWHEEL>;
-            track-remainders;
         };
 
         /* ジェスチャ中：REL を止める */
@@ -199,8 +215,8 @@
         compatible = "zmk,input-listener";
         device = <&trackball>;
 
-        /* 常時：端数繰り越し */
-        input-processors = <&tb_wheel_rema 1 1 &tb_hwheel_rema 1 1>;
+        /* 常時：カーソル端数繰り越し */
+        input-processors = <&tb_cursor_x 1 1 &tb_cursor_y 1 1>;
 
         /* SCROLL(layer5)：REL_X/Y → WHEEL/HWHEEL → WHEEL反転 → 1/4減速 */
         scroller_5  { layers = <5>;  input-processors = <&zip_xy_to_scroll_mapper &tb_invert_wheel (INPUT_TRANSFORM_Y_INVERT) &tb_wheel_rema 1 4 &tb_hwheel_rema 1 4>; };
@@ -250,6 +266,7 @@
         irq-gpios    = <&gpio0 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
         cpi = <800>;
         invert-y;
+        force-awake;
         evt-type     = <INPUT_EV_REL>;
         x-input-code = <INPUT_REL_X>;
         y-input-code = <INPUT_REL_Y>;
