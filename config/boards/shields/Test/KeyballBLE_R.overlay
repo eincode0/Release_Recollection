@@ -1,17 +1,9 @@
 /* ===============================
  * KeyballBLE_R.overlay
  *
- * レイヤー対応:
- *  - SCROLL    : layer 5  → REL_X/Y を WHEEL/HWHEEL に変換
- *  - GESTURE_E : layer 7  → gE_up/down/left/right
- *  - GESTURE_R : layer 8  → gR_up/down/left/right
- *  - GESTURE_S : layer 9  → gS_up/down/left/right
- *  - GESTURE_M : layer 10 → gM_up/down/left/right
- *  - GESTURE_T : layer 11 → gT_up/down/left/right
- *  - GESTURE_A : layer 12 → gA_up/down/left/right
- *  - GESTURE_D : layer 13 → gD_up/down/left/right
- *  - GESTURE_W : layer 14 → gW_up/down/left/right
- *  - SNIPE     : layer 15 → REL_X/Y を 1/4 に減速
+ *  - SCROLL(layer5) : trackball の scroll-layers=5 でドライバが自動変換
+ *  - SNIPE(layer15) : REL_X/Y を 1/4 に減速
+ *  - gesture(7-14)  : 変更なし
  * =============================== */
 
 #include "KeyballBLE.dtsi"
@@ -23,7 +15,6 @@
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/mouse.h>
-#include <dt-bindings/zmk/input_transform.h>
 
 &default_transform { col-offset = <6>; };
 
@@ -38,38 +29,21 @@
 
 / {
     input_processors {
-        /* カーソル端数繰り越し：X */
-        tb_cursor_x: tb_cursor_x {
-            compatible = "zmk,input-processor-scaler";
-            #input-processor-cells = <2>;
-            type = <INPUT_EV_REL>;
-            codes = <INPUT_REL_X>;
-            track-remainders;
-        };
-
-        /* カーソル端数繰り越し：Y */
-        tb_cursor_y: tb_cursor_y {
-            compatible = "zmk,input-processor-scaler";
-            #input-processor-cells = <2>;
-            type = <INPUT_EV_REL>;
-            codes = <INPUT_REL_Y>;
-            track-remainders;
-        };
-
-        /* スケール：WHEEL */
+        /* WHEEL/HWHEEL 端数繰り越し */
         tb_wheel_rema: tb_wheel_rema {
             compatible = "zmk,input-processor-scaler";
             #input-processor-cells = <2>;
             type = <INPUT_EV_REL>;
             codes = <INPUT_REL_WHEEL>;
+            track-remainders;
         };
 
-        /* スケール：HWHEEL */
         tb_hwheel_rema: tb_hwheel_rema {
             compatible = "zmk,input-processor-scaler";
             #input-processor-cells = <2>;
             type = <INPUT_EV_REL>;
             codes = <INPUT_REL_HWHEEL>;
+            track-remainders;
         };
 
         /* ジェスチャ中：REL を止める */
@@ -78,15 +52,6 @@
             #input-processor-cells = <2>;
             type = <INPUT_EV_REL>;
             codes = <INPUT_REL_X INPUT_REL_Y INPUT_REL_WHEEL INPUT_REL_HWHEEL>;
-        };
-
-        /* WHEEL 軸反転 */
-        tb_invert_wheel: tb_invert_wheel {
-            compatible = "zmk,input-processor-transform";
-            #input-processor-cells = <1>;
-            type = <INPUT_EV_REL>;
-            x-codes = <INPUT_REL_HWHEEL>;
-            y-codes = <INPUT_REL_WHEEL>;
         };
 
         /* SNIPE(layer15)：カーソル 1/4 減速 */
@@ -215,13 +180,13 @@
         compatible = "zmk,input-listener";
         device = <&trackball>;
 
-        /* 常時：カーソル端数繰り越し */
-        input-processors = <&tb_cursor_x 1 1 &tb_cursor_y 1 1>;
+        /* 常時：WHEEL/HWHEEL 端数繰り越し */
+        input-processors = <&tb_wheel_rema 1 1 &tb_hwheel_rema 1 1>;
 
-        /* SCROLL(layer5)：REL_X/Y → WHEEL/HWHEEL → WHEEL反転 → 1/4減速 */
-        scroller_5  { layers = <5>;  input-processors = <&zip_xy_to_scroll_mapper &tb_invert_wheel (INPUT_TRANSFORM_Y_INVERT) &tb_wheel_rema 1 4 &tb_hwheel_rema 1 4>; };
+        /* SCROLL(layer5)：trackball の scroll-layers がドライバレベルで処理 */
+        scroller_5  { layers = <5>;  input-processors = <&tb_wheel_rema 1 1 &tb_hwheel_rema 1 1>; };
 
-        /* SNIPE(layer15)：1/4 減速 */
+        /* SNIPE(layer15)：カーソル 1/4 減速 */
         snipe_15    { layers = <15>; input-processors = <&tb_snipe_xy 1 4>; };
 
         /* ジェスチャ(layer7-14)：ジェスチャ認識 + REL停止 */
@@ -260,14 +225,10 @@
 
     trackball: trackball@0 {
         status = "okay";
-        compatible = "pixart,pmw3610-alt";
+        compatible = "pixart,pmw3610";
         reg = <0>;
         spi-max-frequency = <2000000>;
-        irq-gpios    = <&gpio0 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
-        cpi = <1200>;
-        invert-y;
-        evt-type     = <INPUT_EV_REL>;
-        x-input-code = <INPUT_REL_X>;
-        y-input-code = <INPUT_REL_Y>;
+        irq-gpios = <&gpio0 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+        scroll-layers = <5>;
     };
 };
