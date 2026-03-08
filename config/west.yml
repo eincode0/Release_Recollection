@@ -2,8 +2,8 @@ manifest:
   remotes:
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
-    - name: Dist16384
-      url-base: https://github.com/Dist16384
+    - name: badjeff
+      url-base: https://github.com/badjeff
     - name: ssbb
       url-base: https://github.com/ssbb
     - name: kot149
@@ -19,7 +19,7 @@ manifest:
       import: app/west.yml
 
     - name: zmk-pmw3610-driver
-      remote: Dist16384
+      remote: badjeff
       revision: main
       path: modules/zmk-pmw3610-driver
 
