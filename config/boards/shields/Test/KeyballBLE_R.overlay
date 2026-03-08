@@ -202,8 +202,8 @@
         /* 常時：端数繰り越し */
         input-processors = <&tb_wheel_rema 1 1 &tb_hwheel_rema 1 1>;
 
-        /* SCROLL(layer5)：REL_X/Y → WHEEL/HWHEEL → WHEEL反転 → 1/2減速 */
-        scroller_5  { layers = <5>;  input-processors = <&zip_xy_to_scroll_mapper &tb_invert_wheel (INPUT_TRANSFORM_Y_INVERT) &tb_wheel_rema 1 2 &tb_hwheel_rema 1 2>; };
+        /* SCROLL(layer5)：REL_X/Y → WHEEL/HWHEEL → WHEEL反転 → 1/4減速 */
+        scroller_5  { layers = <5>;  input-processors = <&zip_xy_to_scroll_mapper &tb_invert_wheel (INPUT_TRANSFORM_Y_INVERT) &tb_wheel_rema 1 4 &tb_hwheel_rema 1 4>; };
 
         /* SNIPE(layer15)：1/4 減速 */
         snipe_15    { layers = <15>; input-processors = <&tb_snipe_xy 1 4>; };
