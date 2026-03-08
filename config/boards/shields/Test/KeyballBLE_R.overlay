@@ -1,9 +1,9 @@
 /* ===============================
  * KeyballBLE_R.overlay
  *
- *  - SCROLL(layer5) : trackball の scroll-layers=5 でドライバが自動変換
+ *  - SCROLL(layer5) : scroll-layers=5 でドライバが自動変換
  *  - SNIPE(layer15) : REL_X/Y を 1/4 に減速
- *  - gesture(7-14)  : 変更なし
+ *  - gesture(7-14)  : ジェスチャ認識 + REL停止
  * =============================== */
 
 #include "KeyballBLE.dtsi"
@@ -183,7 +183,7 @@
         /* 常時：WHEEL/HWHEEL 端数繰り越し */
         input-processors = <&tb_wheel_rema 1 1 &tb_hwheel_rema 1 1>;
 
-        /* SCROLL(layer5)：trackball の scroll-layers がドライバレベルで処理 */
+        /* SCROLL(layer5)：ドライバの scroll-layers が処理 */
         scroller_5  { layers = <5>;  input-processors = <&tb_wheel_rema 1 1 &tb_hwheel_rema 1 1>; };
 
         /* SNIPE(layer15)：カーソル 1/4 減速 */
@@ -225,10 +225,15 @@
 
     trackball: trackball@0 {
         status = "okay";
-        compatible = "pixart,pmw3610";
+        compatible = "pixart,pmw3610-alt";
         reg = <0>;
         spi-max-frequency = <2000000>;
-        irq-gpios = <&gpio0 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+        irq-gpios    = <&gpio0 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+        cpi = <1200>;
+        invert-y;
+        evt-type     = <INPUT_EV_REL>;
+        x-input-code = <INPUT_REL_X>;
+        y-input-code = <INPUT_REL_Y>;
         scroll-layers = <5>;
     };
 };
