@@ -31,7 +31,7 @@
 
 #undef ZMK_POINTING_DEFAULT_SCRL_VAL
 
-#define ZMK_POINTING_DEFAULT_SCRL_VAL 30
+#define ZMK_POINTING_DEFAULT_SCRL_VAL 10
 
 &msc {
     time-to-max-speed-ms = <0>;
