@@ -66,7 +66,7 @@
 
         /* WHEEL 軸反転 */
         tb_invert_wheel: tb_invert_wheel {
-            compatible = "zmk,input-processor-transformer";
+            compatible = "zmk,input-processor-transform";
             #input-processor-cells = <1>;
             type = <INPUT_EV_REL>;
             y-codes = <INPUT_REL_WHEEL>;
