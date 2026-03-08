@@ -33,11 +33,6 @@ manifest:
       revision: v1
       path: modules/zmk-mouse-gesture
 
-    - name: zmk-scroll-snap
-      remote: kot149
-      revision: v1
-      path: modules/zmk-scroll-snap
-
     - name: zmk-rgbled-widget
       remote: caksoylar
       revision: main
