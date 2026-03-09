@@ -254,15 +254,19 @@
     sensor-dpi = <800>;
 };
 
-&scroll_accel {
-    input-type = <INPUT_EV_REL>;
-    codes = <INPUT_REL_X INPUT_REL_Y>;
-    sensitivity = <800>;
-    max-factor = <2000>;
-    acceleration-exponent = <1>;
-    speed-threshold = <300>;
-    speed-max = <2000>;
-    sensor-dpi = <800>;
+/ {
+    scroll_accel: scroll_accel {
+        compatible = "zmk,input-processor-acceleration";
+        #input-processor-cells = <0>;
+        input-type = <INPUT_EV_REL>;
+        codes = <INPUT_REL_X INPUT_REL_Y>;
+        sensitivity = <800>;
+        max-factor = <2000>;
+        acceleration-exponent = <1>;
+        speed-threshold = <300>;
+        speed-max = <2000>;
+        sensor-dpi = <800>;
+    };
 };
 
 &pointer_accel {
