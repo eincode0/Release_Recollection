@@ -187,7 +187,7 @@
         input-processors = <&pointer_accel>;
 
         /* SCROLL(layer5)：REL_X/Y → WHEEL/HWHEEL → 反転 → 1/4減速 */
-        scroller_5 { layers = <5>; input-processors = <&pointer_accel &zip_xy_to_scroll_mapper &tb_invert_wheel (INPUT_TRANSFORM_Y_INVERT) &tb_wheel_rema 1 4 &tb_hwheel_rema 1 4>; };
+        scroller_5 { layers = <5>; input-processors = <&scroll_accel &zip_xy_to_scroll_mapper &tb_invert_wheel (INPUT_TRANSFORM_Y_INVERT) &tb_wheel_rema 1 4 &tb_hwheel_rema 1 4>; };
 
         /* ジェスチャ(layer7-14)：ジェスチャ認識 + REL停止 */
         gesture_e { layers = <7>;  input-processors = <&zip_gE &tb_drop_all 0 1>; };
@@ -251,6 +251,17 @@
     acceleration-exponent = <2>;
     speed-threshold = <600>;
     speed-max = <3500>;
+    sensor-dpi = <800>;
+};
+
+&scroll_accel {
+    input-type = <INPUT_EV_REL>;
+    codes = <INPUT_REL_X INPUT_REL_Y>;
+    sensitivity = <800>;
+    max-factor = <2000>;
+    acceleration-exponent = <1>;
+    speed-threshold = <300>;
+    speed-max = <2000>;
     sensor-dpi = <800>;
 };
 
