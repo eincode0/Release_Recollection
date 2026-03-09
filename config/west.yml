@@ -10,6 +10,8 @@ manifest:
       url-base: https://github.com/kot149
     - name: caksoylar
       url-base: https://github.com/caksoylar
+    - name: nuovotaka
+      url-base: https://github.com/nuovotaka
 
   projects:
     - name: zmk
@@ -37,6 +39,10 @@ manifest:
       remote: caksoylar
       revision: main
       path: modules/zmk-rgbled-widget
+    - name: zmk-pointing-acceleration-alpha
+      remote: nuovotaka
+      revision: main
+      path: modules/zmk-pointing-acceleration-alpha
 
   self:
     path: config
