@@ -10,6 +10,7 @@
 
 #include <input/processors.dtsi>
 #include <mouse-gesture.dtsi>
+#include <behaviors/input_gestures_accel.dtsi>
 
 #include <zephyr/dt-bindings/input/input-event-codes.h>
 #include <dt-bindings/gpio/gpio.h>
@@ -183,9 +184,10 @@
     trackball_listener: trackball_listener {
         compatible = "zmk,input-listener";
         device = <&trackball>;
+        input-processors = <&pointer_accel>;
 
         /* SCROLL(layer5)：REL_X/Y → WHEEL/HWHEEL → 反転 → 1/4減速 */
-        scroller_5 { layers = <5>; input-processors = <&zip_xy_to_scroll_mapper &tb_invert_wheel (INPUT_TRANSFORM_Y_INVERT) &tb_wheel_rema 1 4 &tb_hwheel_rema 1 4>; };
+        scroller_5 { layers = <5>; input-processors = <&pointer_accel &zip_xy_to_scroll_mapper &tb_invert_wheel (INPUT_TRANSFORM_Y_INVERT) &tb_wheel_rema 1 4 &tb_hwheel_rema 1 4>; };
 
         /* ジェスチャ(layer7-14)：ジェスチャ認識 + REL停止 */
         gesture_e { layers = <7>;  input-processors = <&zip_gE &tb_drop_all 0 1>; };
