@@ -227,7 +227,11 @@
         force-awake;
         force-awake-4ms-mode;
         snipe-layers  = <15>;
-        arrows-layers = <3>;
+        numpad-layers = <2>;
+        numpad-tick   = <15>;
+        arrows-profiles = <
+            3   103 108 105 106   /* layer 3: 矢印キー */
+        >;
         arrows-tick             = <10>;
         arrows-accel;
         arrows-accel-max-div    = <4>;
