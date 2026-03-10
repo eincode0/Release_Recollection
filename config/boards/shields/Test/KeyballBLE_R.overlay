@@ -247,6 +247,9 @@
         scroll-inertia-tick-ms      = <16>;
         scroll-flick-threshold      = <6>;
         scroll-flick-boost          = <512>;
+        scroll-accel;
+        scroll-accel-max-mult       = <4>;
+        scroll-accel-threshold      = <20>;
         evt-type     = <INPUT_EV_REL>;
         x-input-code = <INPUT_REL_X>;
         y-input-code = <INPUT_REL_Y>;
