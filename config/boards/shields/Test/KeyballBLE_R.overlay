@@ -229,6 +229,9 @@
         snipe-layers  = <15>;
         arrows-layers = <3>;
         arrows-tick   = <10>;
+        scroll-inertia;
+        scroll-inertia-decay    = <85>;
+        scroll-inertia-tick-ms  = <16>;
         evt-type     = <INPUT_EV_REL>;
         x-input-code = <INPUT_REL_X>;
         y-input-code = <INPUT_REL_Y>;
