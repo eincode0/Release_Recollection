@@ -1,9 +1,10 @@
 /* ===============================
  * KeyballBLE_R.overlay
  *
- *  - SCROLL(layer5)  : overlay側処理（zip_xy_to_scroll_mapper）
- *  - SNIPE(layer15)  : ドライバ側処理（snipe-layers）
- *  - gesture(7-14)   : ジェスチャ認識 + REL停止
+ *  - SCROLL(layer5)  : overlay side (zip_xy_to_scroll_mapper)
+ *  - SNIPE(layer15)  : driver side (snipe-layers)
+ *  - gesture(7-14)   : gesture recognition + REL stop
+ *  - arrows(layer3)  : trackball to arrow keys
  * =============================== */
 
 #include "KeyballBLE.dtsi"
@@ -32,7 +33,6 @@
 
 / {
     input_processors {
-        /* WHEEL 端数繰り越し */
         tb_wheel_rema: tb_wheel_rema {
             compatible = "zmk,input-processor-scaler";
             #input-processor-cells = <2>;
@@ -41,7 +41,6 @@
             track-remainders;
         };
 
-        /* HWHEEL 端数繰り越し */
         tb_hwheel_rema: tb_hwheel_rema {
             compatible = "zmk,input-processor-scaler";
             #input-processor-cells = <2>;
@@ -50,7 +49,6 @@
             track-remainders;
         };
 
-        /* WHEEL 軸反転 */
         tb_invert_wheel: tb_invert_wheel {
             compatible = "zmk,input-processor-transform";
             #input-processor-cells = <1>;
@@ -59,7 +57,6 @@
             y-codes = <INPUT_REL_WHEEL>;
         };
 
-        /* ジェスチャ中：REL を止める */
         tb_drop_all: tb_drop_all {
             compatible = "zmk,input-processor-scaler";
             #input-processor-cells = <2>;
@@ -67,7 +64,6 @@
             codes = <INPUT_REL_X INPUT_REL_Y INPUT_REL_WHEEL INPUT_REL_HWHEEL>;
         };
 
-        /* ===== ジェスチャプロセッサ ===== */
         zip_gE: zip_gE {
             compatible = "zmk,input-processor-mouse-gesture";
             #input-processor-cells = <0>;
@@ -186,10 +182,8 @@
         device = <&trackball>;
         input-processors = <&pointer_accel>;
 
-        /* SCROLL(layer5)：REL_X/Y → WHEEL/HWHEEL → 反転 → 1/4減速 */
         scroller_5 { layers = <5>; input-processors = <&scroll_accel &zip_xy_to_scroll_mapper &tb_invert_wheel (INPUT_TRANSFORM_Y_INVERT) &tb_wheel_rema 1 4 &tb_hwheel_rema 1 4>; };
 
-        /* ジェスチャ(layer7-14)：ジェスチャ認識 + REL停止 */
         gesture_e { layers = <7>;  input-processors = <&zip_gE &tb_drop_all 0 1>; };
         gesture_r { layers = <8>;  input-processors = <&zip_gR &tb_drop_all 0 1>; };
         gesture_s { layers = <9>;  input-processors = <&zip_gS &tb_drop_all 0 1>; };
@@ -223,7 +217,7 @@
     pinctrl-names = "default", "sleep";
     cs-gpios = <&gpio0 9 GPIO_ACTIVE_LOW>;
 
-trackball: trackball@0 {
+    trackball: trackball@0 {
         status = "okay";
         compatible = "pixart,pmw3610-alt";
         reg = <0>;
@@ -239,6 +233,7 @@ trackball: trackball@0 {
         x-input-code = <INPUT_REL_X>;
         y-input-code = <INPUT_REL_Y>;
     };
+};
 
 &qspi {
     status = "disabled";
@@ -252,6 +247,7 @@ trackball: trackball@0 {
     acceleration-exponent = <2>;
     speed-threshold = <600>;
     speed-max = <3500>;
+    min-factor = <1000>;
     sensor-dpi = <800>;
 };
 
@@ -268,16 +264,4 @@ trackball: trackball@0 {
         speed-max = <2000>;
         sensor-dpi = <800>;
     };
-};
-
-&pointer_accel {
-    input-type = <INPUT_EV_REL>;
-    codes = <INPUT_REL_X INPUT_REL_Y>;
-    sensitivity = <1200>;
-    max-factor = <3000>;
-    acceleration-exponent = <2>;
-    speed-threshold = <600>;
-    speed-max = <3500>;
-    min-factor = <1000>;
-    sensor-dpi = <800>;
 };
