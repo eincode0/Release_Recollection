@@ -1,10 +1,11 @@
 /* ===============================
  * KeyballBLE_R.overlay
  *
- *  - SCROLL(layer5)  : overlay side (zip_xy_to_scroll_mapper)
+ *  - SCROLL(layer5)  : driver side (scroll-layers, inertia/flick/accel)
  *  - SNIPE(layer15)  : driver side (snipe-layers)
  *  - gesture(7-14)   : gesture recognition + REL stop
  *  - arrows(layer3)  : trackball to arrow keys
+ *  - page(layer6)    : trackball to PageUp/Down/Home/End
  * =============================== */
 
 #include "KeyballBLE.dtsi"
@@ -33,30 +34,6 @@
 
 / {
     input_processors {
-        tb_wheel_rema: tb_wheel_rema {
-            compatible = "zmk,input-processor-scaler";
-            #input-processor-cells = <2>;
-            type = <INPUT_EV_REL>;
-            codes = <INPUT_REL_WHEEL>;
-            track-remainders;
-        };
-
-        tb_hwheel_rema: tb_hwheel_rema {
-            compatible = "zmk,input-processor-scaler";
-            #input-processor-cells = <2>;
-            type = <INPUT_EV_REL>;
-            codes = <INPUT_REL_HWHEEL>;
-            track-remainders;
-        };
-
-        tb_invert_wheel: tb_invert_wheel {
-            compatible = "zmk,input-processor-transform";
-            #input-processor-cells = <1>;
-            type = <INPUT_EV_REL>;
-            x-codes = <INPUT_REL_HWHEEL>;
-            y-codes = <INPUT_REL_WHEEL>;
-        };
-
         tb_drop_all: tb_drop_all {
             compatible = "zmk,input-processor-scaler";
             #input-processor-cells = <2>;
@@ -182,8 +159,6 @@
         device = <&trackball>;
         input-processors = <&pointer_accel>;
 
-        scroller_5 { layers = <5>; input-processors = <&scroll_accel &zip_xy_to_scroll_mapper &tb_invert_wheel (INPUT_TRANSFORM_Y_INVERT) &tb_wheel_rema 1 4 &tb_hwheel_rema 1 4>; };
-
         gesture_e { layers = <7>;  input-processors = <&zip_gE &tb_drop_all 0 1>; };
         gesture_r { layers = <8>;  input-processors = <&zip_gR &tb_drop_all 0 1>; };
         gesture_s { layers = <9>;  input-processors = <&zip_gS &tb_drop_all 0 1>; };
@@ -227,6 +202,7 @@
         force-awake;
         force-awake-4ms-mode;
         snipe-layers  = <15>;
+        scroll-layers = <5>;
         numpad-layers = <2>;
         numpad-tick   = <15>;
         arrows-profiles = <
@@ -272,17 +248,4 @@
     sensor-dpi = <800>;
 };
 
-/ {
-    scroll_accel: scroll_accel {
-        compatible = "zmk,input-processor-acceleration";
-        #input-processor-cells = <0>;
-        input-type = <INPUT_EV_REL>;
-        codes = <INPUT_REL_X INPUT_REL_Y>;
-        sensitivity = <800>;
-        max-factor = <2000>;
-        acceleration-exponent = <1>;
-        speed-threshold = <300>;
-        speed-max = <2000>;
-        sensor-dpi = <800>;
-    };
-};
+
