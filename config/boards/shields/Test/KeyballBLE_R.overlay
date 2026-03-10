@@ -230,13 +230,13 @@
         arrows-layers = <3>;
         arrows-tick   = <10>;
         scroll-inertia;
-        scroll-inertia-decay        = <75>;
-        scroll-inertia-decay-fast   = <92>;
+        scroll-inertia-decay        = <78>;
+        scroll-inertia-decay-fast   = <93>;
         scroll-inertia-slow-spd     = <2>;
-        scroll-inertia-fast-spd     = <6>;
+        scroll-inertia-fast-spd     = <5>;
         scroll-inertia-tick-ms      = <16>;
-        scroll-flick-threshold      = <6>;
-        scroll-flick-boost          = <512>;
+        scroll-flick-threshold      = <5>;
+        scroll-flick-boost          = <640>;
         evt-type     = <INPUT_EV_REL>;
         x-input-code = <INPUT_REL_X>;
         y-input-code = <INPUT_REL_Y>;
