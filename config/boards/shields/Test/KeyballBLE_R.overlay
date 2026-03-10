@@ -231,6 +231,7 @@
         numpad-tick   = <15>;
         arrows-profiles = <
             3   103 108 105 106   /* layer 3: 矢印キー */
+            6   104 109 102 107   /* layer 6: PageUp/Down Home/End */
         >;
         arrows-tick             = <10>;
         arrows-accel;
