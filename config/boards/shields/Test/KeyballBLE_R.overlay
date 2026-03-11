@@ -224,7 +224,7 @@
         scroll-flick-threshold      = <6>;
         scroll-flick-boost          = <512>;
         scroll-accel;
-        scroll-accel-max-mult       = <6>;
+        scroll-accel-max-mult       = <8>;
         scroll-accel-threshold      = <15>;
         evt-type     = <INPUT_EV_REL>;
         x-input-code = <INPUT_REL_X>;
