@@ -204,12 +204,12 @@
         snipe-layers  = <15>;
         scroll-layers = <5>;
         arrows-profiles = <
-            2   15  28  14  1000 /* layer 2: tab/enter/bs/gui+z */
-            3   103 108 105 106  /* layer 3: arrows */
-            6   104 109 102 107  /* layer 6: page */
+            2   15  1010  14  111   60  /* layer 2: tab/shift+tab/bs/del, tick=60 */
+            3   103 108 105 106   0   /* layer 3: arrows, tick=global */
+            6   104 109 102 107   0   /* layer 6: page, tick=global */
         >;
         arrows-no-repeat-layers = <2>;
-        arrows-tick             = <40>;
+        arrows-tick             = <30>;
         arrows-accel;
         arrows-accel-max-div    = <4>;
         arrows-accel-threshold  = <20>;
