@@ -205,17 +205,16 @@
         scroll-layers = <5>;
         numpad-layers = <2>;
         numpad-tick   = <15>;
-        numpad-timeout-ms  = <800>;
         arrows-profiles = <
-            3   103 108 105 106   /* layer 3: 矢印キー */
-            6   104 109 102 107   /* layer 6: PageUp/Down Home/End */
+            3   103 108 105 106   /* layer 3: arrows */
+            6   104 109 102 107   /* layer 6: page */
         >;
-        arrows-tick             = <10>;
+        arrows-tick             = <30>;
         arrows-accel;
         arrows-accel-max-div    = <4>;
         arrows-accel-threshold  = <20>;
-        arrows-repeat-delay-ms  = <300>;
-        arrows-repeat-rate-ms   = <50>;
+        arrows-repeat-delay-ms  = <400>;
+        arrows-repeat-rate-ms   = <150>;
         scroll-inertia;
         scroll-inertia-decay        = <75>;
         scroll-inertia-decay-fast   = <92>;
