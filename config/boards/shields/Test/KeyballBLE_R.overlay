@@ -198,7 +198,7 @@
         reg = <0>;
         spi-max-frequency = <2000000>;
         irq-gpios    = <&gpio0 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
-        cpi = <800>;
+        cpi = <1200>;
         force-awake;
         force-awake-4ms-mode;
         snipe-layers  = <15>;
@@ -224,7 +224,7 @@
         scroll-flick-threshold      = <6>;
         scroll-flick-boost          = <512>;
         scroll-accel;
-        scroll-accel-max-mult       = <8>;
+        scroll-accel-max-mult       = <6>;
         scroll-accel-threshold      = <15>;
         evt-type     = <INPUT_EV_REL>;
         x-input-code = <INPUT_REL_X>;
