@@ -6,3 +6,4 @@ url: https://github.com/eincode0/KeyballBLE-LkeyMouse.git
 requires: [xiao_ble]
 features:
   - keys
+  - sensors
