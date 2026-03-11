@@ -203,11 +203,10 @@
         force-awake-4ms-mode;
         snipe-layers  = <15>;
         scroll-layers = <5>;
-        numpad-layers = <2>;
-        numpad-tick   = <15>;
         arrows-profiles = <
-            3   103 108 105 106   /* layer 3: arrows */
-            6   104 109 102 107   /* layer 6: page */
+            2   15  28  14  111  /* layer 2: tab/enter/bs/del */
+            3   103 108 105 106  /* layer 3: arrows */
+            6   104 109 102 107  /* layer 6: page */
         >;
         arrows-tick             = <30>;
         arrows-accel;
