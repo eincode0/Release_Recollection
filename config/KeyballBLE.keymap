@@ -322,14 +322,14 @@
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
-            bindings = <&mkp MB4>, <&kp LG(Q)>;
+            bindings = <&kp LG(LBKT)>, <&kp LG(Q)>;
         };
 
         gW_right: gW_right {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
-            bindings = <&mkp MB5>, <&kp LG(W)>;
+            bindings = <&kp LG(RBKT)>, <&kp LG(W)>;
         };
 
         gT_up: gT_up {
@@ -522,10 +522,10 @@
 
         MOUSE {
             bindings = <
-&mmv MOVE_LEFT       &mmv MOVE_DOWN  &mmv MOVE_UP    &mmv MOVE_RIGHT  &kp LG(T)                                            &kp LG(Z)       &mkp MB5      &lt_mkp 5 MB4  &kp LG(A)  &kp LC(H)
+&mmv MOVE_LEFT       &mmv MOVE_DOWN  &mmv MOVE_UP    &mmv MOVE_RIGHT  &kp LG(T)                                            &kp LG(Z)       &kp LG(RBKT)              &gesture_mo_kp 5 LG(LBKT)  &kp LG(A)  &kp LC(H)
 &msc MOVE_RIGHT      &msc MOVE_DOWN  &msc MOVE_UP    &msc MOVE_LEFT   &mo 7      &mkp MB3             &safari_reload_once  &mkp MB3        &mkp MB2      &mkp MB1       &trans     &lt 5 ENTER
 &mt LEFT_SHIFT HOME  &kp END         &kp DOWN_ARROW  &kp UP_ARROW     &mkp MB2   &mkp MB1             &kp LG(C)            &kp LG(V)       &kp UP_ARROW  &drag_off      &kp LG(X)  &lt 5 BACKSPACE
-&kp LG(P)            &mkp MB5        &mkp MB4        &kp LEFT_ARROW   &kp TAB    &kp RIGHT_ARROW      &drag_on             &kp DOWN_ARROW                                          &trans
+&kp LG(P)            &kp LG(RBKT)   &kp LG(LBKT)   &kp LEFT_ARROW   &kp TAB    &kp RIGHT_ARROW      &drag_on             &kp DOWN_ARROW                                          &trans
             >;
 
             sensor-bindings = <&rotate>;
