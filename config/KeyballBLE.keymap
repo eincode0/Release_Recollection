@@ -71,7 +71,7 @@
 
         drag_off_combo {
             bindings = <&drag_off>;
-            key-positions = <20 19>;
+            key-positions = <32 31>;
         };
 
         key1 {
@@ -112,6 +112,11 @@
         lctab {
             bindings = <&kp LS(TAB)>;
             key-positions = <1 2>;
+        };
+
+        click {
+            bindings = <&mkp MB1>;
+            key-positions = <19 20>;
         };
     };
 
