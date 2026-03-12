@@ -198,15 +198,15 @@
         reg = <0>;
         spi-max-frequency = <2000000>;
         irq-gpios    = <&gpio0 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
-        cpi = <1600>;
+        cpi = <800>;
         force-awake;
         force-awake-4ms-mode;
         snipe-layers  = <15>;
         scroll-layers = <5>;
         arrows-profiles = <
-            2   15  1010  14  111   60  /* layer 2: tab/shift+tab/bs/del, tick=60 */
-            3   103 108 105 106   0   /* layer 3: arrows, tick=global */
-            6   104 109 102 107   0   /* layer 6: page, tick=global */
+            2   15  1010  14  111   60  0  0  /* layer 2: tab/shift+tab/bs/del */
+            3   103 108   105 106   0   0  0  /* layer 3: arrows */
+            6   104 109   102 107   0   1  1  /* layer 6: page, remainder, no-diagonal */
         >;
         arrows-no-repeat-layers = <2>;
         arrows-tick             = <30>;
