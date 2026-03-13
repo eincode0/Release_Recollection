@@ -120,6 +120,13 @@
 
 /* zmk-rgbled-widget: xiao_ble//zmk 用 LED エイリアス定義 */
 / {
+    behaviors {
+        arrows_alt: arrows_alt {
+            compatible = "zmk,behavior-arrows-alt";
+            #binding-cells = <1>;
+        };
+    };
+
     aliases {
         led-red = &led0;
         led-green = &led1;
