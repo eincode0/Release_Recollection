@@ -33,6 +33,13 @@
 };
 
 / {
+    behaviors {
+        arrows_alt: arrows_alt {
+            compatible = "zmk,behavior-arrows-alt";
+            #binding-cells = <1>;
+        };
+    };
+
     input_processors {
         tb_drop_all: tb_drop_all {
             compatible = "zmk,input-processor-scaler";
@@ -204,17 +211,19 @@
         snipe-layers  = <15>;
         scroll-layers = <5>;
         arrows-profiles = <
-            2   1020 1021 1023 1022  60  0  0  /* layer 2: sel-up/sel-down/sel-left/sel-right */
-            3   103 108   105 106   0   0  0  /* layer 3: arrows */
-            6   107 102  109  104   0   1  1  /* layer 6: end/home/pgdown/pgup, remainder, no-diagonal */
+            2   1020 1021 1023 1022   0  0  1  /* layer 2: sel-up/sel-down/sel-left/sel-right */
+            3    103  108  105  106   0  0  1  /* layer 3: arrows */
+            6   1060 1061 1010   15  80  1  1  /* layer 6: MissionCtrl/AppExpose/Shift+Tab/Tab */
         >;
-        arrows-no-repeat-layers = <2>;
+        arrows-alt-profiles = <
+            3  1000  1004    14  111  60  0  1  /* layer 3 ALT: Undo/Redo/BS/Del */
+            2  1005  1003  1001 1002  80  0  1  /* layer 2 ALT: Cmd+A/V/X/C */
+            6  1062  1063  1064 1065  80  0  1  /* layer 6 ALT: Desktop移動/Tab切り替え */
+        >;
+        arrows-no-repeat-layers = <4 6>;
         arrows-tick             = <30>;
-        arrows-accel;
-        arrows-accel-max-div    = <4>;
-        arrows-accel-threshold  = <20>;
-        arrows-repeat-delay-ms  = <400>;
-        arrows-repeat-rate-ms   = <150>;
+        arrows-repeat-delay-ms  = <250>;
+        arrows-repeat-rate-ms   = <100>;
         scroll-inertia;
         scroll-inertia-decay        = <80>;
         scroll-inertia-decay-fast   = <97>;
