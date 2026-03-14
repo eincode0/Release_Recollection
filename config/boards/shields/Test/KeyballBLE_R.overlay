@@ -247,7 +247,7 @@
     speed-threshold = <300>;
     speed-max = <3500>;
     min-factor = <1800>;
-    sensor-dpi = <800>;
+    sensor-dpi = <1600>;
 };
 
 
