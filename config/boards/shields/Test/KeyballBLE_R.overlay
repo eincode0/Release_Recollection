@@ -206,12 +206,12 @@
         arrows-profiles = <
             2   1020 1021 1023 1022  40  0  1  /* layer 2: sel-up/sel-down/sel-left/sel-right */
             3    103  108  105  106  40  0  1  /* layer 3: arrows */
-            6   1060 1061 1010   15  80  1  1  /* layer 6: MissionCtrl/AppExpose/Shift+Tab/Tab */
+            6   1060 1061 1010   15 120  1  1  /* layer 6: MissionCtrl/AppExpose/Shift+Tab/Tab */
         >;
         arrows-alt-profiles = <
             3  1000  1004    14  111  60  0  1  /* layer 3 ALT: Undo/Redo/BS/Del */
             2  1005  1003  1001 1002  80  0  1  /* layer 2 ALT: Cmd+A/V/X/C */
-            6  1062  1063  1064 1065  80  0  1  /* layer 6 ALT: Desktop移動/Tab切り替え */
+            6  1062  1063  1064 1065 120  0  1  /* layer 6 ALT: Desktop移動/Tab切り替え */
         >;
         arrows-no-repeat-layers = <2 3 4 6>;
         arrows-tick             = <30>;
