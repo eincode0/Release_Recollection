@@ -17,6 +17,7 @@
  *   13 GESTURE_D
  *   14 GESTURE_W
  *   15 SNIPE（キーで遅いスクロール：MOVE_X/Y(8)）
+ *   16 NUM_SMART（Smart Num: 数字キーで自動維持、それ以外で自動解除）
  *  - overlay 側で gesture を 7..14 に紐付け（gE/gR/gS/gM/gT/gA/gD/gW）
  * =============================== */
 
@@ -280,6 +281,25 @@ ZMK_COMBO(scroll_toggle, &tog 5, 7 8, ALL)
             ignored-key-positions = <10 15>;
         };
 
+        /* ===== ⑨ Smart Num: 数字入力で NUM_SMART(16) を自動維持 =====
+         *  トリガー: position 15（エンコーダー押し込み）
+         *  continue-list のキーを押している間はレイヤー維持
+         *  それ以外のキーで自動解除
+         * ======================================================= */
+        smart_num: smart_num {
+            compatible = "zmk,behavior-auto-layer";
+            #binding-cells = <0>;
+            bindings = <&tog 16>;
+            ignore-modifiers;
+            continue-list = <
+                KP_NUMBER_0 KP_NUMBER_1 KP_NUMBER_2 KP_NUMBER_3 KP_NUMBER_4
+                KP_NUMBER_5 KP_NUMBER_6 KP_NUMBER_7 KP_NUMBER_8 KP_NUMBER_9
+                BACKSPACE DELETE DOT COMMA EQUAL
+                PLUS MINUS ASTERISK SLASH
+                SPACE ENTER
+            >;
+        };
+
         /* ===== gesture mappings ===== */
 
         gA_up: gA_up {
@@ -515,7 +535,7 @@ ZMK_COMBO(scroll_toggle, &tog 5, 7 8, ALL)
         default_layer {
             bindings = <
 &kp Q                &gesture_mo_kp 14 W  &gesture_mo_kp 7 E   &gesture_mo_kp 8 R   &gesture_mo_kp 11 T                                              &kp Y           &kp U                &gesture_mo_kp 5 I  &kp O       &mt RIGHT_SHIFT P
-&gesture_mo_kp 12 A  &gesture_mo_kp 9 S   &gesture_mo_kp 13 D  &kp F                &lt 6 G              &kt LEFT_SHIFT      &mt LEFT_ALT AT_SIGN    &kp H           &kp J                &gesture_mo_kp 5 K  &gesture_mo_kp 4 L     &gesture_mo_kp 3 MINUS
+&gesture_mo_kp 12 A  &gesture_mo_kp 9 S   &gesture_mo_kp 13 D  &kp F                &lt 6 G              &smart_num          &mt LEFT_ALT AT_SIGN    &kp H           &kp J                &gesture_mo_kp 5 K  &gesture_mo_kp 4 L     &gesture_mo_kp 3 MINUS
 &mt LEFT_SHIFT Z     &kp X                &kp C                &gesture_mo_kp 15 V  &kp B                &kp TAB             &mt LEFT_CONTROL COLON  &mt LEFT_GUI N  &gesture_mo_kp 10 M  &kp COMMA           &kp PERIOD  &gesture_mo_kp 2 PLUS
 &kp LCTRL            &sk LEFT_GUI         &kp LEFT_ALT         &lt 3 SPACE          &mkp MB1             &lt 2 CAPS          &kp BACKSPACE           &lt 1 ENTER                                                          &kp DELETE
             >;
@@ -672,6 +692,17 @@ ZMK_COMBO(scroll_toggle, &tog 5, 7 8, ALL)
 &trans  &msc MOVE_X(-8)  &msc MOVE_Y(-8)  &msc MOVE_X(8)  &trans  &trans      &trans  &trans           &trans           &trans          &trans          &trans
 &trans  &trans           &trans           &trans          &trans  &trans      &trans  &trans                                                            &trans
             >;
+        };
+
+        NUM_SMART {
+            bindings = <
+&kp KP_NUMBER_5       &kp KP_NUMBER_4  &kp KP_NUMBER_3  &kp KP_NUMBER_2  &kp KP_NUMBER_1                               &kp KP_NUMBER_1  &kp KP_NUMBER_2  &kp KP_NUMBER_3  &kp KP_NUMBER_4  &kp KP_NUMBER_5
+&kp KP_NUMBER_0       &kp KP_NUMBER_9  &kp KP_NUMBER_8  &kp KP_NUMBER_7  &kp KP_NUMBER_6  &trans        &kp EQUAL      &kp KP_NUMBER_6  &kp KP_NUMBER_7  &kp KP_NUMBER_8  &kp KP_NUMBER_9  &kp KP_NUMBER_0
+&mt LEFT_SHIFT COMMA  &kp PERIOD       &kp SLASH        &kp ASTERISK     &kp MINUS        &kp PLUS      &kp PLUS       &kp MINUS        &kp ASTERISK     &kp SLASH        &kp PERIOD       &kp COMMA
+&trans                &trans           &trans           &trans           &trans           &trans        &kp BACKSPACE  &kp ENTER                                                           &tog 16
+            >;
+
+            sensor-bindings = <&inc_dec_kp C_BRI_DN C_BRI_UP>;
         };
     };
 };
