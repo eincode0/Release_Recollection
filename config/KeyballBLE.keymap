@@ -26,6 +26,8 @@
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/pointing.h>
+#include <zmk-helpers/helper.h>              /* ⑦ zmk-helpers: ZMK_COMBO 等のマクロ */
+#include <behaviors/tri_state.dtsi>          /* ⑧ zmk-tri-state: スマート Cmd+Tab   */
 
 /* pointing.h の定義（デフォルト10）を上書き */
 
@@ -56,17 +58,17 @@
 };
 
 / {
+    /* ⑦ zmk-helpers: ZMK_COMBO マクロで記述したコンボ例
+     *   書式: ZMK_COMBO(名前, バインディング, キーポジション, レイヤー)
+     *   ALL = 全レイヤーで有効 */
+    ZMK_COMBO(scroll_toggle, &tog 5, 7 8, ALL)
+
     combos {
         compatible = "zmk,combos";
 
         mb2_combo {
             bindings = <&mkp MB2>;
             key-positions = <19 18>;
-        };
-
-        scroll_combos {
-            bindings = <&tog 5>;
-            key-positions = <7 8>;
         };
 
         drag_off_combo {
@@ -246,6 +248,33 @@
             bindings = <&kp>;
         };
 
+        /* ===== ⑧ Swapper: スマート Cmd+Tab（zmk-tri-state） =====
+         *
+         *  swapper     … A+ジェスチャー右 → 最初の1回で Cmd を押し続けて Tab 送信。
+         *                同じジェスチャーを繰り返すたびに Tab のみ追加送信（Cmd 維持）。
+         *                別キー押下 or A 離すと Cmd を解放 → アプリ決定。
+         *
+         *  swapper_rev … A+ジェスチャー左 → 同様に Cmd+Shift+Tab で逆方向スイッチ。
+         *
+         *  ignored-key-positions:
+         *    10 = A（ジェスチャートリガー）、15 = kt LEFT_SHIFT
+         * ======================================================= */
+        swapper: swapper {
+            compatible = "zmk,behavior-tri-state";
+            label = "SWAPPER";
+            #binding-cells = <0>;
+            bindings = <&kt LGUI>, <&kp TAB>, <&kt LGUI>;
+            ignored-key-positions = <10 15>;
+        };
+
+        swapper_rev: swapper_rev {
+            compatible = "zmk,behavior-tri-state";
+            label = "SWAPPER_REV";
+            #binding-cells = <0>;
+            bindings = <&kt LGUI>, <&kp LS(TAB)>, <&kt LGUI>;
+            ignored-key-positions = <10 15>;
+        };
+
         /* ===== gesture mappings ===== */
 
         gA_up: gA_up {
@@ -266,14 +295,16 @@
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
-            bindings = <&kp LG(LS(TAB))>, <&kp LC(LA(LG(NUMBER_3)))>;
+            /* ⑧ 通常: Swapper 逆方向 (Cmd+Shift+Tab を繰り返し) / Shift: 従来通り Ctrl+Alt+Cmd+3 */
+            bindings = <&swapper_rev>, <&kp LC(LA(LG(NUMBER_3)))>;
         };
 
         gA_right: gA_right {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
-            bindings = <&kp LG(TAB)>, <&kp LC(LA(LG(NUMBER_2)))>;
+            /* ⑧ 通常: Swapper 順方向 (Cmd+Tab を繰り返し) / Shift: 従来通り Ctrl+Alt+Cmd+2 */
+            bindings = <&swapper>, <&kp LC(LA(LG(NUMBER_2)))>;
         };
 
         gD_up: gD_up {

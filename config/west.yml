@@ -14,6 +14,8 @@ manifest:
       url-base: https://github.com/nuovotaka
     - name: badjeff
       url-base: https://github.com/badjeff
+    - name: urob                              # ⑦⑧ zmk-helpers / zmk-tri-state
+      url-base: https://github.com/urob
 
   projects:
     - name: zmk
@@ -49,6 +51,16 @@ manifest:
       remote: badjeff
       revision: main
       path: modules/zmk-behavior-insomnia
+
+    - name: zmk-helpers                       # ⑦ keymap 記述ヘルパーマクロ
+      remote: urob
+      revision: main
+      path: modules/zmk-helpers
+
+    - name: zmk-tri-state                     # ⑧ Swapper（スマート Cmd+Tab）
+      remote: urob
+      revision: main
+      path: modules/zmk-tri-state
 
   self:
     path: config
