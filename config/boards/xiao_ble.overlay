@@ -3,6 +3,8 @@
  * "lacks #binding-cells" になる対策（L/R 両方に効く）
  */
 
+#include <common/nordic/nrf52840_uf2_boot_mode.dtsi>
+
 &pinctrl {
     uart0_default: uart0_default {
         #binding-cells = <0>;
