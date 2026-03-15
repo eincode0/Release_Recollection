@@ -288,8 +288,7 @@ ZMK_COMBO(scroll_toggle, &tog 5, 7 8, ALL)
          * ======================================================= */
         smart_num: smart_num {
             compatible = "zmk,behavior-auto-layer";
-            #binding-cells = <0>;
-            bindings = <&tog 16>;
+            #binding-cells = <1>;
             ignore-modifiers;
             continue-list = <
                 KP_NUMBER_0 KP_NUMBER_1 KP_NUMBER_2 KP_NUMBER_3 KP_NUMBER_4
@@ -535,7 +534,7 @@ ZMK_COMBO(scroll_toggle, &tog 5, 7 8, ALL)
         default_layer {
             bindings = <
 &kp Q                &gesture_mo_kp 14 W  &gesture_mo_kp 7 E   &gesture_mo_kp 8 R   &gesture_mo_kp 11 T                                              &kp Y           &kp U                &gesture_mo_kp 5 I  &kp O       &mt RIGHT_SHIFT P
-&gesture_mo_kp 12 A  &gesture_mo_kp 9 S   &gesture_mo_kp 13 D  &kp F                &lt 6 G              &smart_num          &mt LEFT_ALT AT_SIGN    &kp H           &kp J                &gesture_mo_kp 5 K  &gesture_mo_kp 4 L     &gesture_mo_kp 3 MINUS
+&gesture_mo_kp 12 A  &gesture_mo_kp 9 S   &gesture_mo_kp 13 D  &kp F                &lt 6 G              &smart_num 16       &mt LEFT_ALT AT_SIGN    &kp H           &kp J                &gesture_mo_kp 5 K  &gesture_mo_kp 4 L     &gesture_mo_kp 3 MINUS
 &mt LEFT_SHIFT Z     &kp X                &kp C                &gesture_mo_kp 15 V  &kp B                &kp TAB             &mt LEFT_CONTROL COLON  &mt LEFT_GUI N  &gesture_mo_kp 10 M  &kp COMMA           &kp PERIOD  &gesture_mo_kp 2 PLUS
 &kp LCTRL            &sk LEFT_GUI         &kp LEFT_ALT         &lt 3 SPACE          &mkp MB1             &lt 2 CAPS          &kp BACKSPACE           &lt 1 ENTER                                                          &kp DELETE
             >;
