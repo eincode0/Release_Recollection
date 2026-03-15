@@ -120,6 +120,11 @@ ZMK_COMBO(scroll_toggle, &tog 5, 7 8, ALL)
             bindings = <&mkp MB1>;
             key-positions = <19 20>;
         };
+
+        escape {
+            bindings = <&kp ESCAPE>;
+            key-positions = <40 41>;
+        };
     };
 
     macros {
