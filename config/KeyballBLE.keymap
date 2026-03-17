@@ -61,11 +61,14 @@
 /* ⑦ zmk-helpers: ZMK_COMBO マクロは / { } の外に置く（マクロ自身が / { } を生成するため）
  *   書式: ZMK_COMBO(名前, バインディング, キーポジション, レイヤー)
  *   ALL = 全レイヤーで有効 */
-ZMK_COMBO(scroll_toggle, &tog 5, 7 8, ALL)
-
 / {
     combos {
         compatible = "zmk,combos";
+
+        scroll_toggle {
+            bindings = <&tog 5>;
+            key-positions = <7 8>;
+        };
 
         mb2_combo {
             bindings = <&mkp MB2>;
