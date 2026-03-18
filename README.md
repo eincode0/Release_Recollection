@@ -3,6 +3,12 @@
 Keyball + XIAO BLE 向け ZMK ファームウェア設定。
 トラックボールのマウスジェスチャーで多数のショートカットを発動できるのが特徴。
 
+## キーマップ図
+
+> Push のたびに自動更新されます（`.github/workflows/draw-keymap.yml`）
+
+![keymap](keymap.svg)
+
 ---
 
 ## レイヤー構成
