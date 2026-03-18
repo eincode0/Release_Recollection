@@ -151,6 +151,44 @@ Keyball + XIAO BLE 向け ZMK ファームウェア設定。
 | zmk-rgbled-widget | caksoylar/zmk-rgbled-widget | RGB LED インジケーター |
 | zmk-pointing-acceleration-alpha | nuovotaka/zmk-pointing-acceleration-alpha | ポインタ加速度 |
 | zmk-behavior-insomnia | badjeff/zmk-behavior-insomnia | BLE 接続中スリープ防止 |
+| zmk-tri-state | nickcoutsos/zmk-tri-state | アプリ切替スワッパー |
+
+---
+
+## 設定値サマリー
+
+### BLE・接続安定性（KeyballBLE_R.conf）
+
+| 設定 | 値 | 効果 |
+|------|----|------|
+| TX Power | +8dBm | 最大送信出力（接続安定性優先） |
+| BLE接続間隔（min） | 6（7.5ms） | 低レイテンシー |
+| BLE接続間隔（max） | 12（15ms） | 安定性とのバランス |
+| BLE監視タイムアウト | 400（4秒） | 一時的な電波干渉に耐える |
+| Insomnia pingInterval | 10秒 | 接続維持のためのKeepAlive |
+
+### トラックボールセンサー（KeyballBLE_R.conf）
+
+| 設定 | 値 | 効果 |
+|------|----|------|
+| PMW3610 REST移行時間 | 1000ms | 操作停止後すばやく省電力モードへ |
+
+### スレッドスタック（クラッシュ対策）
+
+| 設定 | 値 | 対象 |
+|------|----|------|
+| メインスレッド | 6144 bytes | KeyballBLE_R |
+| システムワークキュー | 8192 bytes | KeyballBLE_R |
+| EC11スレッド | 4096 bytes | KeyballBLE_L |
+
+---
+
+## 変更履歴
+
+| 日付 | 内容 |
+|------|------|
+| 2026-03-18 | BLE接続パラメータ追加、スタックサイズ拡張（クラッシュ対策） |
+| 2026-03-18 | PMW3610 REST高速化（省電力） |
 
 ---
 
