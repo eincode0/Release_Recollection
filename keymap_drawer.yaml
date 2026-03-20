@@ -23,6 +23,3 @@ parse_config:
     swapper: "Swap→"
     swapper_rev: "Swap←"
 
-layout:
-  qmk_keyboard: keyball/keyball44
-  qmk_layout: LAYOUT_universal
