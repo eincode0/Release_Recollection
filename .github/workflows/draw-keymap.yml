@@ -26,7 +26,7 @@ jobs:
         run: pip install keymap-drawer
 
       - name: Parse ZMK keymap
-        run: keymap -c keymap_drawer.yaml parse -z config/KeyballBLE.keymap --qmk-keyboard keyball/keyball44 --qmk-layout LAYOUT_universal > keymap.yaml
+        run: keymap -c keymap_drawer.yaml parse -z config/KeyballBLE.keymap > keymap.yaml
 
       - name: Draw keymap
         run: keymap -c keymap_drawer.yaml draw keymap.yaml > keymap.svg
