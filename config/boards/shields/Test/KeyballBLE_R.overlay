@@ -211,7 +211,7 @@
         arrows-alt-profiles = <
             3  1000  1004    14  111 120  0  1  /* layer 3 ALT: Undo/Redo/BS/Del */
             2  1005  1003  1001 1002 120  0  1  /* layer 2 ALT: Cmd+A/V/X/C */
-            6  1066  1067  1064 1065 200  0  1  /* layer 6 ALT: Desktop左(F15)/Desktop右(F14)/Cmd+Shift+Tab/Cmd+Tab */
+            6  1066  1067  1071 1070 200  0  1  /* layer 6 ALT: Desktop左(F15)/Desktop右(F14)/Swapper逆(Cmd+Shift+Tab)/Swapper順(Cmd+Tab) */
         >;
         arrows-no-repeat-layers = <2 3 4 6>;
         arrows-tick             = <30>;
