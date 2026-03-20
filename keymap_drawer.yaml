@@ -1,0 +1,28 @@
+draw_config:
+  key_h: 54
+  key_w: 54
+  split_gap: 30
+  combo_w: 28
+  combo_h: 26
+  n_cols: 2
+
+parse_config:
+  raw_binding_map:
+    gesture_mo_kp: "Mo/Kp"
+    mouse_gesture_kp: "Gest/Kp"
+    mouse_gesture_mkp: "Gest/Mkp"
+    lt_to_layer_0: "LT→0"
+    lt_mkp: "LT/Mkp"
+    mod_mkp: "Mod/Mkp"
+    dragkey: "DragKey"
+    smart_num: "SmNum"
+    arrows_alt: "Arrows"
+    g_shft: "GShft"
+    lm: "LM"
+    rotate: "Rotate"
+    swapper: "Swap→"
+    swapper_rev: "Swap←"
+
+layout:
+  qmk_keyboard: keyball/keyball44
+  qmk_layout: LAYOUT_universal
