@@ -7,8 +7,6 @@ draw_config:
   n_cols: 2
 
 parse_config:
-  qmk_keyboard: keyball/keyball44
-  qmk_layout: LAYOUT_universal
   raw_binding_map:
     gesture_mo_kp: "Mo/Kp"
     mouse_gesture_kp: "Gest/Kp"

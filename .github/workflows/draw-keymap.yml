@@ -29,7 +29,7 @@ jobs:
         run: keymap -c keymap_drawer.yaml parse -z config/KeyballBLE.keymap > keymap.yaml
 
       - name: Draw keymap
-        run: keymap -c keymap_drawer.yaml draw keymap.yaml > keymap.svg
+        run: keymap -c keymap_drawer.yaml draw keymap.yaml --qmk-keyboard keyball/keyball44 --layout-name LAYOUT_universal > keymap.svg
 
       - name: Commit generated files
         uses: EndBug/add-and-commit@v9
