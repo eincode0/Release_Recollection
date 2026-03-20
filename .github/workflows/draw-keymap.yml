@@ -28,8 +28,11 @@ jobs:
       - name: Parse ZMK keymap
         run: keymap -c keymap_drawer.yaml parse -z config/KeyballBLE.keymap > keymap.yaml
 
+      - name: Reorder keymap keys
+        run: python scripts/reorder_keymap.py keymap.yaml
+
       - name: Draw keymap
-        run: keymap -c keymap_drawer.yaml draw keymap.yaml --cols-thumbs-notation "666+4 666+3" > keymap.svg
+        run: keymap -c keymap_drawer.yaml draw keymap.yaml --cols-thumbs-notation "566+6 566+3" > keymap.svg
 
       - name: Commit generated files
         uses: EndBug/add-and-commit@v9
