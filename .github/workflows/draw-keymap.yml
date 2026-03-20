@@ -20,10 +20,10 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
+          python-version: "3.12"
 
       - name: Install keymap-drawer
-        run: pip install "keymap-drawer==0.23.0"
+        run: pip install keymap-drawer
 
       - name: Parse ZMK keymap
         run: keymap -c keymap_drawer.yaml parse -z config/KeyballBLE.keymap > keymap.yaml
