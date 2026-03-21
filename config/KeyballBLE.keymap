@@ -18,6 +18,7 @@
  *   14 GESTURE_W
  *   15 SNIPE（キーで遅いスクロール：MOVE_X/Y(8)）
  *   16 NUM_SMART（Smart Num: 数字キーで自動維持、それ以外で自動解除）
+ *   17 GESTURE_F（F キー長押し：メディアリモコン）
  *  - overlay 側で gesture を 7..14 に紐付け（gE/gR/gS/gM/gT/gA/gD/gW）
  * =============================== */
 
@@ -538,6 +539,34 @@
             mods = <(MOD_LSFT|MOD_RSFT)>;
             bindings = <&kp C_BRI_UP>, <&kp F18>;
         };
+
+        gF_up: gF_up {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+            bindings = <&kp C_PLAY_PAUSE>, <&kp C_STOP>;
+        };
+
+        gF_down: gF_down {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+            bindings = <&kp C_MUTE>, <&kp C_EJECT>;
+        };
+
+        gF_left: gF_left {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+            bindings = <&kp C_PREV>, <&kp C_RW>;
+        };
+
+        gF_right: gF_right {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+            bindings = <&kp C_NEXT>, <&kp C_FF>;
+        };
     };
 
     keymap {
@@ -546,7 +575,7 @@
         default_layer {
             bindings = <
 &kp Q                &gesture_mo_kp 14 W  &gesture_mo_kp 7 E   &gesture_mo_kp 8 R   &gesture_mo_kp 11 T                                             &kp Y           &kp U                &gesture_mo_kp 5 I  &kp O               &mt RIGHT_SHIFT P
-&gesture_mo_kp 12 A  &gesture_mo_kp 9 S   &gesture_mo_kp 13 D  &kp F                &lt 6 G              &smart_num 16      &mt LEFT_ALT AT_SIGN    &kp H           &kp J                &gesture_mo_kp 5 K  &gesture_mo_kp 4 L  &gesture_mo_kp 3 MINUS
+&gesture_mo_kp 12 A  &gesture_mo_kp 9 S   &gesture_mo_kp 13 D  &gesture_mo_kp 17 F  &lt 6 G              &smart_num 16      &mt LEFT_ALT AT_SIGN    &kp H           &kp J                &gesture_mo_kp 5 K  &gesture_mo_kp 4 L  &gesture_mo_kp 3 MINUS
 &mt LEFT_SHIFT Z     &kp X                &kp C                &gesture_mo_kp 15 V  &kp B                &kp TAB            &mt LEFT_CONTROL COLON  &mt LEFT_GUI N  &gesture_mo_kp 10 M  &kp COMMA           &kp PERIOD          &gesture_mo_kp 2 PLUS
 &kp LCTRL            &sk LEFT_GUI         &kp LEFT_ALT         &lt 3 SPACE          &mkp MB1             &lt 2 CAPS         &kp BACKSPACE           &lt 1 ENTER                                                                  &kp DELETE
             >;
@@ -714,6 +743,15 @@
             >;
 
             sensor-bindings = <&inc_dec_kp C_BRI_DN C_BRI_UP>;
+        };
+
+        GESTURE_F {
+            bindings = <
+&trans  &trans  &trans  &trans          &trans                                      &trans  &trans  &kp LEFT_SHIFT  &trans          &trans
+&trans  &trans  &trans  &trans          &trans          &trans              &trans  &trans  &trans  &kp LEFT_SHIFT  &kp LEFT_SHIFT  &trans
+&trans  &trans  &trans  &trans          &trans          &trans              &trans  &trans  &trans  &trans          &trans          &trans
+&trans  &trans  &trans  &kp LEFT_SHIFT  &kp LEFT_SHIFT  &kp LEFT_SHIFT      &trans  &trans                                          &trans
+            >;
         };
     };
 };
