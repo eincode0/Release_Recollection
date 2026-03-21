@@ -17,7 +17,8 @@ layers:
     h: GESTURE_S
   - t: D
     h: GESTURE_D
-  - F
+  - t: F
+    h: GESTURE_F
   - t: G
     h: Bluetooth
   - '&smart_num 16'
@@ -1192,6 +1193,86 @@ layers:
   - ENTER
   - t: NUM_SMART
     h: toggle
+  GESTURE_F:
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - type: held
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - LEFT SHIFT
+  - LEFT SHIFT
+  - LEFT SHIFT
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - LEFT SHIFT
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - LEFT SHIFT
+  - LEFT SHIFT
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
 combos:
 - p:
   - 25
