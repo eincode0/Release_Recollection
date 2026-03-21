@@ -205,14 +205,14 @@
         snipe-layers  = <15>;
         scroll-layers = <5>;
         arrows-profiles = <
-            2   1020 1021 1023 1022  40  0  1  /* layer 2: sel-up/sel-down/sel-left/sel-right */
-            3    103  108  105  106  40  0  1  /* layer 3: arrows */
-            6   1060 1061 1010   15 200  1  1  /* layer 6: MissionCtrl/AppExpose/Shift+Tab/Tab */
+            2   1020 1021 1023 1022  40  0  1  0  /* layer 2: sel-up/sel-down/sel-left/sel-right, one_shot=0 */
+            3    103  108  105  106  40  0  1  0  /* layer 3: arrows, one_shot=0 */
+            6   1060 1061   58   90 200  1  1  1  /* layer 6: MissionCtrl/AppExpose/LANG2(英数)/LANG1(かな), one_shot=1 */
         >;
         arrows-alt-profiles = <
-            3  1000  1004    14  111 120  0  1  /* layer 3 ALT: Undo/Redo/BS/Del */
-            2  1005  1003  1001 1002 120  0  1  /* layer 2 ALT: Cmd+A/V/X/C */
-            6  1066  1067  1064 1065 200  0  1  /* layer 6 ALT: Desktop左(F15)/Desktop右(F14)/Cmd+Shift+Tab/Cmd+Tab */
+            3  1000  1004    14  111 120  0  1  1  /* layer 3 ALT: Undo/Redo/BS/Del, one_shot=1 */
+            2  1005  1003  1001 1002 120  0  1  1  /* layer 2 ALT: Cmd+A/V/X/C, one_shot=1 */
+            6  1066  1067  1064 1065 200  0  1  1  /* layer 6 ALT: Desktop左(F15)/Desktop右(F14)/Cmd+Shift+Tab/Cmd+Tab, one_shot=1 */
         >;
         arrows-no-repeat-layers = <2 3 4 6>;
         arrows-tick             = <30>;
