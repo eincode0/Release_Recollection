@@ -11,6 +11,13 @@ layers:
     h: GESTURE_R
   - t: T
     h: GESTURE_T
+  - Y
+  - U
+  - t: I
+    h: SCROLL
+  - O
+  - t: P
+    h: RIGHT SHIFT
   - t: A
     h: GESTURE_A
   - t: S
@@ -22,30 +29,6 @@ layers:
   - t: G
     h: Bluetooth
   - '&smart_num 16'
-  - t: Z
-    h: LEFT SHIFT
-  - X
-  - C
-  - t: V
-    h: SNIPE
-  - B
-  - TAB
-  - LCTRL
-  - t: LEFT GUI
-    h: sticky
-  - LEFT ALT
-  - t: SPACE
-    h: NUM
-  - '&mkp MB1'
-  - t: CAPS
-    h: ARROW_SIGN
-  - Y
-  - U
-  - t: I
-    h: SCROLL
-  - O
-  - t: P
-    h: RIGHT SHIFT
   - t: '@'
     h: LEFT ALT
   - H
@@ -56,6 +39,14 @@ layers:
     h: MOUSE
   - t: '-'
     h: NUM
+  - t: Z
+    h: LEFT SHIFT
+  - X
+  - C
+  - t: V
+    h: SNIPE
+  - B
+  - TAB
   - t: ':'
     h: LEFT CONTROL
   - t: N
@@ -65,6 +56,15 @@ layers:
   - ','
   - .
   - t: +
+    h: ARROW_SIGN
+  - LCTRL
+  - t: LEFT GUI
+    h: sticky
+  - LEFT ALT
+  - t: SPACE
+    h: NUM
+  - '&mkp MB1'
+  - t: CAPS
     h: ARROW_SIGN
   - BACKSPACE
   - t: ENTER
@@ -76,12 +76,23 @@ layers:
   - F3
   - F2
   - F1
+  - Sft+RIGHT ARROW
+  - LEFT ARROW
+  - UP ARROW
+  - RIGHT ARROW
+  - Ctl+TAB
   - F10
   - F9
   - F8
   - F7
   - F6
   - ESC
+  - Sft+LEFT ARROW
+  - LEFT ARROW
+  - LEFT ARROW
+  - DOWN ARROW
+  - RIGHT ARROW
+  - Sft+Ctl+TAB
   - t: F11
     h: LEFT SHIFT
   - F17
@@ -89,6 +100,12 @@ layers:
   - F15
   - F14
   - F13
+  - Gui+A
+  - Gui+M
+  - Gui+Q
+  - Gui+W
+  - Gui+P
+  - Sft+Gui+5
   - t: F12
     h: LEFT CONTROL
   - t: F19
@@ -98,23 +115,6 @@ layers:
   - CAPS
   - F20
   - Gui+BACKSPACE
-  - Sft+RIGHT ARROW
-  - LEFT ARROW
-  - UP ARROW
-  - RIGHT ARROW
-  - Ctl+TAB
-  - Sft+LEFT ARROW
-  - LEFT ARROW
-  - LEFT ARROW
-  - DOWN ARROW
-  - RIGHT ARROW
-  - Sft+Ctl+TAB
-  - Gui+A
-  - Gui+M
-  - Gui+Q
-  - Gui+W
-  - Gui+P
-  - Sft+Gui+5
   - BACKSPACE
   - type: held
   - Sft+Gui+4
@@ -124,18 +124,37 @@ layers:
   - UP ARROW
   - RIGHT ARROW
   - RIGHT ARROW
+  - ^
+  - '&'
+  - '~'
+  - (
+  - t: )
+    h: LEFT SHIFT
   - LEFT ARROW
   - LEFT ARROW
   - DOWN ARROW
   - RIGHT ARROW
   - HOME
   - MUTE
+  - _
+  - '!'
+  - '@'
+  - '#'
+  - $
+  - '%'
   - Sft+LEFT ARROW
   - Sft+RIGHT ARROW
   - Sft+Ctl+TAB
   - Ctl+TAB
   - END
   - ESC
+  - '"'
+  - '['
+  - ']'
+  - '{'
+  - '}'
+  - t: \
+    type: held
   - t: ▽
     type: trans
   - t: ▽
@@ -148,25 +167,6 @@ layers:
     type: trans
   - t: ▽
     type: trans
-  - ^
-  - '&'
-  - '~'
-  - (
-  - t: )
-    h: LEFT SHIFT
-  - _
-  - '!'
-  - '@'
-  - '#'
-  - $
-  - '%'
-  - '"'
-  - '['
-  - ']'
-  - '{'
-  - '}'
-  - t: \
-    type: held
   - BACKSPACE
   - ENTER
   - '|'
@@ -176,12 +176,24 @@ layers:
   - KP 3
   - KP 2
   - KP 1
+  - KP 1
+  - KP 2
+  - KP 3
+  - KP 4
+  - KP 5
   - KP 0
   - KP 9
   - KP 8
   - KP 7
   - KP 6
   - CAPS
+  - '='
+  - KP 6
+  - KP 7
+  - KP 8
+  - KP 9
+  - t: KP 0
+    type: held
   - t: ','
     h: LEFT SHIFT
   - .
@@ -189,6 +201,12 @@ layers:
   - '*'
   - '-'
   - +
+  - +
+  - '-'
+  - '*'
+  - /
+  - .
+  - ','
   - t: ▽
     type: trans
   - t: ▽
@@ -201,24 +219,6 @@ layers:
     type: trans
   - t: default
     h: toggle
-  - KP 1
-  - KP 2
-  - KP 3
-  - KP 4
-  - KP 5
-  - '='
-  - KP 6
-  - KP 7
-  - KP 8
-  - KP 9
-  - t: KP 0
-    type: held
-  - +
-  - '-'
-  - '*'
-  - /
-  - .
-  - ','
   - BACKSPACE
   - ENTER
   - Gui+Z
@@ -228,31 +228,18 @@ layers:
   - '&mmv MOVE_UP'
   - '&mmv MOVE_RIGHT'
   - Gui+T
-  - '&msc MOVE_RIGHT'
-  - '&msc MOVE_DOWN'
-  - '&msc MOVE_UP'
-  - '&msc MOVE_LEFT'
-  - '&arrows_alt 6'
-  - '&mkp MB3'
-  - t: HOME
-    h: LEFT SHIFT
-  - END
-  - DOWN ARROW
-  - UP ARROW
-  - '&mkp MB2'
-  - '&mkp MB1'
-  - Gui+P
-  - Gui+]
-  - Gui+[
-  - '&arrows_alt 3'
-  - TAB
-  - '&arrows_alt 2'
   - Gui+Z
   - Gui+]
   - t: Gui+[
     h: SCROLL
   - Gui+A
   - Ctl+H
+  - '&msc MOVE_RIGHT'
+  - '&msc MOVE_DOWN'
+  - '&msc MOVE_UP'
+  - '&msc MOVE_LEFT'
+  - '&arrows_alt 6'
+  - '&mkp MB3'
   - '&safari_reload_once'
   - '&mkp MB3'
   - '&mkp MB2'
@@ -260,6 +247,13 @@ layers:
   - type: held
   - t: ENTER
     h: SCROLL
+  - t: HOME
+    h: LEFT SHIFT
+  - END
+  - DOWN ARROW
+  - UP ARROW
+  - '&mkp MB2'
+  - '&mkp MB1'
   - Gui+C
   - Gui+V
   - UP ARROW
@@ -267,6 +261,12 @@ layers:
   - Gui+X
   - t: BACKSPACE
     h: SCROLL
+  - Gui+P
+  - Gui+]
+  - Gui+[
+  - '&arrows_alt 3'
+  - TAB
+  - '&arrows_alt 2'
   - '&drag_on'
   - DOWN ARROW
   - t: ▽
@@ -276,6 +276,12 @@ layers:
   - '&mmv MOVE_DOWN'
   - '&mmv MOVE_UP'
   - '&mmv MOVE_RIGHT'
+  - t: ▽
+    type: trans
+  - LEFT SHIFT
+  - RIGHT ALT
+  - type: held
+  - RIGHT CONTROL
   - t: ▽
     type: trans
   - '&msc MOVE_RIGHT'
@@ -303,22 +309,6 @@ layers:
     type: trans
   - t: ▽
     type: trans
-  - Gui+9
-  - t: ▽
-    type: trans
-  - Gui+0
-  - LEFT SHIFT
-  - RIGHT ALT
-  - type: held
-  - RIGHT CONTROL
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
   - t: ▽
     type: trans
   - t: ▽
@@ -336,44 +326,21 @@ layers:
     type: trans
   - t: ▽
     type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - Gui+9
+  - t: ▽
+    type: trans
+  - Gui+0
   - UP ARROW
   - DOWN ARROW
   - t: ▽
     type: trans
   Bluetooth:
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - type: held
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - Gui+Alt+ESC
-  - Ctl+Gui+Q
-  - t: ▽
-    type: trans
   - t: ▽
     type: trans
   - t: ▽
@@ -394,6 +361,17 @@ layers:
     h: '3'
   - t: BT
     h: '4'
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - type: held
+  - t: ▽
+    type: trans
   - '&studio_unlock'
   - t: ▽
     type: trans
@@ -405,6 +383,16 @@ layers:
     type: trans
   - t: ▽
     type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - Gui+Alt+ESC
+  - Ctl+Gui+Q
   - '&bootloader'
   - t: ▽
     type: trans
@@ -415,6 +403,18 @@ layers:
   - t: ▽
     type: trans
   - BT CLR
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
   - t: ▽
     type: trans
   - t: ▽
@@ -434,6 +434,37 @@ layers:
     type: trans
   - t: ▽
     type: trans
+  - LEFT SHIFT
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - LEFT SHIFT
+  - LEFT SHIFT
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
   - t: ▽
     type: trans
   - t: ▽
@@ -463,37 +494,6 @@ layers:
   - LEFT SHIFT
   - LEFT SHIFT
   - LEFT SHIFT
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - LEFT SHIFT
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - LEFT SHIFT
-  - LEFT SHIFT
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
   - t: ▽
     type: trans
   - t: ▽
@@ -514,6 +514,37 @@ layers:
     type: trans
   - t: ▽
     type: trans
+  - LEFT SHIFT
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - LEFT SHIFT
+  - LEFT SHIFT
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
   - t: ▽
     type: trans
   - t: ▽
@@ -543,37 +574,6 @@ layers:
   - LEFT SHIFT
   - LEFT SHIFT
   - LEFT SHIFT
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - LEFT SHIFT
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - LEFT SHIFT
-  - LEFT SHIFT
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
   - t: ▽
     type: trans
   - t: ▽
@@ -587,6 +587,15 @@ layers:
     type: trans
   - t: ▽
     type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - LEFT SHIFT
   - t: ▽
     type: trans
   - t: ▽
@@ -608,36 +617,6 @@ layers:
     type: trans
   - t: ▽
     type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - LEFT SHIFT
-  - LEFT SHIFT
-  - LEFT SHIFT
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - LEFT SHIFT
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
   - LEFT SHIFT
   - LEFT SHIFT
   - t: ▽
@@ -654,6 +633,27 @@ layers:
     type: trans
   - t: ▽
     type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - LEFT SHIFT
+  - LEFT SHIFT
+  - LEFT SHIFT
   - t: ▽
     type: trans
   - t: ▽
@@ -675,10 +675,7 @@ layers:
     type: trans
   - t: ▽
     type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
+  - LEFT SHIFT
   - t: ▽
     type: trans
   - t: ▽
@@ -703,12 +700,6 @@ layers:
     type: trans
   - LEFT SHIFT
   - LEFT SHIFT
-  - LEFT SHIFT
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - LEFT SHIFT
   - t: ▽
     type: trans
   - t: ▽
@@ -719,8 +710,8 @@ layers:
     type: trans
   - t: ▽
     type: trans
-  - LEFT SHIFT
-  - LEFT SHIFT
+  - t: ▽
+    type: trans
   - t: ▽
     type: trans
   - t: ▽
@@ -734,6 +725,15 @@ layers:
     type: trans
   - t: ▽
     type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - LEFT SHIFT
+  - LEFT SHIFT
+  - LEFT SHIFT
   - t: ▽
     type: trans
   - t: ▽
@@ -754,6 +754,37 @@ layers:
     type: trans
   - t: ▽
     type: trans
+  - LEFT SHIFT
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - LEFT SHIFT
+  - LEFT SHIFT
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
   - t: ▽
     type: trans
   - t: ▽
@@ -783,37 +814,6 @@ layers:
   - LEFT SHIFT
   - LEFT SHIFT
   - LEFT SHIFT
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - LEFT SHIFT
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - LEFT SHIFT
-  - LEFT SHIFT
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
   - t: ▽
     type: trans
   - t: ▽
@@ -827,6 +827,15 @@ layers:
     type: trans
   - t: ▽
     type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - LEFT SHIFT
   - t: ▽
     type: trans
   - t: ▽
@@ -848,36 +857,6 @@ layers:
     type: trans
   - t: ▽
     type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - LEFT SHIFT
-  - LEFT SHIFT
-  - LEFT SHIFT
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - LEFT SHIFT
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
   - LEFT SHIFT
   - LEFT SHIFT
   - t: ▽
@@ -894,6 +873,27 @@ layers:
     type: trans
   - t: ▽
     type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - LEFT SHIFT
+  - LEFT SHIFT
+  - LEFT SHIFT
   - t: ▽
     type: trans
   - t: ▽
@@ -915,6 +915,15 @@ layers:
     type: trans
   - t: ▽
     type: trans
+  - LEFT SHIFT
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
   - type: held
   - t: ▽
     type: trans
@@ -928,36 +937,6 @@ layers:
     type: trans
   - t: ▽
     type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - LEFT SHIFT
-  - LEFT SHIFT
-  - LEFT SHIFT
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - LEFT SHIFT
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
   - LEFT SHIFT
   - LEFT SHIFT
   - t: ▽
@@ -974,6 +953,27 @@ layers:
     type: trans
   - t: ▽
     type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - LEFT SHIFT
+  - LEFT SHIFT
+  - LEFT SHIFT
   - t: ▽
     type: trans
   - t: ▽
@@ -994,6 +994,37 @@ layers:
     type: trans
   - t: ▽
     type: trans
+  - LEFT SHIFT
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - LEFT SHIFT
+  - LEFT SHIFT
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
   - t: ▽
     type: trans
   - t: ▽
@@ -1023,37 +1054,6 @@ layers:
   - LEFT SHIFT
   - LEFT SHIFT
   - LEFT SHIFT
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - LEFT SHIFT
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - LEFT SHIFT
-  - LEFT SHIFT
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
   - t: ▽
     type: trans
   - t: ▽
@@ -1075,11 +1075,29 @@ layers:
     type: trans
   - t: ▽
     type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
   - '&msc MOVE_Y(8)'
   - t: ▽
     type: trans
   - t: ▽
     type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - '&msc MOVE_X(-8)'
+  - '&msc MOVE_Y(-8)'
+  - '&msc MOVE_Y(8)'
+  - '&msc MOVE_X(8)'
   - t: ▽
     type: trans
   - t: ▽
@@ -1116,24 +1134,6 @@ layers:
     type: trans
   - t: ▽
     type: trans
-  - '&msc MOVE_X(-8)'
-  - '&msc MOVE_Y(-8)'
-  - '&msc MOVE_Y(8)'
-  - '&msc MOVE_X(8)'
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
   - t: ▽
     type: trans
   - t: ▽
@@ -1146,6 +1146,11 @@ layers:
   - KP 3
   - KP 2
   - KP 1
+  - KP 1
+  - KP 2
+  - KP 3
+  - KP 4
+  - KP 5
   - KP 0
   - KP 9
   - KP 8
@@ -1153,6 +1158,12 @@ layers:
   - KP 6
   - t: ▽
     type: trans
+  - '='
+  - KP 6
+  - KP 7
+  - KP 8
+  - KP 9
+  - KP 0
   - t: ','
     h: LEFT SHIFT
   - .
@@ -1160,35 +1171,24 @@ layers:
   - '*'
   - '-'
   - +
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - KP 1
-  - KP 2
-  - KP 3
-  - KP 4
-  - KP 5
-  - '='
-  - KP 6
-  - KP 7
-  - KP 8
-  - KP 9
-  - KP 0
   - +
   - '-'
   - '*'
   - /
   - .
   - ','
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
   - BACKSPACE
   - ENTER
   - t: NUM_SMART
@@ -1200,6 +1200,15 @@ layers:
     type: trans
   - t: ▽
     type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - LEFT SHIFT
   - t: ▽
     type: trans
   - t: ▽
@@ -1221,36 +1230,6 @@ layers:
     type: trans
   - t: ▽
     type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - LEFT SHIFT
-  - LEFT SHIFT
-  - LEFT SHIFT
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - LEFT SHIFT
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
-  - t: ▽
-    type: trans
   - LEFT SHIFT
   - LEFT SHIFT
   - t: ▽
@@ -1267,6 +1246,27 @@ layers:
     type: trans
   - t: ▽
     type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - t: ▽
+    type: trans
+  - LEFT SHIFT
+  - LEFT SHIFT
+  - LEFT SHIFT
   - t: ▽
     type: trans
   - t: ▽
@@ -1275,33 +1275,33 @@ layers:
     type: trans
 combos:
 - p:
-  - 25
-  - 26
+  - 7
+  - 8
   k:
     t: SCROLL
     h: toggle
 - p:
-  - 31
-  - 30
+  - 19
+  - 18
   k: '&mkp MB2'
 - p:
-  - 38
-  - 37
+  - 32
+  - 31
   k: '&drag_off'
+- p:
+  - 17
+  - 18
+  k: '!'
 - p:
   - 29
   - 30
-  k: '!'
-- p:
-  - 35
-  - 36
   k: '?'
 - p:
+  - 21
   - 33
-  - 39
   k: '&msc MOVE_UP'
 - p:
-  - 39
+  - 33
   - 42
   k: '&msc MOVE_DOWN'
 - p:
@@ -1309,20 +1309,20 @@ combos:
   - 1
   k: LEFT SHIFT
 - p:
-  - 26
-  - 27
+  - 8
+  - 9
   k: RIGHT SHIFT
 - p:
-  - 6
-  - 7
+  - 11
+  - 12
   k: TAB
 - p:
   - 1
   - 2
   k: Sft+TAB
 - p:
-  - 31
-  - 32
+  - 19
+  - 20
   k: '&mkp MB1'
 - p:
   - 40
