@@ -153,19 +153,6 @@
             right { pattern = <GESTURE_RIGHT>; bindings = <&gW_right>; };
         };
 
-        zip_gF: zip_gF {
-            compatible = "zmk,input-processor-mouse-gesture";
-            #input-processor-cells = <0>;
-            stroke-size = <60>;
-            movement-threshold = <6>;
-            idle-timeout-ms = <110>;
-            gesture-cooldown-ms = <130>;
-            enable-eager-mode;
-            up    { pattern = <GESTURE_UP>;    bindings = <&gF_up>;    };
-            down  { pattern = <GESTURE_DOWN>;  bindings = <&gF_down>;  };
-            left  { pattern = <GESTURE_LEFT>;  bindings = <&gF_left>;  };
-            right { pattern = <GESTURE_RIGHT>; bindings = <&gF_right>; };
-        };
     };
 
     trackball_listener: trackball_listener {
@@ -181,12 +168,11 @@
         gesture_a { layers = <12>; input-processors = <&zip_gA &tb_drop_all 0 1>; };
         gesture_d { layers = <13>; input-processors = <&zip_gD &tb_drop_all 0 1>; };
         gesture_w { layers = <14>; input-processors = <&zip_gW &tb_drop_all 0 1>; };
-        gesture_f { layers = <17>; input-processors = <&zip_gF &tb_drop_all 0 1>; };
     };
 
     layer_listeners {
         compatible = "zmk,layer-listeners";
-        gesture_auto { layers = <7 8 9 10 11 12 13 14 17>; bindings = <&mouse_gesture_on &mouse_gesture_off>; };
+        gesture_auto { layers = <7 8 9 10 11 12 13 14>; bindings = <&mouse_gesture_on &mouse_gesture_off>; };
     };
 };
 
