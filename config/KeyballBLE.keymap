@@ -354,7 +354,7 @@
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
-            bindings = <&kp LG(H)>, <&kp F16>;
+            bindings = <&kp LG(H)>, <&kp LC(DOWN_ARROW)>;
         };
 
         gD_left: gD_left {
