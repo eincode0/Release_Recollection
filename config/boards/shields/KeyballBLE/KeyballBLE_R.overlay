@@ -212,7 +212,7 @@
         arrows-alt-profiles = <
             3  1000  1004    14  111 120  0  1  1  /* layer 3 ALT: Undo/Redo/BS/Del, one_shot=1 */
             2  1005  1003  1001 1002 120  0  1  1  /* layer 2 ALT: Cmd+A/V/X/C, one_shot=1 */
-            6  1066  1067     0    0 200  0  1  0  /* layer 6 ALT: Desktop左(F15)/Desktop右(F14)/なし/なし (1070/1071のk_busy_waitによるBLE切断を回避) */
+            6  1066  1067  1071 1070 200  0  1  0  /* layer 6 ALT: Desktop左(F15)/Desktop右(F14)/Swapper逆/Swapper正 */
         >;
         arrows-no-repeat-layers = <2 3 4 6>;
         arrows-tick             = <30>;
