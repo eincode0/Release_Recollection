@@ -133,7 +133,7 @@ Keyball + XIAO BLE 向け ZMK ファームウェア設定。
 |---------|----|----|----|----|----------|
 | 2 ARROW_SIGN | `Cmd+A` | `Cmd+V` | `Cmd+X` | `Cmd+C` | あり |
 | 3 NUM | `Undo` | `Redo` | `BS` | `Del` | あり |
-| 6 Bluetooth | Desktop左(F15) | Desktop右(F14) | `Cmd+Shift+Tab` | `Cmd+Tab` | あり |
+| 6 Bluetooth | Desktop左(F15) | Desktop右(F14) | なし | なし | あり |
 
 > **one_shot**: 有効の場合、トラックボールを動かすと 1 回だけキーが送出される（押しっぱなしにならない）。
 
@@ -206,6 +206,7 @@ Keyball + XIAO BLE 向け ZMK ファームウェア設定。
 
 | 日付 | 内容 |
 |------|------|
+| 2026-03-26 | BLE切断バグ修正: layer 6 ALT の Swapper(1070/1071)を無効化。ドライバ内 k_busy_wait がシステムワークキューをブロックしBLEを切断していた。アプリ切替は GESTURE_A (layer 12) の &swapper/&swapper_rev を使用 |
 | 2026-03-21 | アロープロファイルを9要素形式に更新（one_shotフィールド追加）、layer6をLANG1/LANG2入力に変更 |
 | 2026-03-21 | GESTURE_F レイヤー追加（F キー長押し：メディアリモコン） |
 | 2026-03-18 | BLE接続パラメータ追加、スタックサイズ拡張（クラッシュ対策） |
