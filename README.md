@@ -99,7 +99,7 @@ Keyball + XIAO BLE 向け ZMK ファームウェア設定。
 | 方向 | 通常 | Shift 同時押し |
 |------|------|--------------|
 | ↑ 上 | `Ctrl+↑` Mission Control | `F12` |
-| ↓ 下 | `Cmd+H` ウィンドウを隠す | `F16` |
+| ↓ 下 | `Cmd+H` ウィンドウを隠す | `Ctrl+↓` |
 | ← 左 | `F15` | `F11` |
 | → 右 | `F14` | `F20` |
 
@@ -133,7 +133,7 @@ Keyball + XIAO BLE 向け ZMK ファームウェア設定。
 |---------|----|----|----|----|----------|
 | 2 ARROW_SIGN | `Cmd+A` | `Cmd+V` | `Cmd+X` | `Cmd+C` | あり |
 | 3 NUM | `Undo` | `Redo` | `BS` | `Del` | あり |
-| 6 Bluetooth | Desktop左(F15) | Desktop右(F14) | なし | なし | あり |
+| 6 Bluetooth | Desktop左(F15) | Desktop右(F14) | Swapper逆(Cmd+Shift+Tab) | Swapper正(Cmd+Tab) | なし |
 
 > **one_shot**: 有効の場合、トラックボールを動かすと 1 回だけキーが送出される（押しっぱなしにならない）。
 
