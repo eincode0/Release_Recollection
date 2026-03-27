@@ -191,7 +191,7 @@ Keyball + XIAO BLE 向け ZMK ファームウェア設定。
 | TX Power | +8dBm | 最大送信出力（接続安定性優先） |
 | BLE接続間隔（min） | 6（7.5ms） | 低レイテンシー |
 | BLE接続間隔（max） | 12（15ms） | 安定性とのバランス |
-| BLE監視タイムアウト | 400（4秒） | 一時的な電波干渉に耐える |
+| BLE監視タイムアウト | 800（8秒） | USB 3.0 SSD等の電波干渉に耐える |
 | Insomnia pingInterval | 10秒 | 接続維持のためのKeepAlive |
 
 ### トラックボールセンサー（KeyballBLE_R.conf）
