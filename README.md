@@ -163,7 +163,7 @@ Keyball + XIAO BLE 向け ZMK ファームウェア設定。
 | 13 GESTURE_D | 1 |
 | 14 GESTURE_W | 2 |
 | 15 SNIPE | 7 |
-| 16 NUM_SMART | 8 |
+| 16 NUM_SMART | 3 |
 
 ---
 
