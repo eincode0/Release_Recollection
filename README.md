@@ -184,15 +184,18 @@ Keyball + XIAO BLE 向け ZMK ファームウェア設定。
 
 ## 設定値サマリー
 
-### BLE・接続安定性（KeyballBLE_R.conf / L.conf 共通）
+### BLE・接続安定性
 
 | 設定 | 値 | 対象 | 効果 |
 |------|----|------|------|
-| TX Power | +8dBm | R・L両側 | 最大送信出力（接続安定性優先） |
-| BLE接続間隔（min） | 6（7.5ms） | R・L両側 | 低レイテンシー |
-| BLE接続間隔（max） | 12（15ms） | R・L両側 | 安定性とのバランス |
-| BLE監視タイムアウト | 800（8秒） | R・L両側 | USB 3.0 SSD等の電波干渉に耐える |
-| BLEバッファ（ACL TX） | 6本 / 251byte | R・L両側 | 左右間通信のパケット詰まり防止 |
+| Experimental Conn | 有効（2M PHY無効） | R・L両側 | 干渉耐性向上（ZMK推奨） |
+| TX Power | +8dBm | R・L両側 | 最大送信出力 |
+| Split BLE Latency | 10 | R側（Central） | peripheral のイベントスキップ回数を削減（デフォルト30→10） |
+| Split BLE Timeout | 600（6秒） | R側（Central） | 左右間の切断判定を緩和 |
+| BT Max Conn / Paired | 4 | R側（Central） | 1 peripheral + 3 host profiles |
+| ホスト接続間隔（min/max） | 6/12（7.5-15ms） | R側 | 低レイテンシー |
+| ホスト監視タイムアウト | 800（8秒） | R側 | USB 3.0 SSD等の電波干渉に耐える |
+| BLEバッファ（ACL TX） | 6本 / 251byte | R・L両側 | パケット詰まり防止 |
 | Insomnia pingInterval | 10秒 | R側のみ | 接続維持のためのKeepAlive |
 
 ### トラックボールセンサー（KeyballBLE_R.conf）
@@ -215,7 +218,7 @@ Keyball + XIAO BLE 向け ZMK ファームウェア設定。
 
 | 日付 | 内容 |
 |------|------|
-| 2026-03-31 | 左手側BLE接続安定化: TX出力・接続パラメータ・BLEバッファ・スタックサイズ・スリープ設定・wakeup-sourceを追加。R側にもBLEバッファ拡張 |
+| 2026-03-31 | Split BLE接続安定化: experimental conn(2M PHY無効)、split latency/timeout調整、BT_MAX_CONN設定、左側にTX出力・バッファ・スリープ・wakeup-source追加 |
 | 2026-03-27 | BLE supervision timeout を 400→800（4秒→8秒）に延長。USB 3.0 SSD接続時の2.4GHz干渉による切断を軽減 |
 | 2026-03-26 | BLE切断バグ修正: layer 6 ALT の Swapper(1070/1071)を無効化。ドライバ内 k_busy_wait がシステムワークキューをブロックしBLEを切断していた。アプリ切替は GESTURE_A (layer 12) の &swapper/&swapper_rev を使用 |
 | 2026-03-21 | アロープロファイルを9要素形式に更新（one_shotフィールド追加）、layer6をLANG1/LANG2入力に変更 |
