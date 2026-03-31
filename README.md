@@ -198,7 +198,7 @@ Keyball + XIAO BLE 向け ZMK ファームウェア設定。
 | ホスト接続間隔（min/max） | 12/24（15-30ms） | R側 | 7.5msは短すぎてMac負荷時に取りこぼす。15msに緩める |
 | ホストLatency | 0 | R側 | スキップなし（4にすると最悪120ms遅延が発生） |
 | ホスト監視タイムアウト | 1000（10秒） | R側 | 切断判定を最大限延長 |
-| Insomnia pingInterval | 5秒 | R側のみ | keepaliveを高頻度化 |
+| Insomnia pingInterval | 無効化中 | R側のみ | BLE切断原因切り分けのため一時無効化 |
 
 ### トラックボールセンサー（KeyballBLE_R.conf）
 
@@ -221,6 +221,7 @@ Keyball + XIAO BLE 向け ZMK ファームウェア設定。
 
 | 日付 | 内容 |
 |------|------|
+| 2026-03-31 | insomnia無効化: 5秒ごとのBLE pingがワークキューをブロックしてsupervision timeout切断を引き起こしている疑いのため切り分け目的で無効化 |
 | 2026-03-31 | BLE接続パラメータ再調整: LATENCY=4→0（最悪120ms遅延が発生するため）、MIN_INT=12・MAX_INT=24（15-30ms）に変更。Mac負荷対策と低遅延を両立 |
 | 2026-03-31 | RAM最適化: BT_MAX_CONN=4→2（同時接続は右←→左+右←→ホストの2本で十分）、BT_MAX_PAIRED=4→5、HEAP_MEM_POOL_SIZE=8192を追加。BLEバッファ枯渇・スタック破壊による切断対策 |
 | 2026-03-31 | BLE安定化: experimental conn(2M PHY無効)、ホスト接続パラメータ調整(MAX_INT=24,LAT=2)、split latency/timeout調整、BT_MAX_CONN設定、左側にTX出力・スリープ・wakeup-source追加。BLEバッファ拡張はRAM不足でクラッシュしたため削除 |
