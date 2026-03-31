@@ -221,6 +221,7 @@ Keyball + XIAO BLE 向け ZMK ファームウェア設定。
 
 | 日付 | 内容 |
 |------|------|
+| 2026-03-31 | 32kHz内部クロック切替: CONFIG_CLOCK_CONTROL_NRF_K32SRC_SYNTH=y をR・L両側に追加。XIAO BLE外部水晶不安定によるBLE supervision timeout切断対策（ZMK公式推奨） |
 | 2026-03-31 | insomnia再有効化: 無効化しても切断が発生したため原因でないと判断し復元 |
 | 2026-03-31 | BLE接続パラメータ再調整: LATENCY=4→0（最悪120ms遅延が発生するため）、MIN_INT=12・MAX_INT=24（15-30ms）に変更。Mac負荷対策と低遅延を両立 |
 | 2026-03-31 | RAM最適化: BT_MAX_CONN=4→2（同時接続は右←→左+右←→ホストの2本で十分）、BT_MAX_PAIRED=4→5、HEAP_MEM_POOL_SIZE=8192を追加。BLEバッファ枯渇・スタック破壊による切断対策 |
