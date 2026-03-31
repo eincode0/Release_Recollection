@@ -178,7 +178,8 @@ Keyball + XIAO BLE 向け ZMK ファームウェア設定。
 | zmk-rgbled-widget | caksoylar/zmk-rgbled-widget | RGB LED インジケーター |
 | zmk-pointing-acceleration-alpha | nuovotaka/zmk-pointing-acceleration-alpha | ポインタ加速度 |
 | zmk-behavior-insomnia | badjeff/zmk-behavior-insomnia | BLE 接続中スリープ防止 |
-| zmk-tri-state | nickcoutsos/zmk-tri-state | アプリ切替スワッパー |
+| zmk-tri-state | urob/zmk-tri-state | アプリ切替スワッパー |
+| zmk-auto-layer | urob/zmk-auto-layer | Smart Num（数字入力で自動レイヤー維持） |
 
 ---
 
