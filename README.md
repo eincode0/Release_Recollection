@@ -195,8 +195,9 @@ Keyball + XIAO BLE 向け ZMK ファームウェア設定。
 | Split BLE Timeout | 600（6秒） | R側（Central） | 左右間の切断判定を緩和 |
 | BT Max Conn / Paired | 4 | R側（Central） | 1 peripheral + 3 host profiles |
 | ホスト接続間隔（min/max） | 6/12（7.5-15ms） | R側 | 低レイテンシー |
+| ホストLatency | 6 | R側 | Macが6イベントスキップ可能（Universal Control共存対策） |
 | ホスト監視タイムアウト | 800（8秒） | R側 | USB 3.0 SSD等の電波干渉に耐える |
-| BLEバッファ（ACL TX） | 6本 / 251byte | R・L両側 | パケット詰まり防止 |
+| BLEバッファ（ACL TX/RX） | 6本 / 251byte | R・L両側 | パケット詰まり防止・再接続安定化 |
 | Insomnia pingInterval | 10秒 | R側のみ | 接続維持のためのKeepAlive |
 
 ### トラックボールセンサー（KeyballBLE_R.conf）
@@ -219,7 +220,7 @@ Keyball + XIAO BLE 向け ZMK ファームウェア設定。
 
 | 日付 | 内容 |
 |------|------|
-| 2026-03-31 | Split BLE接続安定化: experimental conn(2M PHY無効)、split latency/timeout調整、BT_MAX_CONN設定、左側にTX出力・バッファ・スリープ・wakeup-source追加 |
+| 2026-03-31 | ホストBLE安定化: ホストLatency 0→6（Universal Control共存対策）、RXバッファ拡張。Split BLE安定化: experimental conn、split latency/timeout調整、BT_MAX_CONN設定、左側にTX出力・バッファ・スリープ・wakeup-source追加 |
 | 2026-03-27 | BLE supervision timeout を 400→800（4秒→8秒）に延長。USB 3.0 SSD接続時の2.4GHz干渉による切断を軽減 |
 | 2026-03-26 | BLE切断バグ修正: layer 6 ALT の Swapper(1070/1071)を無効化。ドライバ内 k_busy_wait がシステムワークキューをブロックしBLEを切断していた。アプリ切替は GESTURE_A (layer 12) の &swapper/&swapper_rev を使用 |
 | 2026-03-21 | アロープロファイルを9要素形式に更新（one_shotフィールド追加）、layer6をLANG1/LANG2入力に変更 |
