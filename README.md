@@ -191,13 +191,13 @@ Keyball + XIAO BLE 向け ZMK ファームウェア設定。
 |------|----|------|------|
 | Experimental Conn | 有効（2M PHY無効） | R・L両側 | 干渉耐性向上（ZMK推奨） |
 | TX Power | +8dBm | R・L両側 | 最大送信出力 |
-| Split BLE Latency | 10 | R側（Central） | peripheral のイベントスキップ回数を削減（デフォルト30→10） |
-| Split BLE Timeout | 600（6秒） | R側（Central） | 左右間の切断判定を緩和 |
+| Split BLE Latency | 0 | R側（Central） | 左右間スキップなし（最強設定） |
+| Split BLE Timeout | 1000（10秒） | R側（Central） | 左右間の切断判定を最大限延長 |
 | BT Max Conn / Paired | 4 | R側（Central） | 1 peripheral + 3 host profiles |
-| ホスト接続間隔（min/max） | 6/24（7.5-30ms） | R側 | 幅広くしMacが状況に応じて自動調整 |
-| ホストLatency | 2 | R側 | 最大2イベントスキップ（トラックボール送信とUC共存） |
-| ホスト監視タイムアウト | 800（8秒） | R側 | USB 3.0 SSD等の電波干渉に耐える |
-| Insomnia pingInterval | 10秒 | R側のみ | 接続維持のためのKeepAlive |
+| ホスト接続間隔（min/max） | 6/12（7.5-15ms） | R側 | 短い接続間隔で途切れにくく |
+| ホストLatency | 0 | R側 | スキップ一切なし（最強設定） |
+| ホスト監視タイムアウト | 1000（10秒） | R側 | 切断判定を最大限延長 |
+| Insomnia pingInterval | 5秒 | R側のみ | keepaliveを高頻度化 |
 
 ### トラックボールセンサー（KeyballBLE_R.conf）
 
