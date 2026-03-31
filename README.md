@@ -194,8 +194,8 @@ Keyball + XIAO BLE 向け ZMK ファームウェア設定。
 | Split BLE Latency | 10 | R側（Central） | peripheral のイベントスキップ回数を削減（デフォルト30→10） |
 | Split BLE Timeout | 600（6秒） | R側（Central） | 左右間の切断判定を緩和 |
 | BT Max Conn / Paired | 4 | R側（Central） | 1 peripheral + 3 host profiles |
-| ホスト接続間隔（min/max） | 6/12（7.5-15ms） | R側 | 低レイテンシー |
-| ホストLatency | 6 | R側 | Macが6イベントスキップ可能（Universal Control共存対策） |
+| ホスト接続間隔（min/max） | 6/24（7.5-30ms） | R側 | 幅広くしMacが状況に応じて自動調整 |
+| ホストLatency | 2 | R側 | 最大2イベントスキップ（トラックボール送信とUC共存） |
 | ホスト監視タイムアウト | 800（8秒） | R側 | USB 3.0 SSD等の電波干渉に耐える |
 | BLEバッファ（ACL TX/RX） | 6本 / 251byte | R・L両側 | パケット詰まり防止・再接続安定化 |
 | Insomnia pingInterval | 10秒 | R側のみ | 接続維持のためのKeepAlive |
