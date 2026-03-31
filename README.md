@@ -193,7 +193,8 @@ Keyball + XIAO BLE 向け ZMK ファームウェア設定。
 | TX Power | +8dBm | R・L両側 | 最大送信出力 |
 | Split BLE Latency | 0 | R側（Central） | 左右間スキップなし（最強設定） |
 | Split BLE Timeout | 1000（10秒） | R側（Central） | 左右間の切断判定を最大限延長 |
-| BT Max Conn / Paired | 4 | R側（Central） | 1 peripheral + 3 host profiles |
+| BT Max Conn | 2 | R側（Central） | 右←→左(1) + 右←→ホスト(1)。4は過剰でRAM消費 |
+| BT Max Paired | 5 | R側（Central） | プロファイル切替用（Mac/iPhone等） |
 | ホスト接続間隔（min/max） | 6/12（7.5-15ms） | R側 | 短い接続間隔で途切れにくく |
 | ホストLatency | 0 | R側 | スキップ一切なし（最強設定） |
 | ホスト監視タイムアウト | 1000（10秒） | R側 | 切断判定を最大限延長 |
@@ -205,13 +206,14 @@ Keyball + XIAO BLE 向け ZMK ファームウェア設定。
 |------|----|------|
 | PMW3610 REST移行時間 | 1000ms | 操作停止後すばやく省電力モードへ |
 
-### スレッドスタック（クラッシュ対策）
+### スレッドスタック・ヒープ（クラッシュ・RAM不足対策）
 
-| 設定 | 値 | 対象 |
-|------|----|------|
-| メインスレッド | 6144 bytes | R・L両側 |
-| システムワークキュー | 8192 bytes | R・L両側 |
-| EC11スレッド | 4096 bytes | KeyballBLE_L |
+| 設定 | 値 | 対象 | 備考 |
+|------|----|------|------|
+| メインスレッド | 6144 bytes | R・L両側 | デフォルト比3倍 |
+| システムワークキュー | 8192 bytes | R・L両側 | デフォルト比4倍 |
+| EC11スレッド | 4096 bytes | KeyballBLE_L | |
+| ヒーププール | 8192 bytes | R側 | BLEバッファ・ZMK Studio等の動的確保用 |
 
 ---
 
@@ -219,6 +221,7 @@ Keyball + XIAO BLE 向け ZMK ファームウェア設定。
 
 | 日付 | 内容 |
 |------|------|
+| 2026-03-31 | RAM最適化: BT_MAX_CONN=4→2（同時接続は右←→左+右←→ホストの2本で十分）、BT_MAX_PAIRED=4→5、HEAP_MEM_POOL_SIZE=8192を追加。BLEバッファ枯渇・スタック破壊による切断対策 |
 | 2026-03-31 | BLE安定化: experimental conn(2M PHY無効)、ホスト接続パラメータ調整(MAX_INT=24,LAT=2)、split latency/timeout調整、BT_MAX_CONN設定、左側にTX出力・スリープ・wakeup-source追加。BLEバッファ拡張はRAM不足でクラッシュしたため削除 |
 | 2026-03-27 | BLE supervision timeout を 400→800（4秒→8秒）に延長。USB 3.0 SSD接続時の2.4GHz干渉による切断を軽減 |
 | 2026-03-26 | BLE切断バグ修正: layer 6 ALT の Swapper(1070/1071)を無効化。ドライバ内 k_busy_wait がシステムワークキューをブロックしBLEを切断していた。アプリ切替は GESTURE_A (layer 12) の &swapper/&swapper_rev を使用 |
