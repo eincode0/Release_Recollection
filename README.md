@@ -193,11 +193,9 @@ Keyball + XIAO BLE 向け ZMK ファームウェア設定。
 | TX Power | +8dBm | R・L両側 | 最大送信出力 |
 | Split BLE Latency | 0 | R側（Central） | 左右間スキップなし（最強設定） |
 | Split BLE Timeout | 1000（10秒） | R側（Central） | 左右間の切断判定を最大限延長 |
-| BT Max Conn | 2 | R側（Central） | 右←→左(1) + 右←→ホスト(1)。4は過剰でRAM消費 |
+| BT Max Conn | 5 | R側（Central） | 4プロファイル + 1スプリット接続（プロファイル数+1が正しい設定） |
 | BT Max Paired | 5 | R側（Central） | プロファイル切替用（Mac/iPhone等） |
-| ホスト接続間隔（min/max） | 12/24（15-30ms） | R側 | 7.5msは短すぎてMac負荷時に取りこぼす。15msに緩める |
-| ホストLatency | 0 | R側 | スキップなし（4にすると最悪120ms遅延が発生） |
-| ホスト監視タイムアウト | 1000（10秒） | R側 | 切断判定を最大限延長 |
+| ホスト接続パラメータ | ZMKデフォルト | R側 | 他の安定事例に倣い明示指定なし（デフォルトが最適） |
 | Insomnia pingInterval | 5秒 | R側のみ | keepaliveを高頻度化 |
 
 ### トラックボールセンサー（KeyballBLE_R.conf）
@@ -223,7 +221,7 @@ Keyball + XIAO BLE 向け ZMK ファームウェア設定。
 |------|------|
 | 2026-03-31 | 32kHz内部クロック切替: CONFIG_CLOCK_CONTROL_NRF_K32SRC_SYNTH=y をR・L両側に追加。XIAO BLE外部水晶不安定によるBLE supervision timeout切断対策（ZMK公式推奨） |
 | 2026-03-31 | insomnia再有効化: 無効化しても切断が発生したため原因でないと判断し復元 |
-| 2026-03-31 | BLE接続パラメータ再調整: LATENCY=4→0（最悪120ms遅延が発生するため）、MIN_INT=12・MAX_INT=24（15-30ms）に変更。Mac負荷対策と低遅延を両立 |
+| 2026-03-31 | ホストBLE接続パラメータ削除: PERIPHERAL_PREF_*を全削除しZMKデフォルトに戻す。他の安定事例（mable/corne/totem）は一切設定しておらず、明示指定が切断原因だった可能性。BT_MAX_CONNも2→5に修正（プロファイル数+1が正しい） |
 | 2026-03-31 | RAM最適化: BT_MAX_CONN=4→2（同時接続は右←→左+右←→ホストの2本で十分）、BT_MAX_PAIRED=4→5、HEAP_MEM_POOL_SIZE=8192を追加。BLEバッファ枯渇・スタック破壊による切断対策 |
 | 2026-03-31 | BLE安定化: experimental conn(2M PHY無効)、ホスト接続パラメータ調整(MAX_INT=24,LAT=2)、split latency/timeout調整、BT_MAX_CONN設定、左側にTX出力・スリープ・wakeup-source追加。BLEバッファ拡張はRAM不足でクラッシュしたため削除 |
 | 2026-03-27 | BLE supervision timeout を 400→800（4秒→8秒）に延長。USB 3.0 SSD接続時の2.4GHz干渉による切断を軽減 |
