@@ -191,8 +191,8 @@ Keyball + XIAO BLE 向け ZMK ファームウェア設定。
 |------|----|------|------|
 | Experimental Conn | **無効化中** | R・L両側 | 安定版(LkeyMouse)は未設定。切断原因の切り分けのため無効化 |
 | TX Power | +8dBm | R・L両側 | 最大送信出力 |
-| Split BLE Latency | 0 | R側（Central） | 左右間スキップなし（最強設定） |
-| Split BLE Timeout | 1000（10秒） | R側（Central） | 左右間の切断判定を最大限延長 |
+| Split BLE Latency | ZMKデフォルト | R側（Central） | 明示指定なし（安定版LkeyMouseに倣う） |
+| Split BLE Timeout | ZMKデフォルト | R側（Central） | 明示指定なし（TIMEOUT=1000が再接続失敗の原因の可能性） |
 | BT Max Conn | 5 | R側（Central） | 4プロファイル + 1スプリット接続（プロファイル数+1が正しい設定） |
 | BT Max Paired | 5 | R側（Central） | プロファイル切替用（Mac/iPhone等） |
 | ホスト接続パラメータ | ZMKデフォルト | R側 | 他の安定事例に倣い明示指定なし（デフォルトが最適） |
@@ -221,6 +221,7 @@ Keyball + XIAO BLE 向け ZMK ファームウェア設定。
 |------|------|
 | 2026-03-31 | 32kHz内部クロック切替: CONFIG_CLOCK_CONTROL_NRF_K32SRC_SYNTH=y をR・L両側に追加。XIAO BLE外部水晶不安定によるBLE supervision timeout切断対策（ZMK公式推奨） |
 | 2026-03-31 | insomnia再有効化: 無効化しても切断が発生したため原因でないと判断し復元 |
+| 2026-03-31 | Split BLE接続パラメータ削除: SPLIT_BLE_PREF_LATENCY/TIMEOUTを削除しデフォルトに戻す。TIMEOUT=1000が左手スリープ後の自動再接続失敗を引き起こしていた可能性 |
 | 2026-03-31 | EXPERIMENTAL_CONN無効化: 安定動作のLkeyMouseリポジトリは未設定。BCM4388(Apple Silicon)との相性で逆効果の可能性があるため切り分け目的で無効化 |
 | 2026-03-31 | ホストBLE接続パラメータ削除: PERIPHERAL_PREF_*を全削除しZMKデフォルトに戻す。他の安定事例（mable/corne/totem）は一切設定しておらず、明示指定が切断原因だった可能性。BT_MAX_CONNも2→5に修正（プロファイル数+1が正しい） |
 | 2026-03-31 | RAM最適化: BT_MAX_CONN=4→2（同時接続は右←→左+右←→ホストの2本で十分）、BT_MAX_PAIRED=4→5、HEAP_MEM_POOL_SIZE=8192を追加。BLEバッファ枯渇・スタック破壊による切断対策 |
