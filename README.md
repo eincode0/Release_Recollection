@@ -15,29 +15,29 @@
 
 ══════════════════════════════════════════════
 
-## ◆ FLOOR REGISTRY ── レイヤー構成
+## ◆ SYNTHESIS REGISTRY ── レイヤー構成
 
-*アインクラッドの各フロアに対応するレイヤー一覧。アクティブなフロアは STATUS CRYSTAL が示す。*
+*整合騎士の命名規則に従い番号付けされたレイヤー一覧。アクティブなレイヤーは STATUS CRYSTAL が示す。*
 
-| FLOOR | レイヤー名 | 概要 |
-|-------|-----------|------|
-| [ FLOOR 00 ] | default | 通常入力 |
-| [ FLOOR 01 ] | FUNCTION | ファンクションキー・カーソル |
-| [ FLOOR 02 ] | ARROW_SIGN | 矢印・記号 |
-| [ FLOOR 03 ] | NUM | テンキー |
-| [ FLOOR 04 ] | MOUSE | マウス操作 |
-| [ FLOOR 05 ] | SCROLL | スクロール |
-| [ FLOOR 06 ] | Bluetooth | BT接続切替・bootloader |
-| [ FLOOR 07 ] | GESTURE_E | ジェスチャー（E キー長押し）|
-| [ FLOOR 08 ] | GESTURE_R | ジェスチャー（R キー長押し）|
-| [ FLOOR 09 ] | GESTURE_S | ジェスチャー（S キー長押し）|
-| [ FLOOR 10 ] | GESTURE_M | ジェスチャー（M キー長押し）|
-| [ FLOOR 11 ] | GESTURE_T | ジェスチャー（T キー長押し）|
-| [ FLOOR 12 ] | GESTURE_A | ジェスチャー（A キー長押し）|
-| [ FLOOR 13 ] | GESTURE_D | ジェスチャー（D キー長押し）|
-| [ FLOOR 14 ] | GESTURE_W | ジェスチャー（W キー長押し）|
-| [ FLOOR 15 ] | SNIPE | 低速スクロール（V キー長押し）|
-| [ FLOOR 16 ] | NUM_SMART | スマート数字入力（数字キーで自動維持） |
+| SYNTHESIS | レイヤー名 | 概要 |
+|-----------|-----------|------|
+| [ Synthesis 00 ] | default | 通常入力 |
+| [ Synthesis 01 ] | FUNCTION | ファンクションキー・カーソル |
+| [ Synthesis 02 ] | ARROW_SIGN | 矢印・記号 |
+| [ Synthesis 03 ] | NUM | テンキー |
+| [ Synthesis 04 ] | MOUSE | マウス操作 |
+| [ Synthesis 05 ] | SCROLL | スクロール |
+| [ Synthesis 06 ] | Bluetooth | BT接続切替・bootloader |
+| [ Synthesis 07 ] | GESTURE_E | ジェスチャー（E キー長押し）|
+| [ Synthesis 08 ] | GESTURE_R | ジェスチャー（R キー長押し）|
+| [ Synthesis 09 ] | GESTURE_S | ジェスチャー（S キー長押し）|
+| [ Synthesis 10 ] | GESTURE_M | ジェスチャー（M キー長押し）|
+| [ Synthesis 11 ] | GESTURE_T | ジェスチャー（T キー長押し）|
+| [ Synthesis 12 ] | GESTURE_A | ジェスチャー（A キー長押し）|
+| [ Synthesis 13 ] | GESTURE_D | ジェスチャー（D キー長押し）|
+| [ Synthesis 14 ] | GESTURE_W | ジェスチャー（W キー長押し）|
+| [ Synthesis 15 ] | SNIPE | 低速スクロール（V キー長押し）|
+| [ Synthesis 16 ] | NUM_SMART | スマート数字入力（数字キーで自動維持） |
 
 ══════════════════════════════════════════════
 
@@ -229,7 +229,7 @@
 
 ### NERVE LINK STABILITY ── BLE・接続安定性
 
-*ナーブギアとホストを繋ぐ生命線。接続が切れれば、全てが無に帰す。*
+*ソウル・トランスレーターとホストを繋ぐ生命線。接続が切れれば、フラクトライトは消滅する。*
 
 | 設定 | 値 | 対象 | 効果 |
 |------|----|------|------|
