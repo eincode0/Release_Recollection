@@ -1,9 +1,0 @@
-file_format: "1"
-id: KeyballBLE
-name: KeyballBLE
-type: shield
-url: https://github.com/eincode0/KeyballBLE-LkeyMouse.git
-requires: [xiao_ble/nrf52840/zmk]
-features:
-  - keys
-  - sensors
