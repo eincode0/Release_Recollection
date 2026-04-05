@@ -1,0 +1,693 @@
+/* ===============================
+ * Recollection.keymap（コメント整理）
+ *  - レイヤー順＝番号（0起算）
+ *    0 default_layer
+ *    1 FUNCTION
+ *    2 ARROW_SIGN
+ *    3 NUM
+ *    4 MOUSE
+ *    5 SCROLL
+ *    6 Bluetooth
+ *    7 GESTURE_E
+ *    8 GESTURE_R
+ *    9 GESTURE_S
+ *   10 GESTURE_M
+ *   11 GESTURE_T
+ *   12 GESTURE_A
+ *   13 GESTURE_D
+ *   14 GESTURE_W
+ *   15 SNIPE（キーで遅いスクロール：MOVE_X/Y(8)）
+ *   16 NUM_SMART（Smart Num: 数字キーで自動維持、それ以外で自動解除）
+ *  - overlay 側で gesture を 7..14 に紐付け（gE/gR/gS/gM/gT/gA/gD/gW）
+ * =============================== */
+
+#include "dts/mouse-gesture.local.dtsi"
+#include <dt-bindings/zmk/mouse.h>
+#include <zmk-helpers/helper.h>              /* ⑦ zmk-helpers: ZMK_COMBO 等のマクロ */
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/pointing.h>
+
+/* ⑧ zmk-tri-state: behaviors/tri_state.dtsi は不要。behavior を keymap に直接定義する */
+/* pointing.h の定義（デフォルト10）を上書き */
+
+#undef ZMK_POINTING_DEFAULT_SCRL_VAL
+
+#define ZMK_POINTING_DEFAULT_SCRL_VAL 10
+
+&msc {
+    time-to-max-speed-ms = <0>;
+    acceleration-exponent = <0>;
+};
+
+&mt {
+    flavor = "balanced";
+    quick-tap-ms = <0>;
+};
+
+&mouse_gesture_kp {
+    tapping-term-ms = <200>;
+    quick-tap-ms = <0>;
+    flavor = "tap-preferred";
+};
+
+&mouse_gesture_mkp {
+    tapping-term-ms = <200>;
+    quick-tap-ms = <0>;
+    flavor = "tap-preferred";
+};
+
+/* ⑦ zmk-helpers: ZMK_COMBO マクロは / { } の外に置く（マクロ自身が / { } を生成するため）
+ *   書式: ZMK_COMBO(名前, バインディング, キーポジション, レイヤー)
+ *   ALL = 全レイヤーで有効 */
+
+/ {
+    combos {
+        compatible = "zmk,combos";
+
+        scroll_toggle {
+            bindings = <&tog 5>;
+            key-positions = <7 8>;
+        };
+
+        mb2_combo {
+            bindings = <&mkp MB2>;
+            key-positions = <19 18>;
+        };
+
+        drag_off_combo {
+            bindings = <&drag_off>;
+            key-positions = <32 31>;
+        };
+
+        key1 {
+            bindings = <&kp EXCLAMATION>;
+            key-positions = <17 18>;
+        };
+
+        key2 {
+            bindings = <&kp QUESTION>;
+            key-positions = <29 30>;
+        };
+
+        scrl_up {
+            bindings = <&msc MOVE_UP>;
+            key-positions = <21 33>;
+        };
+
+        scrl_down {
+            bindings = <&msc MOVE_DOWN>;
+            key-positions = <33 42>;
+        };
+
+        left_shift {
+            bindings = <&kp LEFT_SHIFT>;
+            key-positions = <0 1>;
+        };
+
+        right_shift {
+            bindings = <&kp RIGHT_SHIFT>;
+            key-positions = <8 9>;
+        };
+
+        tab {
+            bindings = <&kp TAB>;
+            key-positions = <11 12>;
+        };
+
+        lctab {
+            bindings = <&kp LS(TAB)>;
+            key-positions = <1 2>;
+        };
+
+        click {
+            bindings = <&mkp MB1>;
+            key-positions = <19 20>;
+        };
+
+        escape {
+            bindings = <&kp ESCAPE>;
+            key-positions = <40 41>;
+        };
+    };
+
+    macros {
+        safari_reload_once: safari_reload_once {
+            compatible = "zmk,behavior-macro";
+            label = "SAFARI_RELOAD_ONCE";
+            #binding-cells = <0>;
+            bindings =
+                <&macro_press>,
+                <&kp LGUI>,
+                <&macro_tap>,
+                <&kp R>,
+                <&macro_release>,
+                <&kp LGUI>;
+        };
+
+        to_layer_0: to_layer_0 {
+            compatible = "zmk,behavior-macro-one-param";
+            label = "TO_LAYER_0";
+            #binding-cells = <1>;
+            bindings = <&to 0 &macro_param_1to1 &kp MACRO_PLACEHOLDER>;
+        };
+
+        drag_on: drag_on {
+            compatible = "zmk,behavior-macro";
+            label = "DRAG_ON";
+            #binding-cells = <0>;
+            bindings = <&macro_press>, <&mkp MB1>;
+        };
+
+        drag_off: drag_off {
+            compatible = "zmk,behavior-macro";
+            label = "DRAG_OFF";
+            #binding-cells = <0>;
+            bindings = <&macro_release>, <&mkp MB1>;
+        };
+
+        lm: lm {
+            compatible = "zmk,behavior-macro-two-param";
+            #binding-cells = <2>;
+            wait-ms = <0>;
+            tap-ms = <0>;
+            bindings =
+                <&macro_param_1to1>,
+                <&macro_press>,
+                <&mo MACRO_PLACEHOLDER &macro_param_2to1>,
+                <&macro_press>,
+                <&kp MACRO_PLACEHOLDER>,
+                <&macro_pause_for_release>,
+                <&macro_param_2to1>,
+                <&macro_release>,
+                <&kp MACRO_PLACEHOLDER &macro_param_1to1>,
+                <&macro_release>,
+                <&mo MACRO_PLACEHOLDER>;
+        };
+    };
+
+    behaviors {
+        gesture_mo_kp: gesture_mo_kp {
+            compatible = "zmk,behavior-hold-tap";
+            label = "GESTURE_MO_KP";
+            bindings = <&mo>, <&kp>;
+
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <210>;
+            quick-tap-ms = <150>;
+            require-prior-idle-ms = <450>;
+        };
+
+        lt_to_layer_0: lt_to_layer_0 {
+            compatible = "zmk,behavior-hold-tap";
+            label = "LAYER_TAP_TO_0";
+            bindings = <&mo>, <&to_layer_0>;
+
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <210>;
+            quick-tap-ms = <150>;
+            require-prior-idle-ms = <350>;
+        };
+
+        rotate: rotate {
+            compatible = "zmk,behavior-sensor-rotate";
+            label = "ROTATE";
+            #sensor-binding-cells = <0>;
+            bindings = <&msc MOVE_UP>, <&msc MOVE_DOWN>;
+
+            tap-ms = <20>;
+        };
+
+        lt_mkp: lt_mkp {
+            compatible = "zmk,behavior-hold-tap";
+            label = "LT_MKP";
+            bindings = <&mo>, <&mkp>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+        };
+
+        mod_mkp: mod_mkp {
+            compatible = "zmk,behavior-hold-tap";
+            label = "MOD_MKP";
+            bindings = <&kp>, <&mkp>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+        };
+
+        dragkey: dragkey {
+            compatible = "zmk,behavior-hold-tap";
+            label = "DRAGKEY";
+            bindings = <&drag_on>, <&mkp>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            require-prior-idle-ms = <150>;
+            flavor = "tap-preferred";
+            quick-tap-ms = <100>;
+        };
+
+        g_shft: g_shft {
+            compatible = "zmk,behavior-sticky-key";
+            #binding-cells = <1>;
+            release-after-ms = <1000>;
+            bindings = <&kp>;
+        };
+
+        swapper: swapper {
+            compatible = "zmk,behavior-tri-state";
+            label = "SWAPPER";
+            #binding-cells = <0>;
+            bindings = <&kt LGUI>, <&kp TAB>, <&kt LGUI>;
+
+            ignored-key-positions = <10 15>;
+        };
+
+        swapper_rev: swapper_rev {
+            compatible = "zmk,behavior-tri-state";
+            label = "SWAPPER_REV";
+            #binding-cells = <0>;
+            bindings = <&kt LGUI>, <&kp LS(TAB)>, <&kt LGUI>;
+
+            ignored-key-positions = <10 15>;
+        };
+
+        smart_num: smart_num {
+            compatible = "zmk,behavior-auto-layer";
+            #binding-cells = <1>;
+            ignore-modifiers;
+            continue-list = <
+                KP_NUMBER_0 KP_NUMBER_1 KP_NUMBER_2 KP_NUMBER_3 KP_NUMBER_4
+                KP_NUMBER_5 KP_NUMBER_6 KP_NUMBER_7 KP_NUMBER_8 KP_NUMBER_9
+                BACKSPACE DELETE DOT COMMA EQUAL
+                PLUS MINUS ASTERISK SLASH
+                SPACE ENTER
+            >;
+        };
+
+        gA_up: gA_up {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+            bindings = <&kp LC(B)>, <&kp LC(LA(LG(NUMBER_1)))>;
+        };
+
+        gA_down: gA_down {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+            bindings = <&kp LG(SPACE)>, <&kp LC(LA(LG(NUMBER_4)))>;
+        };
+
+        gA_left: gA_left {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+            bindings = <&swapper_rev>, <&kp LC(LA(LG(NUMBER_3)))>;
+        };
+
+        gA_right: gA_right {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+            bindings = <&swapper>, <&kp LC(LA(LG(NUMBER_2)))>;
+        };
+
+        gD_up: gD_up {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+            bindings = <&kp LC(UP_ARROW)>, <&kp F12>;
+        };
+
+        gD_down: gD_down {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+            bindings = <&kp LG(H)>, <&kp LC(DOWN_ARROW)>;
+        };
+
+        gD_left: gD_left {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+            bindings = <&kp F15>, <&kp F11>;
+        };
+
+        gD_right: gD_right {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+            bindings = <&kp F14>, <&kp F20>;
+        };
+
+        gW_up: gW_up {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+            bindings = <&kp F3>, <&kp HOME>;
+        };
+
+        gW_down: gW_down {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+            bindings = <&kp LG(M)>, <&kp END>;
+        };
+
+        gW_left: gW_left {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+            bindings = <&kp LG(LBKT)>, <&kp LG(Q)>;
+        };
+
+        gW_right: gW_right {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+            bindings = <&kp LG(RBKT)>, <&kp LG(W)>;
+        };
+
+        gT_up: gT_up {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+            bindings = <&kp LG(T)>, <&kp LG(R)>;
+        };
+
+        gT_down: gT_down {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+            bindings = <&kp LG(W)>, <&kp LG(F)>;
+        };
+
+        gT_left: gT_left {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+            bindings = <&kp LC(LS(TAB))>, <&kp LG(MINUS)>;
+        };
+
+        gT_right: gT_right {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+            bindings = <&kp LC(TAB)>, <&kp LG(PLUS)>;
+        };
+
+        gE_up: gE_up {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+            bindings = <&kp LG(C)>, <&kp LG(X)>;
+        };
+
+        gE_down: gE_down {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+            bindings = <&kp LG(V)>, <&kp LG(LS(V))>;
+        };
+
+        gE_left: gE_left {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+            bindings = <&kp LG(Z)>, <&kp LG(P)>;
+        };
+
+        gE_right: gE_right {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+            bindings = <&kp LG(LS(Z))>, <&kp LG(RET)>;
+        };
+
+        gR_up: gR_up {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+            bindings = <&kp LG(A)>, <&kp LG(LS(UP_ARROW))>;
+        };
+
+        gR_down: gR_down {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+            bindings = <&kp LG(X)>, <&kp LG(LS(DOWN_ARROW))>;
+        };
+
+        gR_left: gR_left {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+            bindings = <&kp LA(LS(LEFT_ARROW))>, <&kp LG(LS(LEFT_ARROW))>;
+        };
+
+        gR_right: gR_right {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+            bindings = <&kp LA(LS(RIGHT_ARROW))>, <&kp LG(LS(RIGHT_ARROW))>;
+        };
+
+        gS_up: gS_up {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+            bindings = <&kp LG(LS(NUMBER_3))>, <&kp LC(LG(LS(NUMBER_3)))>;
+        };
+
+        gS_down: gS_down {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+            bindings = <&kp ESC>, <&kp ESC>;
+        };
+
+        gS_left: gS_left {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+            bindings = <&kp LG(LS(NUMBER_4))>, <&kp LC(LG(LS(NUMBER_4)))>;
+        };
+
+        gS_right: gS_right {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+            bindings = <&kp LG(LS(NUMBER_5))>, <&kp LG(LS(NUMBER_5))>;
+        };
+
+        gM_up: gM_up {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+            bindings = <&kp C_VOLUME_UP>, <&kp F13>;
+        };
+
+        gM_down: gM_down {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+            bindings = <&kp C_VOLUME_DOWN>, <&kp C_MUTE>;
+        };
+
+        gM_left: gM_left {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+            bindings = <&kp C_BRI_DN>, <&kp F19>;
+        };
+
+        gM_right: gM_right {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+            bindings = <&kp C_BRI_UP>, <&kp F18>;
+        };
+    };
+
+    keymap {
+        compatible = "zmk,keymap";
+
+        default_layer {
+            bindings = <
+&mt LEFT_SHIFT Q     &gesture_mo_kp 14 W  &gesture_mo_kp 7 E   &gesture_mo_kp 8 R   &gesture_mo_kp 11 T                                    &kp Y        &kp U                &gesture_mo_kp 5 I  &kp O               &mt RIGHT_SHIFT P
+&gesture_mo_kp 12 A  &gesture_mo_kp 9 S   &gesture_mo_kp 13 D  &kp F                &lt 6 G              &smart_num 16      &kp AT_SIGN    &kp H        &kp J                &gesture_mo_kp 5 K  &gesture_mo_kp 4 L  &mt LEFT_GUI MINUS
+&kp Z                &kp X                &kp C                &gesture_mo_kp 15 V  &kp B                &kp TAB            &kp COLON      &kp N        &gesture_mo_kp 10 M  &kp COMMA           &kp PERIOD          &mt LEFT_CONTROL PLUS
+&kp LCTRL            &kp LEFT_GUI         &kp LEFT_ALT         &lt 3 SPACE          &mkp MB1             &lt 2 CAPS         &kp BACKSPACE  &lt 1 ENTER                                                               &mt LEFT_ALT DELETE
+            >;
+
+            sensor-bindings = <&inc_dec_kp DOWN_ARROW UP_ARROW>;
+        };
+
+        FUNCTION {
+            bindings = <
+&kp F5                &kp F4            &kp F3            &kp F2    &kp F1                                              &kp LS(RIGHT_ARROW)  &kp LEFT_ARROW  &kp UP_ARROW    &kp RIGHT_ARROW  &kp LC(TAB)
+&kp F10               &kp F9            &kp F8            &kp F7    &kp F6   &kp ESC                &kp LS(LEFT_ARROW)  &kp LEFT_ARROW       &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT_ARROW  &kp LS(LC(TAB))
+&mt LEFT_SHIFT F11    &kp F17           &kp F16           &kp F15   &kp F14  &kp F13                &kp RG(A)           &kp RG(M)            &kp RG(Q)       &kp RG(W)       &kp RG(P)        &kp RS(RG(NUMBER_5))
+&mt LEFT_CONTROL F12  &mt LEFT_GUI F19  &mt LEFT_ALT F18  &kp CAPS  &kp F20  &kp LG(BACKSPACE)      &kp BACKSPACE       &trans                                                                &kp RS(RG(NUMBER_4))
+            >;
+
+            sensor-bindings = <&inc_dec_kp RIGHT_ARROW LEFT_ARROW>;
+        };
+
+        ARROW_SIGN {
+            bindings = <
+&kp LEFT_ARROW      &kp LEFT_ARROW       &kp UP_ARROW     &kp RIGHT_ARROW  &kp RIGHT_ARROW                                     &kp CARET         &kp AMPERSAND      &kp TILDE       &kp LEFT_PARENTHESIS  &mt LEFT_SHIFT RIGHT_PARENTHESIS
+&kp LEFT_ARROW      &kp LEFT_ARROW       &kp DOWN_ARROW   &kp RIGHT_ARROW  &kp HOME         &kp C_MUTE      &kp UNDERSCORE     &kp EXCLAMATION   &kp AT_SIGN        &kp HASH        &kp DOLLAR            &kp PERCENT
+&kp LS(LEFT_ARROW)  &kp LS(RIGHT_ARROW)  &kp LS(LC(TAB))  &kp LC(TAB)      &kp END          &kp ESC         &kp DOUBLE_QUOTES  &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &kp LEFT_BRACE  &kp RIGHT_BRACE       &kp BACKSLASH
+&trans              &trans               &trans           &to 0            &trans           &trans          &kp BACKSPACE      &kp ENTER                                                                  &kp PIPE
+            >;
+
+            sensor-bindings = <&inc_dec_kp C_VOLUME_DOWN C_VOLUME_UP>;
+        };
+
+        NUM {
+            bindings = <
+&kp KP_NUMBER_5       &kp KP_NUMBER_4  &kp KP_NUMBER_3  &kp KP_NUMBER_2  &kp KP_NUMBER_1                               &kp KP_NUMBER_1  &kp KP_NUMBER_2  &kp KP_NUMBER_3  &kp KP_NUMBER_4  &kp KP_NUMBER_5
+&kp KP_NUMBER_0       &kp KP_NUMBER_9  &kp KP_NUMBER_8  &kp KP_NUMBER_7  &kp KP_NUMBER_6  &kp CAPS      &kp EQUAL      &kp KP_NUMBER_6  &kp KP_NUMBER_7  &kp KP_NUMBER_8  &kp KP_NUMBER_9  &kp KP_NUMBER_0
+&mt LEFT_SHIFT COMMA  &kp PERIOD       &kp SLASH        &kp ASTERISK     &kp MINUS        &kp PLUS      &kp PLUS       &kp MINUS        &kp ASTERISK     &kp SLASH        &kp PERIOD       &kp COMMA
+&trans                &trans           &trans           &trans           &trans           &to 0         &kp BACKSPACE  &kp ENTER                                                           &kp RG(Z)
+            >;
+
+            sensor-bindings = <&inc_dec_kp C_BRI_DN C_BRI_UP>;
+        };
+
+        MOUSE {
+            bindings = <
+&mmv MOVE_LEFT       &mmv MOVE_DOWN  &mmv MOVE_UP    &mmv MOVE_RIGHT  &kp LG(T)                                              &kp LG(Z)       &kp LG(RBKT)  &gesture_mo_kp 5 LG(LBKT)  &kp LG(A)  &kp LC(H)
+&msc MOVE_RIGHT      &msc MOVE_DOWN  &msc MOVE_UP    &msc MOVE_LEFT   &arrows_alt 6  &mkp MB3           &safari_reload_once  &mkp MB3        &mkp MB2      &mkp MB1                   &trans     &gesture_mo_kp 5 ENTER
+&mt LEFT_SHIFT HOME  &kp END         &kp DOWN_ARROW  &kp UP_ARROW     &mkp MB2       &mkp MB1           &kp LG(C)            &kp LG(V)       &kp UP_ARROW  &drag_off                  &kp LG(X)  &gesture_mo_kp 5 BACKSPACE
+&kp LG(P)            &kp LG(RBKT)    &kp LG(LBKT)    &arrows_alt 3    &kp TAB        &arrows_alt 2      &drag_on             &kp DOWN_ARROW                                                      &trans
+            >;
+
+            sensor-bindings = <&rotate>;
+        };
+
+        SCROLL {
+            bindings = <
+&mmv MOVE_LEFT   &mmv MOVE_DOWN  &mmv MOVE_UP  &mmv MOVE_RIGHT   &trans                                      &kp LEFT_SHIFT  &kp RIGHT_ALT  &trans  &kp RIGHT_CONTROL  &trans
+&msc MOVE_RIGHT  &msc MOVE_DOWN  &msc MOVE_UP  &msc MOVE_LEFT    &mo 8   &to 0                 &trans        &trans          &trans         &trans  &trans             &trans
+&trans           &trans          &trans        &trans            &trans  &trans                &trans        &trans          &kp UP_ARROW   &trans  &trans             &trans
+&trans           &trans          &trans        &kp LG(NUMBER_9)  &trans  &kp LG(NUMBER_0)      &kp UP_ARROW  &kp DOWN_ARROW                                            &trans
+            >;
+
+            sensor-bindings = <&inc_dec_kp LG(LA(MINUS)) LG(LA(PLUS))>;
+        };
+
+        Bluetooth {
+            bindings = <
+&trans  &trans  &trans  &trans  &trans                                              &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4
+&trans  &trans  &trans  &trans  &trans           &trans             &studio_unlock  &trans        &trans        &trans        &trans        &trans
+&trans  &trans  &trans  &trans  &kp LG(LA(ESC))  &kp LC(LG(Q))      &bootloader     &trans        &trans        &trans        &trans        &bt BT_CLR
+&trans  &trans  &trans  &trans  &trans           &trans             &trans          &trans                                                  &bt BT_CLR_ALL
+            >;
+
+            sensor-bindings = <&rotate>;
+        };
+
+        GESTURE_E {
+            bindings = <
+&trans  &trans  &trans  &trans          &trans                                      &trans  &trans  &kp LEFT_SHIFT  &trans          &trans
+&trans  &trans  &trans  &trans          &trans          &trans              &trans  &trans  &trans  &kp LEFT_SHIFT  &kp LEFT_SHIFT  &trans
+&trans  &trans  &trans  &trans          &trans          &trans              &trans  &trans  &trans  &trans          &trans          &trans
+&trans  &trans  &trans  &kp LEFT_SHIFT  &kp LEFT_SHIFT  &kp LEFT_SHIFT      &trans  &trans                                          &trans
+            >;
+
+            sensor-bindings = <&inc_dec_kp F15 F14>;
+        };
+
+        GESTURE_R {
+            bindings = <
+&trans  &trans  &trans  &trans          &trans                                      &trans  &trans  &kp LEFT_SHIFT  &trans          &trans
+&trans  &trans  &trans  &trans          &trans          &trans              &trans  &trans  &trans  &kp LEFT_SHIFT  &kp LEFT_SHIFT  &trans
+&trans  &trans  &trans  &trans          &trans          &trans              &trans  &trans  &trans  &trans          &trans          &trans
+&trans  &trans  &trans  &kp LEFT_SHIFT  &kp LEFT_SHIFT  &kp LEFT_SHIFT      &trans  &trans                                          &trans
+            >;
+
+            sensor-bindings = <&inc_dec_kp LG(MINUS) LG(PLUS)>;
+        };
+
+        GESTURE_S {
+            bindings = <
+&trans  &trans  &trans  &trans          &trans                                      &trans  &trans  &kp LEFT_SHIFT  &trans          &trans
+&trans  &trans  &trans  &trans          &trans          &trans              &trans  &trans  &trans  &kp LEFT_SHIFT  &kp LEFT_SHIFT  &trans
+&trans  &trans  &trans  &trans          &trans          &trans              &trans  &trans  &trans  &trans          &trans          &trans
+&trans  &trans  &trans  &kp LEFT_SHIFT  &kp LEFT_SHIFT  &kp LEFT_SHIFT      &trans  &trans                                          &trans
+            >;
+        };
+
+        GESTURE_M {
+            bindings = <
+&trans  &trans  &trans  &trans          &trans                                      &trans  &trans  &kp LEFT_SHIFT  &trans          &trans
+&trans  &trans  &trans  &trans          &trans          &trans              &trans  &trans  &trans  &kp LEFT_SHIFT  &kp LEFT_SHIFT  &trans
+&trans  &trans  &trans  &trans          &trans          &trans              &trans  &trans  &trans  &trans          &trans          &trans
+&trans  &trans  &trans  &kp LEFT_SHIFT  &kp LEFT_SHIFT  &kp LEFT_SHIFT      &trans  &trans                                          &trans
+            >;
+        };
+
+        GESTURE_T {
+            bindings = <
+&trans  &trans  &trans  &trans          &trans                                      &trans  &trans  &kp LEFT_SHIFT  &trans          &trans
+&trans  &trans  &trans  &trans          &trans          &trans              &trans  &trans  &trans  &kp LEFT_SHIFT  &kp LEFT_SHIFT  &trans
+&trans  &trans  &trans  &trans          &trans          &trans              &trans  &trans  &trans  &trans          &trans          &trans
+&trans  &trans  &trans  &kp LEFT_SHIFT  &kp LEFT_SHIFT  &kp LEFT_SHIFT      &trans  &trans                                          &trans
+            >;
+        };
+
+        GESTURE_A {
+            bindings = <
+&trans  &trans  &trans  &trans          &trans                                      &trans  &trans  &kp LEFT_SHIFT  &trans          &trans
+&trans  &trans  &trans  &trans          &trans          &trans              &trans  &trans  &trans  &kp LEFT_SHIFT  &kp LEFT_SHIFT  &trans
+&trans  &trans  &trans  &trans          &trans          &trans              &trans  &trans  &trans  &trans          &trans          &trans
+&trans  &trans  &trans  &kp LEFT_SHIFT  &kp LEFT_SHIFT  &kp LEFT_SHIFT      &trans  &trans                                          &trans
+            >;
+        };
+
+        GESTURE_D {
+            bindings = <
+&trans  &trans  &trans  &trans          &trans                                      &trans  &trans  &kp LEFT_SHIFT  &trans          &trans
+&trans  &trans  &trans  &trans          &trans          &trans              &trans  &trans  &trans  &kp LEFT_SHIFT  &kp LEFT_SHIFT  &trans
+&trans  &trans  &trans  &trans          &trans          &trans              &trans  &trans  &trans  &trans          &trans          &trans
+&trans  &trans  &trans  &kp LEFT_SHIFT  &kp LEFT_SHIFT  &kp LEFT_SHIFT      &trans  &trans                                          &trans
+            >;
+        };
+
+        GESTURE_W {
+            bindings = <
+&trans  &trans  &trans  &trans          &trans                                      &trans  &trans  &kp LEFT_SHIFT  &trans          &trans
+&trans  &trans  &trans  &trans          &trans          &trans              &trans  &trans  &trans  &kp LEFT_SHIFT  &kp LEFT_SHIFT  &trans
+&trans  &trans  &trans  &trans          &trans          &trans              &trans  &trans  &trans  &trans          &trans          &trans
+&trans  &trans  &trans  &kp LEFT_SHIFT  &kp LEFT_SHIFT  &kp LEFT_SHIFT      &trans  &trans                                          &trans
+            >;
+        };
+
+        SNIPE {
+            bindings = <
+&trans  &trans           &trans           &trans          &trans                      &trans           &trans           &trans          &trans          &trans
+&trans  &trans           &msc MOVE_Y(8)   &trans          &trans  &trans      &trans  &msc MOVE_X(-8)  &msc MOVE_Y(-8)  &msc MOVE_Y(8)  &msc MOVE_X(8)  &trans
+&trans  &msc MOVE_X(-8)  &msc MOVE_Y(-8)  &msc MOVE_X(8)  &trans  &trans      &trans  &trans           &trans           &trans          &trans          &trans
+&trans  &trans           &trans           &trans          &trans  &trans      &trans  &trans                                                            &trans
+            >;
+        };
+
+        NUM_SMART {
+            bindings = <
+&kp KP_NUMBER_5       &kp KP_NUMBER_4  &kp KP_NUMBER_3  &kp KP_NUMBER_2  &kp KP_NUMBER_1                               &kp KP_NUMBER_1  &kp KP_NUMBER_2  &kp KP_NUMBER_3  &kp KP_NUMBER_4  &kp KP_NUMBER_5
+&kp KP_NUMBER_0       &kp KP_NUMBER_9  &kp KP_NUMBER_8  &kp KP_NUMBER_7  &kp KP_NUMBER_6  &trans        &kp EQUAL      &kp KP_NUMBER_6  &kp KP_NUMBER_7  &kp KP_NUMBER_8  &kp KP_NUMBER_9  &kp KP_NUMBER_0
+&mt LEFT_SHIFT COMMA  &kp PERIOD       &kp SLASH        &kp ASTERISK     &kp MINUS        &kp PLUS      &kp PLUS       &kp MINUS        &kp ASTERISK     &kp SLASH        &kp PERIOD       &kp COMMA
+&trans                &trans           &trans           &trans           &trans           &trans        &kp BACKSPACE  &kp ENTER                                                           &tog 16
+            >;
+
+            sensor-bindings = <&inc_dec_kp C_BRI_DN C_BRI_UP>;
+        };
+    };
+};
