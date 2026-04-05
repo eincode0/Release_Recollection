@@ -1,0 +1,5 @@
+config SHIELD_RECOLLECTION_R
+    def_bool $(shields_list_contains,Recollection_R)
+
+config SHIELD_RECOLLECTION_L
+    def_bool $(shields_list_contains,Recollection_L)
