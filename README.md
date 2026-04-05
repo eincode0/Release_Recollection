@@ -1,46 +1,56 @@
-# Release_Recollection
+# ⚔ RECOLLECTION — SYSTEM INTERFACE
 
-Recollection — XIAO BLE 向け ZMK ファームウェア設定。
-トラックボールのマウスジェスチャーで多数のショートカットを発動できるのが特徴。
+> **[ SYSTEM ANNOUNCEMENT ]**
+> Recollection — アインクラッドの戦場に降り立つ者へ。
+> XIAO BLE 上に展開された ZMK ファームウェア。
+> トラックボールの軌跡が剣技を呼び覚ます。
 
-## キーマップ図
+══════════════════════════════════════════════
 
-> Push のたびに自動更新されます（`.github/workflows/draw-keymap.yml`）
+## ◆ KEYMAP DISPLAY ── キーマップ図
+
+> [ CARDINAL ] Push のたびに自動更新されます（`.github/workflows/draw-keymap.yml`）
 
 ![keymap](keymap.svg)
 
+══════════════════════════════════════════════
+
+## ◆ FLOOR REGISTRY ── レイヤー構成
+
+*アインクラッドの各フロアに対応するレイヤー一覧。アクティブなフロアは STATUS CRYSTAL が示す。*
+
+| FLOOR | レイヤー名 | 概要 |
+|-------|-----------|------|
+| [ FLOOR 00 ] | default | 通常入力 |
+| [ FLOOR 01 ] | FUNCTION | ファンクションキー・カーソル |
+| [ FLOOR 02 ] | ARROW_SIGN | 矢印・記号 |
+| [ FLOOR 03 ] | NUM | テンキー |
+| [ FLOOR 04 ] | MOUSE | マウス操作 |
+| [ FLOOR 05 ] | SCROLL | スクロール |
+| [ FLOOR 06 ] | Bluetooth | BT接続切替・bootloader |
+| [ FLOOR 07 ] | GESTURE_E | ジェスチャー（E キー長押し）|
+| [ FLOOR 08 ] | GESTURE_R | ジェスチャー（R キー長押し）|
+| [ FLOOR 09 ] | GESTURE_S | ジェスチャー（S キー長押し）|
+| [ FLOOR 10 ] | GESTURE_M | ジェスチャー（M キー長押し）|
+| [ FLOOR 11 ] | GESTURE_T | ジェスチャー（T キー長押し）|
+| [ FLOOR 12 ] | GESTURE_A | ジェスチャー（A キー長押し）|
+| [ FLOOR 13 ] | GESTURE_D | ジェスチャー（D キー長押し）|
+| [ FLOOR 14 ] | GESTURE_W | ジェスチャー（W キー長押し）|
+| [ FLOOR 15 ] | SNIPE | 低速スクロール（V キー長押し）|
+| [ FLOOR 16 ] | NUM_SMART | スマート数字入力（数字キーで自動維持） |
+
+══════════════════════════════════════════════
+
+## ◆ SWORD SKILLS ── ジェスチャーマッピング表
+
+*剣技は指定のキーを長押しし、トラックボールを動かすことで発動する。*
+*各剣技は上下左右 4 方向を認識。Shift 同時押しで上位技（派生技）に切り替わる。*
+
 ---
 
-## レイヤー構成
+### ◆ SWORD SKILL : SCRIBE ── GESTURE_E（E キー長押し）― 編集剣技
 
-| # | レイヤー名 | 概要 |
-|---|-----------|------|
-| 0 | default | 通常入力 |
-| 1 | FUNCTION | ファンクションキー・カーソル |
-| 2 | ARROW_SIGN | 矢印・記号 |
-| 3 | NUM | テンキー |
-| 4 | MOUSE | マウス操作 |
-| 5 | SCROLL | スクロール |
-| 6 | Bluetooth | BT接続切替・bootloader |
-| 7 | GESTURE_E | ジェスチャー（E キー長押し）|
-| 8 | GESTURE_R | ジェスチャー（R キー長押し）|
-| 9 | GESTURE_S | ジェスチャー（S キー長押し）|
-| 10 | GESTURE_M | ジェスチャー（M キー長押し）|
-| 11 | GESTURE_T | ジェスチャー（T キー長押し）|
-| 12 | GESTURE_A | ジェスチャー（A キー長押し）|
-| 13 | GESTURE_D | ジェスチャー（D キー長押し）|
-| 14 | GESTURE_W | ジェスチャー（W キー長押し）|
-| 15 | SNIPE | 低速スクロール（V キー長押し）|
-| 16 | NUM_SMART | スマート数字入力（数字キーで自動維持） |
-
----
-
-## ジェスチャーマッピング表
-
-対応キーを**長押ししながらトラックボールを動かす**とジェスチャーが発動。
-各ジェスチャーは上下左右の 4 方向を認識。Shift を同時押しすると別コマンドになる。
-
-### GESTURE_E（E キー長押し）― 編集系
+*文字を刻む剣技。クリップボードとアンドゥを自在に操る。*
 
 | 方向 | 通常 | Shift 同時押し |
 |------|------|--------------|
@@ -49,7 +59,11 @@ Recollection — XIAO BLE 向け ZMK ファームウェア設定。
 | ← 左 | `Cmd+Z` アンドゥ | `Cmd+P` |
 | → 右 | `Cmd+Shift+Z` リドゥ | `Cmd+Return` |
 
-### GESTURE_R（R キー長押し）― 選択・テキスト操作系
+---
+
+### ◆ SWORD SKILL : SELECTOR ── GESTURE_R（R キー長押し）― 選択剣技
+
+*テキストを支配する剣技。範囲を制する者が情報を制する。*
 
 | 方向 | 通常 | Shift 同時押し |
 |------|------|--------------|
@@ -58,7 +72,11 @@ Recollection — XIAO BLE 向け ZMK ファームウェア設定。
 | ← 左 | `Alt+Shift+←` 単語選択（左） | `Cmd+Shift+←` 行頭まで選択 |
 | → 右 | `Alt+Shift+→` 単語選択（右） | `Cmd+Shift+→` 行末まで選択 |
 
-### GESTURE_S（S キー長押し）― スクリーンショット系
+---
+
+### ◆ SWORD SKILL : CAPTURE ── GESTURE_S（S キー長押し）― 捕捉剣技
+
+*画面を鏡に映す剣技。現実をクリスタルに封じる。*
 
 | 方向 | 通常 | Shift 同時押し |
 |------|------|--------------|
@@ -67,7 +85,11 @@ Recollection — XIAO BLE 向け ZMK ファームウェア設定。
 | ← 左 | `Cmd+Shift+4` 範囲選択スクショ | `Ctrl+Cmd+Shift+4` 範囲選択（クリップボード） |
 | → 右 | `Cmd+Shift+5` スクショメニュー | `Cmd+Shift+5` |
 
-### GESTURE_M（M キー長押し）― メディア・輝度系
+---
+
+### ◆ SWORD SKILL : CONDUCTOR ── GESTURE_M（M キー長押し）― 音響剣技
+
+*音と光を調律する剣技。空間そのものを演奏する。*
 
 | 方向 | 通常 | Shift 同時押し |
 |------|------|--------------|
@@ -76,7 +98,11 @@ Recollection — XIAO BLE 向け ZMK ファームウェア設定。
 | ← 左 | 輝度下げる | `F19` |
 | → 右 | 輝度上げる | `F18` |
 
-### GESTURE_T（T キー長押し）― ブラウザタブ系
+---
+
+### ◆ SWORD SKILL : NAVIGATOR ── GESTURE_T（T キー長押し）― 航路剣技
+
+*ブラウザのポータルを開閉する剣技。次のフロアへの扉を操る。*
 
 | 方向 | 通常 | Shift 同時押し |
 |------|------|--------------|
@@ -85,7 +111,11 @@ Recollection — XIAO BLE 向け ZMK ファームウェア設定。
 | ← 左 | `Ctrl+Shift+Tab` 前のタブ | `Cmd+-` ズームアウト |
 | → 右 | `Ctrl+Tab` 次のタブ | `Cmd++` ズームイン |
 
-### GESTURE_A（A キー長押し）― アプリ切替・Spotlight系
+---
+
+### ◆ SWORD SKILL : SEARCHER ── GESTURE_A（A キー長押し）― 探索剣技
+
+*アプリ間をテレポートする剣技。Spotlight が新たな扉を示す。*
 
 | 方向 | 通常 | Shift 同時押し |
 |------|------|--------------|
@@ -94,7 +124,11 @@ Recollection — XIAO BLE 向け ZMK ファームウェア設定。
 | ← 左 | `Cmd+Shift+Tab` アプリ切替（前） | `Ctrl+Alt+Cmd+3` |
 | → 右 | `Cmd+Tab` アプリ切替（次） | `Ctrl+Alt+Cmd+2` |
 
-### GESTURE_D（D キー長押し）― ウィンドウ・Mission Control系
+---
+
+### ◆ SWORD SKILL : DIMENSION ── GESTURE_D（D キー長押し）― 空間剣技
+
+*ウィンドウと次元を制御する剣技。Mission Control で全フロアを俯瞰する。*
 
 | 方向 | 通常 | Shift 同時押し |
 |------|------|--------------|
@@ -103,7 +137,11 @@ Recollection — XIAO BLE 向け ZMK ファームウェア設定。
 | ← 左 | `F15` | `F11` |
 | → 右 | `F14` | `F20` |
 
-### GESTURE_W（W キー長押し）― ウィンドウ・ブラウザ履歴系
+---
+
+### ◆ SWORD SKILL : EXPLORER ── GESTURE_W（W キー長押し）― 踏破剣技
+
+*世界とブラウザ履歴を横断する剣技。訪れたフロアを自在に行き来する。*
 
 | 方向 | 通常 | Shift 同時押し |
 |------|------|--------------|
@@ -112,12 +150,12 @@ Recollection — XIAO BLE 向け ZMK ファームウェア設定。
 | ← 左 | `Cmd+[` ブラウザ戻る | `Cmd+Q` アプリ終了 |
 | → 右 | `Cmd+]` ブラウザ進む | `Cmd+W` タブ/ウィンドウを閉じる |
 
----
+══════════════════════════════════════════════
 
-## トラックボール → キー変換（アロープロファイル）
+## ◆ MOVEMENT PARAMETERS ── トラックボール → キー変換（アロープロファイル）
 
-特定のレイヤーではトラックボールの動きがキー入力に変換される。
-ジェスチャーとは別の機能で、**動かし続けると連続入力**される。
+*特定フロアではトラックボールの動きがキー入力に変換される。*
+*剣技とは独立した機能で、**動かし続けると連続入力**される。*
 
 ### 通常プロファイル（arrows-profiles）
 
@@ -135,15 +173,17 @@ Recollection — XIAO BLE 向け ZMK ファームウェア設定。
 | 3 NUM | `Undo` | `Redo` | `BS` | `Del` | あり |
 | 6 Bluetooth | Desktop左(F15) | Desktop右(F14) | Swapper逆(Cmd+Shift+Tab) | Swapper正(Cmd+Tab) | なし |
 
-> **one_shot**: 有効の場合、トラックボールを動かすと 1 回だけキーが送出される（押しっぱなしにならない）。
+> [ SYSTEM ] **one_shot**: 有効の場合、トラックボールを動かすと 1 回だけキーが送出される（押しっぱなしにならない）。
 
 **加速設定**（layer 3）
 - 閾値を超えると最大 1/4 速度まで加速
 - 初回入力から 250ms 後に連続入力開始、100ms 間隔でリピート
 
----
+══════════════════════════════════════════════
 
-## LED カラー（レイヤーインジケーター）
+## ◆ STATUS CRYSTAL REGISTRY ── LED カラー（レイヤーインジケーター）
+
+*アクティブなフロアに応じてクリスタルの発光色が変化する。*
 
 | レイヤー | 色番号 |
 |---------|-------|
@@ -165,9 +205,11 @@ Recollection — XIAO BLE 向け ZMK ファームウェア設定。
 | 15 SNIPE | 7 |
 | 16 NUM_SMART | 3 |
 
----
+══════════════════════════════════════════════
 
-## 依存モジュール
+## ◆ EQUIPPED MODULES ── 依存モジュール
+
+*パーティに編成された外部モジュール一覧。*
 
 | モジュール | リポジトリ | 用途 |
 |-----------|-----------|------|
@@ -181,11 +223,13 @@ Recollection — XIAO BLE 向け ZMK ファームウェア設定。
 | zmk-tri-state | urob/zmk-tri-state | アプリ切替スワッパー |
 | zmk-auto-layer | urob/zmk-auto-layer | Smart Num（数字入力で自動レイヤー維持） |
 
----
+══════════════════════════════════════════════
 
-## 設定値サマリー
+## ◆ CHARACTER PARAMETERS ── 設定値サマリー
 
-### BLE・接続安定性
+### NERVE LINK STABILITY ── BLE・接続安定性
+
+*NerveGear インターフェースの接続パラメータ。切断はデスゲームと同義。*
 
 | 設定 | 値 | 対象 | 効果 |
 |------|----|------|------|
@@ -202,7 +246,7 @@ Recollection — XIAO BLE 向け ZMK ファームウェア設定。
 | BT_PERIPHERAL_PREF_MAX_INT | 12 (15ms) | R側 | 接続インターバル上限 |
 | Insomnia pingInterval | 5秒 | R側のみ | keepaliveを高頻度化 |
 
-### トラックボールセンサー（Elucidator.conf）
+### MOTION SENSOR CONFIG ── トラックボールセンサー（Elucidator.conf）
 
 | 設定 | 値 | 効果 |
 |------|----|------|
@@ -214,9 +258,11 @@ Recollection — XIAO BLE 向け ZMK ファームウェア設定。
 |------|----|------|------|
 | EC11スレッド | 4096 bytes | Dark_Repulser | |
 
----
+══════════════════════════════════════════════
 
-## 変更履歴
+## ◆ SYSTEM LOG ── 変更履歴
+
+*アインクラッドに刻まれた戦闘記録。*
 
 | 日付 | 内容 |
 |------|------|
@@ -246,9 +292,9 @@ Recollection — XIAO BLE 向け ZMK ファームウェア設定。
 | 2026-03-18 | BLE接続パラメータ追加、スタックサイズ拡張（クラッシュ対策） |
 | 2026-03-18 | PMW3610 REST高速化（省電力） |
 
----
+══════════════════════════════════════════════
 
-## ビルド
+## ◆ INITIALIZATION PROTOCOL ── ビルド
 
-GitHub Actions で自動ビルドされます（`.github/workflows/build.yml`）。
-Push 時に自動実行、Artifacts から `.uf2` ファイルをダウンロードして書き込んでください。
+> [ CARDINAL ] GitHub Actions で自動ビルドされます（`.github/workflows/build.yml`）。
+> Push 時に自動実行、Artifacts から `.uf2` ファイルをダウンロードして書き込んでください。
