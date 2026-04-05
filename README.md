@@ -23,7 +23,7 @@
 
 ## ◆ SYNTHESIS REGISTRY ── レイヤー構成
 
-*整合騎士の命名規則に従い番号付けされたレイヤー一覧。アクティブなレイヤーは STATUS CRYSTAL が示す。*
+*カーディナルシステムにより展開されたシンセシス一覧。アクティブなシンセシスは STATUS CRYSTAL が示す。*
 
 | SYNTHESIS | NAME | DESCRIPTION |
 |---|---|---|
