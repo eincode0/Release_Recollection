@@ -164,7 +164,7 @@
 
 ### ◆ PRIMARY FORMATION ── 通常プロファイル（arrows-profiles）
 
-| レイヤー | 上 | 下 | 左 | 右 | one_shot | 備考 |
+| SYNTHESIS | 上 | 下 | 左 | 右 | one_shot | 備考 |
 |---|---|---|---|---|---|---|
 | 2 ARROW_SIGN | 選択↑ | 選択↓ | 選択← | 選択→ | なし | 自動リピートなし |
 | 3 NUM | `↑` | `↓` | `←` | `→` | なし | 加速あり |
@@ -172,7 +172,7 @@
 
 ### ◆ ALT FORMATION ── Shift 同時押し時（arrows-alt-profiles）
 
-| レイヤー | 上 | 下 | 左 | 右 | one_shot |
+| SYNTHESIS | 上 | 下 | 左 | 右 | one_shot |
 |---|---|---|---|---|---|
 | 2 ARROW_SIGN | `Cmd+A` | `Cmd+V` | `Cmd+X` | `Cmd+C` | あり |
 | 3 NUM | `Undo` | `Redo` | `BS` | `Del` | あり |
@@ -188,11 +188,11 @@
 
 ══════════════════════════════════════════════
 
-## ◆ STATUS CRYSTAL REGISTRY ── LED カラー（レイヤーインジケーター）
+## ◆ STATUS CRYSTAL REGISTRY ── LED カラー（シンセシスインジケーター）
 
 *アクティブなシンセシスに応じてクリスタルの発光色が変化する。現在位置をフラクトライトに知らせるインジケーター。*
 
-| レイヤー | 色番号 |
+| SYNTHESIS | COLOR |
 |---|---|
 | 0 default | 0 |
 | 1 FUNCTION | 1 |
