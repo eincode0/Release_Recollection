@@ -18,7 +18,7 @@
 
 ### 2リポジトリ構成
 
-- **このリポジトリ** (`keyball_gesture_led`): キーマップ・設定値
+- **このリポジトリ** (`Release_Recollection`): キーマップ・設定値
 - **ドライバリポジトリ** (`eincode0/zmk-pmw3610-driver`): PMW3610トラックボールドライバ本体
 
 ドライバを修正した場合、**必ず `config/west.yml` の revision をマージ後のコミットハッシュに更新する**こと。
@@ -54,8 +54,8 @@
 
 ### ビルド確認
 ```bash
-gh run list --repo eincode0/keyball_gesture_led --limit 5
-gh run view <run_id> --repo eincode0/keyball_gesture_led
+gh run list --repo eincode0/Release_Recollection --limit 5
+gh run view <run_id> --repo eincode0/Release_Recollection
 ```
 
 ## ブランチ作成例
