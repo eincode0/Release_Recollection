@@ -1,5 +1,5 @@
-config SHIELD_RECOLLECTION_R
-    def_bool $(shields_list_contains,Recollection_R)
+config SHIELD_ELUCIDATOR
+    def_bool $(shields_list_contains,Elucidator)
 
-config SHIELD_RECOLLECTION_L
-    def_bool $(shields_list_contains,Recollection_L)
+config SHIELD_DARK_REPULSER
+    def_bool $(shields_list_contains,Dark_Repulser)

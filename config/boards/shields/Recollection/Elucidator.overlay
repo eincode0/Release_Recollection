@@ -1,5 +1,5 @@
 /* ===============================
- * Recollection_R.overlay
+ * Elucidator.overlay
  *
  *  - SCROLL(layer5)  : driver side (scroll-layers, inertia/flick/accel)
  *  - SNIPE(layer15)  : driver side (snipe-layers)

@@ -1,4 +1,4 @@
-if SHIELD_RECOLLECTION_R
+if SHIELD_ELUCIDATOR
 
 config ZMK_KEYBOARD_NAME
     default "Elucidator"
@@ -11,7 +11,7 @@ config ZMK_SPLIT_ROLE_CENTRAL
 
 endif
 
-if SHIELD_RECOLLECTION_L
+if SHIELD_DARK_REPULSER
 
 config ZMK_KEYBOARD_NAME
     default "Dark Repulser"

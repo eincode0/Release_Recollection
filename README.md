@@ -219,7 +219,7 @@ Recollection — XIAO BLE 向け ZMK ファームウェア設定。
 
 | 日付 | 内容 |
 |------|------|
-| 2026-04-05 | BLE表示名を右: `Elucidator`、左: `Dark Repulser` に変更 |
+| 2026-04-05 | シールド名を `Elucidator` / `Dark_Repulser` に変更（.uf2ファイル名・BLE名・シールドシンボル全て統一） |
 | 2026-04-05 | 残存する旧名 KeyballBLE / keyball_gesture_led をすべて Recollection に統一（module.yml・CLAUDE.md・README・スクリプト・ワークスペースファイル） |
 | 2026-04-05 | シールドファイル・ディレクトリを KeyballBLE → Recollection に完全リネーム |
 | 2026-04-05 | `Recollection_R.conf` の `CONFIG_ZMK_KEYBOARD_NAME="KeyballBLE"` を削除: `.conf` の明示設定が `Kconfig.defconfig` の `Recollection` を上書きしていたため |

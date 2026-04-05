@@ -10,9 +10,9 @@
 | ファイル | 役割 |
 |---|---|
 | `config/Recollection.keymap` | キーマップ定義（レイヤー・バインド） |
-| `config/boards/shields/Recollection/Recollection_R.overlay` | 右手側設定（トラックボール・arrows profiles等） |
-| `config/boards/shields/Recollection/Recollection_R.conf` | 右手側Kconfig（PMW3610パラメータ等） |
-| `config/boards/shields/Recollection/Recollection_L.overlay` | 左手側設定 |
+| `config/boards/shields/Recollection/Elucidator.overlay` | 右手側設定（トラックボール・arrows profiles等） |
+| `config/boards/shields/Recollection/Elucidator.conf` | 右手側Kconfig（PMW3610パラメータ等） |
+| `config/boards/shields/Recollection/Dark_Repulser.overlay` | 左手側設定 |
 | `config/west.yml` | モジュール依存（ドライバのrevisionを管理） |
 | `README.md` | 機能一覧・設定値ドキュメント |
 
