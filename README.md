@@ -1,7 +1,13 @@
-# ⚔ RECOLLECTION — SYSTEM INTERFACE
+◆══════════════════════════════════════◆
+
+# << RELEASE RECOLLECTION >>
+
+*記憶解放 — ZMK Firmware System Interface*
+
+◆══════════════════════════════════════◆
 
 > **[ SYSTEM ANNOUNCEMENT ]**
-> Recollection — アインクラッドの戦場に降り立つ者へ。
+> アインクラッドの戦場に降り立つ者へ。
 > XIAO BLE 上に展開された ZMK ファームウェア。
 > トラックボールの軌跡が剣技を呼び覚ます。
 
