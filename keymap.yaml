@@ -17,33 +17,33 @@ layers:
   - F
   - {t: G, h: Bluetooth}
   - '&smart_num 16'
-  - {t: '@', h: LEFT ALT}
+  - '@'
   - H
   - J
   - {t: K, h: SCROLL}
   - {t: L, h: MOUSE}
-  - {t: '-', h: NUM}
+  - {t: '-', h: LEFT GUI}
   - Z
   - X
   - C
   - {t: V, h: SNIPE}
   - B
   - TAB
-  - {t: ':', h: LEFT CONTROL}
-  - {t: N, h: LEFT GUI}
+  - ':'
+  - N
   - {t: M, h: GESTURE_M}
   - ','
   - .
-  - {t: +, h: ARROW_SIGN}
+  - {t: +, h: LEFT CONTROL}
   - LCTRL
-  - {t: LEFT GUI, h: sticky}
+  - LEFT GUI
   - LEFT ALT
   - {t: SPACE, h: NUM}
   - '&mkp MB1'
   - {t: CAPS, h: ARROW_SIGN}
   - BACKSPACE
   - {t: ENTER, h: FUNCTION}
-  - DELETE
+  - {t: DELETE, h: LEFT ALT}
   FUNCTION:
   - F5
   - F4
@@ -122,13 +122,13 @@ layers:
   - ']'
   - '{'
   - '}'
-  - {t: \, type: held}
+  - \
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: default, h: toggle}
   - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
+  - {type: held}
   - BACKSPACE
   - ENTER
   - '|'
@@ -154,7 +154,7 @@ layers:
   - KP 7
   - KP 8
   - KP 9
-  - {t: KP 0, type: held}
+  - KP 0
   - {t: ',', h: LEFT SHIFT}
   - .
   - /
@@ -170,7 +170,7 @@ layers:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
+  - {type: held}
   - {t: ▽, type: trans}
   - {t: default, h: toggle}
   - BACKSPACE
