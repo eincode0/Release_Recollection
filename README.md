@@ -1,6 +1,6 @@
 # Release_Recollection
 
-Keyball + XIAO BLE 向け ZMK ファームウェア設定。
+Recollection — XIAO BLE 向け ZMK ファームウェア設定。
 トラックボールのマウスジェスチャーで多数のショートカットを発動できるのが特徴。
 
 ## キーマップ図
@@ -198,10 +198,11 @@ Keyball + XIAO BLE 向け ZMK ファームウェア設定。
 | Split BLE Timeout | ZMKデフォルト | R側（Central） | 明示指定なし（TIMEOUT=1000が再接続失敗の原因の可能性） |
 | BT Max Conn | 5 | R側（Central） | 4プロファイル + 1スプリット接続（プロファイル数+1が正しい設定） |
 | BT Max Paired | 5 | R側（Central） | プロファイル切替用（Mac/iPhone等） |
-| ホスト接続パラメータ | ZMKデフォルト | R側 | 他の安定事例に倣い明示指定なし（デフォルトが最適） |
+| BT_PERIPHERAL_PREF_MIN_INT | 6 (7.5ms) | R側 | 接続インターバル下限。前回MAX_INT=12固定は削除済み→今回は範囲指定で再試験 |
+| BT_PERIPHERAL_PREF_MAX_INT | 12 (15ms) | R側 | 接続インターバル上限 |
 | Insomnia pingInterval | 5秒 | R側のみ | keepaliveを高頻度化 |
 
-### トラックボールセンサー（Recollection_R.conf）
+### トラックボールセンサー（Elucidator.conf）
 
 | 設定 | 値 | 効果 |
 |------|----|------|
@@ -211,7 +212,7 @@ Keyball + XIAO BLE 向け ZMK ファームウェア設定。
 
 | 設定 | 値 | 対象 | 備考 |
 |------|----|------|------|
-| EC11スレッド | 4096 bytes | Recollection_L | |
+| EC11スレッド | 4096 bytes | Dark_Repulser | |
 
 ---
 
@@ -219,6 +220,10 @@ Keyball + XIAO BLE 向け ZMK ファームウェア設定。
 
 | 日付 | 内容 |
 |------|------|
+| 2026-04-05 | BT_PERIPHERAL_PREF_MIN_INT=6 / MAX_INT=12 を再追加（7.5〜15ms範囲指定）。前回は15ms固定でトラックボールに悪影響→今回は範囲指定で再試験。コミュニティ報告でBLE安定性向上事例あり |
+| 2026-04-05 | シールド名を `Elucidator` / `Dark_Repulser` に変更（.uf2ファイル名・BLE名・シールドシンボル全て統一） |
+| 2026-04-05 | 残存する旧名 KeyballBLE / keyball_gesture_led をすべて Recollection に統一（module.yml・CLAUDE.md・README・スクリプト・ワークスペースファイル） |
+| 2026-04-05 | シールドファイル・ディレクトリを KeyballBLE → Recollection に完全リネーム |
 | 2026-04-05 | `Recollection_R.conf` の `CONFIG_ZMK_KEYBOARD_NAME="KeyballBLE"` を削除: `.conf` の明示設定が `Kconfig.defconfig` の `Recollection` を上書きしていたため |
 | 2026-04-05 | READMEタイトルを `Release_Recollection` に修正、残存 `KeyballBLE` 表記を修正 |
 | 2026-04-05 | キーボード名を `KeyballBLE_R` / `KeyballBLE_L` から `Recollection` / `Recollection_L` に変更、リポジトリ名を `Release_Recollection` に変更 |

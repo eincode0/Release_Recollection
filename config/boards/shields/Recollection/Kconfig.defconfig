@@ -1,7 +1,7 @@
-if SHIELD_KEYBALLBLE_R
+if SHIELD_ELUCIDATOR
 
 config ZMK_KEYBOARD_NAME
-    default "Recollection"
+    default "Elucidator"
 
 config ZMK_SPLIT
     default y
@@ -11,10 +11,10 @@ config ZMK_SPLIT_ROLE_CENTRAL
 
 endif
 
-if SHIELD_KEYBALLBLE_L
+if SHIELD_DARK_REPULSER
 
 config ZMK_KEYBOARD_NAME
-    default "Recollection_L"
+    default "Dark Repulser"
 
 config ZMK_SPLIT
     default y

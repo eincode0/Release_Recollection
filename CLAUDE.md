@@ -2,17 +2,17 @@
 
 ## プロジェクト構成
 
-このリポジトリは **Keyball BLE キーボードファームウェア設定** リポジトリ。
+このリポジトリは **Recollection キーボードファームウェア設定** リポジトリ。
 ビルドは GitHub Actions で行い、成果物（.uf2）はArtifactsからダウンロードする。
 
 ### 主要ファイル
 
 | ファイル | 役割 |
 |---|---|
-| `config/KeyballBLE.keymap` | キーマップ定義（レイヤー・バインド） |
-| `config/boards/shields/KeyballBLE/KeyballBLE_R.overlay` | 右手側設定（トラックボール・arrows profiles等） |
-| `config/boards/shields/KeyballBLE/KeyballBLE_R.conf` | 右手側Kconfig（PMW3610パラメータ等） |
-| `config/boards/shields/KeyballBLE/KeyballBLE_L.overlay` | 左手側設定 |
+| `config/Recollection.keymap` | キーマップ定義（レイヤー・バインド） |
+| `config/boards/shields/Recollection/Elucidator.overlay` | 右手側設定（トラックボール・arrows profiles等） |
+| `config/boards/shields/Recollection/Elucidator.conf` | 右手側Kconfig（PMW3610パラメータ等） |
+| `config/boards/shields/Recollection/Dark_Repulser.overlay` | 左手側設定 |
 | `config/west.yml` | モジュール依存（ドライバのrevisionを管理） |
 | `README.md` | 機能一覧・設定値ドキュメント |
 
@@ -42,7 +42,7 @@
 ## よくある作業フロー
 
 ### キーマップ変更
-1. `config/KeyballBLE.keymap` を編集
+1. `config/Recollection.keymap` を編集
 2. README.md を更新
 3. feature ブランチで PR → マージ → ビルド確認
 

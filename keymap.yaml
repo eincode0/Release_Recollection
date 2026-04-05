@@ -1,4 +1,4 @@
-layout: {zmk_keyboard: KeyballBLE}
+layout: {zmk_keyboard: Recollection}
 layers:
   default:
   - {t: Q, h: LEFT SHIFT}
