@@ -156,7 +156,7 @@
 
 *特定のシンセシスでは、トラックボールの動きがキー入力へと変換される。剣技とは独立した力で、**動かし続ける限り連続入力**される。*
 
-### 通常プロファイル（arrows-profiles）
+### ◆ PRIMARY FORMATION ── 通常プロファイル（arrows-profiles）
 
 | レイヤー | 上 | 下 | 左 | 右 | one_shot | 備考 |
 |---------|----|----|----|----|----------|------|
@@ -164,7 +164,7 @@
 | 3 NUM | `↑` | `↓` | `←` | `→` | なし | 加速あり |
 | 6 Bluetooth | `MissionCtrl` | `AppExpose` | `LANG2(英数)` | `LANG1(かな)` | あり | 斜め無効・余り有効 |
 
-### ALTプロファイル（arrows-alt-profiles）― Shift 同時押し時
+### ◆ ALT FORMATION ── Shift 同時押し時（arrows-alt-profiles）
 
 | レイヤー | 上 | 下 | 左 | 右 | one_shot |
 |---------|----|----|----|----|----------|
@@ -172,9 +172,11 @@
 | 3 NUM | `Undo` | `Redo` | `BS` | `Del` | あり |
 | 6 Bluetooth | Desktop左(F15) | Desktop右(F14) | Swapper逆(Cmd+Shift+Tab) | Swapper正(Cmd+Tab) | なし |
 
-> [ SYSTEM ] **one_shot**: 有効の場合、トラックボールを動かすと 1 回だけキーが送出される（押しっぱなしにならない）。
+> **[ SYSTEM ]** **one_shot** — 有効時、センサーの動きに対してキーが 1 度だけ送出される。
+> 押しっぱなし状態にはならない。連続入力が不要な操作に適用される。
 
-**加速設定**（layer 3）
+### ◆ ACCELERATION SYSTEM ── 加速設定（Synthesis 03）
+
 - 閾値を超えると最大 1/4 速度まで加速
 - 初回入力から 250ms 後に連続入力開始、100ms 間隔でリピート
 
