@@ -1,4 +1,4 @@
-#include "KeyballBLE.dtsi"
+#include "Recollection.dtsi"
 
 &kscan0 {
     wakeup-source;

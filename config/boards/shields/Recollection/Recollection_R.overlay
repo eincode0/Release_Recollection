@@ -1,5 +1,5 @@
 /* ===============================
- * KeyballBLE_R.overlay
+ * Recollection_R.overlay
  *
  *  - SCROLL(layer5)  : driver side (scroll-layers, inertia/flick/accel)
  *  - SNIPE(layer15)  : driver side (snipe-layers)
@@ -8,7 +8,7 @@
  *  - page(layer6)    : trackball to PageUp/Down/Home/End
  * =============================== */
 
-#include "KeyballBLE.dtsi"
+#include "Recollection.dtsi"
 
 #include <input/processors.dtsi>
 #include <mouse-gesture.dtsi>

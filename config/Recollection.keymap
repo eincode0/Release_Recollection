@@ -1,5 +1,5 @@
 /* ===============================
- * KeyballBLE.keymap（コメント整理）
+ * Recollection.keymap（コメント整理）
  *  - レイヤー順＝番号（0起算）
  *    0 default_layer
  *    1 FUNCTION
@@ -258,18 +258,6 @@
             bindings = <&kp>;
         };
 
-        /* ===== ⑧ Swapper: スマート Cmd+Tab（zmk-tri-state） =====
-         *
-         *  swapper     … A+ジェスチャー右 → 最初の1回で Cmd を押し続けて Tab 送信。
-         *                同じジェスチャーを繰り返すたびに Tab のみ追加送信（Cmd 維持）。
-         *                別キー押下 or A 離すと Cmd を解放 → アプリ決定。
-         *
-         *  swapper_rev … A+ジェスチャー左 → 同様に Cmd+Shift+Tab で逆方向スイッチ。
-         *
-         *  ignored-key-positions:
-         *    10 = A（ジェスチャートリガー）、15 = kt LEFT_SHIFT
-         * ======================================================= */
-
         swapper: swapper {
             compatible = "zmk,behavior-tri-state";
             label = "SWAPPER";
@@ -288,12 +276,6 @@
             ignored-key-positions = <10 15>;
         };
 
-        /* ===== ⑨ Smart Num: 数字入力で NUM_SMART(16) を自動維持 =====
-         *  トリガー: position 15（エンコーダー押し込み）
-         *  continue-list のキーを押している間はレイヤー維持
-         *  それ以外のキーで自動解除
-         * ======================================================= */
-
         smart_num: smart_num {
             compatible = "zmk,behavior-auto-layer";
             #binding-cells = <1>;
@@ -306,8 +288,6 @@
                 SPACE ENTER
             >;
         };
-
-        /* ===== gesture mappings ===== */
 
         gA_up: gA_up {
             compatible = "zmk,behavior-mod-morph";
@@ -327,9 +307,6 @@
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
-
-            /* ⑧ 通常: Swapper 逆方向 (Cmd+Shift+Tab を繰り返し) / Shift: 従来通り Ctrl+Alt+Cmd+3 */
-
             bindings = <&swapper_rev>, <&kp LC(LA(LG(NUMBER_3)))>;
         };
 
@@ -337,9 +314,6 @@
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
-
-            /* ⑧ 通常: Swapper 順方向 (Cmd+Tab を繰り返し) / Shift: 従来通り Ctrl+Alt+Cmd+2 */
-
             bindings = <&swapper>, <&kp LC(LA(LG(NUMBER_2)))>;
         };
 

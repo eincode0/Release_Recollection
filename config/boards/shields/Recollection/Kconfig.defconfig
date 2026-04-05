@@ -1,7 +1,7 @@
-if SHIELD_KEYBALLBLE_R
+if SHIELD_RECOLLECTION_R
 
 config ZMK_KEYBOARD_NAME
-    default "Recollection"
+    default "Recollection_R"
 
 config ZMK_SPLIT
     default y
@@ -11,7 +11,7 @@ config ZMK_SPLIT_ROLE_CENTRAL
 
 endif
 
-if SHIELD_KEYBALLBLE_L
+if SHIELD_RECOLLECTION_L
 
 config ZMK_KEYBOARD_NAME
     default "Recollection_L"
