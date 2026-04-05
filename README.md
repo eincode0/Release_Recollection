@@ -201,7 +201,7 @@ Recollection — XIAO BLE 向け ZMK ファームウェア設定。
 | ホスト接続パラメータ | ZMKデフォルト | R側 | 他の安定事例に倣い明示指定なし（デフォルトが最適） |
 | Insomnia pingInterval | 5秒 | R側のみ | keepaliveを高頻度化 |
 
-### トラックボールセンサー（Recollection_R.conf）
+### トラックボールセンサー（Elucidator.conf）
 
 | 設定 | 値 | 効果 |
 |------|----|------|
@@ -211,7 +211,7 @@ Recollection — XIAO BLE 向け ZMK ファームウェア設定。
 
 | 設定 | 値 | 対象 | 備考 |
 |------|----|------|------|
-| EC11スレッド | 4096 bytes | Recollection_L | |
+| EC11スレッド | 4096 bytes | Dark_Repulser | |
 
 ---
 
