@@ -201,7 +201,7 @@ Keyball + XIAO BLE 向け ZMK ファームウェア設定。
 | ホスト接続パラメータ | ZMKデフォルト | R側 | 他の安定事例に倣い明示指定なし（デフォルトが最適） |
 | Insomnia pingInterval | 5秒 | R側のみ | keepaliveを高頻度化 |
 
-### トラックボールセンサー（KeyballBLE_R.conf）
+### トラックボールセンサー（Recollection_R.conf）
 
 | 設定 | 値 | 効果 |
 |------|----|------|
@@ -211,7 +211,7 @@ Keyball + XIAO BLE 向け ZMK ファームウェア設定。
 
 | 設定 | 値 | 対象 | 備考 |
 |------|----|------|------|
-| EC11スレッド | 4096 bytes | KeyballBLE_L | |
+| EC11スレッド | 4096 bytes | Recollection_L | |
 
 ---
 
@@ -219,7 +219,8 @@ Keyball + XIAO BLE 向け ZMK ファームウェア設定。
 
 | 日付 | 内容 |
 |------|------|
-| 2026-04-05 | READMEタイトルを `Release_Recollection` に修正 |
+| 2026-04-05 | `Recollection_R.conf` の `CONFIG_ZMK_KEYBOARD_NAME="KeyballBLE"` を削除: `.conf` の明示設定が `Kconfig.defconfig` の `Recollection` を上書きしていたため |
+| 2026-04-05 | READMEタイトルを `Release_Recollection` に修正、残存 `KeyballBLE` 表記を修正 |
 | 2026-04-05 | キーボード名を `KeyballBLE_R` / `KeyballBLE_L` から `Recollection` / `Recollection_L` に変更、リポジトリ名を `Release_Recollection` に変更 |
 | 2026-03-31 | 32kHz内部クロック切替: CONFIG_CLOCK_CONTROL_NRF_K32SRC_SYNTH=y をR・L両側に追加。XIAO BLE外部水晶不安定によるBLE supervision timeout切断対策（ZMK公式推奨） |
 | 2026-03-31 | insomnia再有効化: 無効化しても切断が発生したため原因でないと判断し復元 |
