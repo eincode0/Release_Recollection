@@ -1,6 +1,6 @@
 # Release_Recollection
 
-Keyball + XIAO BLE 向け ZMK ファームウェア設定。
+Recollection — XIAO BLE 向け ZMK ファームウェア設定。
 トラックボールのマウスジェスチャーで多数のショートカットを発動できるのが特徴。
 
 ## キーマップ図
@@ -219,6 +219,8 @@ Keyball + XIAO BLE 向け ZMK ファームウェア設定。
 
 | 日付 | 内容 |
 |------|------|
+| 2026-04-05 | 残存する旧名 KeyballBLE / keyball_gesture_led をすべて Recollection に統一（module.yml・CLAUDE.md・README・スクリプト・ワークスペースファイル） |
+| 2026-04-05 | シールドファイル・ディレクトリを KeyballBLE → Recollection に完全リネーム |
 | 2026-04-05 | `Recollection_R.conf` の `CONFIG_ZMK_KEYBOARD_NAME="KeyballBLE"` を削除: `.conf` の明示設定が `Kconfig.defconfig` の `Recollection` を上書きしていたため |
 | 2026-04-05 | READMEタイトルを `Release_Recollection` に修正、残存 `KeyballBLE` 表記を修正 |
 | 2026-04-05 | キーボード名を `KeyballBLE_R` / `KeyballBLE_L` から `Recollection` / `Recollection_L` に変更、リポジトリ名を `Release_Recollection` に変更 |
