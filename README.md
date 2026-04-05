@@ -48,9 +48,9 @@
 
 ---
 
-### ◆ SWORD SKILL : SCRIBE ── GESTURE_E（E キー長押し）― 編集剣技
+### ◆ SWORD SKILL : SHARP NAIL  [ KEY : E ] ── GESTURE_E（E キー長押し）― 編集剣技
 
-*文字を刻む剣技。クリップボードとアンドゥを自在に操る。*
+*素早い連続斬撃。コピー・カット・ペーストを一息に刻み込む。*
 
 | 方向 | 通常 | Shift 同時押し |
 |------|------|--------------|
@@ -61,9 +61,9 @@
 
 ---
 
-### ◆ SWORD SKILL : SELECTOR ── GESTURE_R（R キー長押し）― 選択剣技
+### ◆ SWORD SKILL : VORPAL STRIKE  [ KEY : R ] ── GESTURE_R（R キー長押し）― 選択剣技
 
-*テキストを支配する剣技。範囲を制する者が情報を制する。*
+*渾身の一撃でテキストを貫く。精密な範囲指定を一刀両断する。*
 
 | 方向 | 通常 | Shift 同時押し |
 |------|------|--------------|
@@ -74,9 +74,9 @@
 
 ---
 
-### ◆ SWORD SKILL : CAPTURE ── GESTURE_S（S キー長押し）― 捕捉剣技
+### ◆ SWORD SKILL : THE ECLIPSE  [ KEY : S ] ── GESTURE_S（S キー長押し）― 捕捉剣技
 
-*画面を鏡に映す剣技。現実をクリスタルに封じる。*
+*全てを覆い封じる最終奥義。画面そのものを闇に刻み込む。*
 
 | 方向 | 通常 | Shift 同時押し |
 |------|------|--------------|
@@ -87,9 +87,9 @@
 
 ---
 
-### ◆ SWORD SKILL : CONDUCTOR ── GESTURE_M（M キー長押し）― 音響剣技
+### ◆ SWORD SKILL : HOWLING OCTAVE  [ KEY : M ] ── GESTURE_M（M キー長押し）― 音響剣技
 
-*音と光を調律する剣技。空間そのものを演奏する。*
+*8連の咆哮が空間を震わせる。音量と輝度を意のままに操る。*
 
 | 方向 | 通常 | Shift 同時押し |
 |------|------|--------------|
@@ -100,9 +100,9 @@
 
 ---
 
-### ◆ SWORD SKILL : NAVIGATOR ── GESTURE_T（T キー長押し）― 航路剣技
+### ◆ SWORD SKILL : SONIC LEAP  [ KEY : T ] ── GESTURE_T（T キー長押し）― 航路剣技
 
-*ブラウザのポータルを開閉する剣技。次のフロアへの扉を操る。*
+*音速で次の場所へ跳躍する。タブという扉を瞬時に開閉する。*
 
 | 方向 | 通常 | Shift 同時押し |
 |------|------|--------------|
@@ -113,9 +113,9 @@
 
 ---
 
-### ◆ SWORD SKILL : SEARCHER ── GESTURE_A（A キー長押し）― 探索剣技
+### ◆ SWORD SKILL : VERTICAL SQUARE  [ KEY : A ] ── GESTURE_A（A キー長押し）― 探索剣技
 
-*アプリ間をテレポートする剣技。Spotlight が新たな扉を示す。*
+*四方を刻む連続剣技。アプリの格子を縦横に切り裂き、目標へ飛ぶ。*
 
 | 方向 | 通常 | Shift 同時押し |
 |------|------|--------------|
@@ -126,9 +126,9 @@
 
 ---
 
-### ◆ SWORD SKILL : DIMENSION ── GESTURE_D（D キー長押し）― 空間剣技
+### ◆ SWORD SKILL : STARBURST STREAM  [ KEY : D ] ── GESTURE_D（D キー長押し）― 空間剣技
 
-*ウィンドウと次元を制御する剣技。Mission Control で全フロアを俯瞰する。*
+*16連の星屑が全方位を薙ぎ払う。Mission Control で全フロアを一望する。*
 
 | 方向 | 通常 | Shift 同時押し |
 |------|------|--------------|
@@ -139,9 +139,9 @@
 
 ---
 
-### ◆ SWORD SKILL : EXPLORER ── GESTURE_W（W キー長押し）― 踏破剣技
+### ◆ SWORD SKILL : HORIZONTAL  [ KEY : W ] ── GESTURE_W（W キー長押し）― 踏破剣技
 
-*世界とブラウザ履歴を横断する剣技。訪れたフロアを自在に行き来する。*
+*水平に薙ぐ一閃。左右に刻まれた履歴の軌跡を自在に辿る。*
 
 | 方向 | 通常 | Shift 同時押し |
 |------|------|--------------|
@@ -266,6 +266,7 @@
 
 | 日付 | 内容 |
 |------|------|
+| 2026-04-05 | READMEをSAOスタイルに変更：剣技名をSAO実在剣技に統一（Sharp Nail / Vorpal Strike / The Eclipse / Howling Octave / Sonic Leap / Vertical Square / Starburst Stream / Horizontal） |
 | 2026-04-05 | BT_PERIPHERAL_PREF_MIN_INT=6 / MAX_INT=12 を再追加（7.5〜15ms範囲指定）。前回は15ms固定でトラックボールに悪影響→今回は範囲指定で再試験。コミュニティ報告でBLE安定性向上事例あり |
 | 2026-04-05 | シールド名を `Elucidator` / `Dark_Repulser` に変更（.uf2ファイル名・BLE名・シールドシンボル全て統一） |
 | 2026-04-05 | 残存する旧名 KeyballBLE / keyball_gesture_led をすべて Recollection に統一（module.yml・CLAUDE.md・README・スクリプト・ワークスペースファイル） |
