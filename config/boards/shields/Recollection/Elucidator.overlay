@@ -243,7 +243,7 @@
     input-type = <INPUT_EV_REL>;
     codes = <INPUT_REL_X INPUT_REL_Y>;
     sensitivity = <1200>;
-    max-factor = <5000>;
+    max-factor = <8000>;
     acceleration-exponent = <2>;
     speed-threshold = <300>;
     speed-max = <3500>;
