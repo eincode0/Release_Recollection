@@ -281,6 +281,7 @@
 |---|---|
 | 2026-04-05 | west.yml: zmk-pmw3610-driver を 1286ad4 に更新（CONFIG_PMW3610_ALT_POLLING_RATE_125/250 Kconfig choice 追加） |
 | 2026-04-05 | BT_PERIPHERAL_PREF_MIN_INT=6 / MAX_INT=12 を再追加（7.5〜15ms範囲指定）。前回は15ms固定でトラックボールに悪影響→今回は範囲指定で再試験 |
+| 2026-04-07 | pointer_accel チューニング: min-factor 1800→900 / max-factor 3000→5000 / acceleration-exponent 1→2（フリック時の加速を強化、精密操作時を低速化） |
 
 ══════════════════════════════════════════════
 
