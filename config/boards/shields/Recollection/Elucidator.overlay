@@ -247,7 +247,7 @@
     acceleration-exponent = <2>;
     speed-threshold = <300>;
     speed-max = <3500>;
-    min-factor = <1800>;
+    min-factor = <1200>;
     sensor-dpi = <1600>;
 };
 
