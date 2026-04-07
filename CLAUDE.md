@@ -46,7 +46,7 @@
 ### ルール
 
 - **mainへの直接プッシュは必ずユーザーに確認してからOKをもらって行う（どのデバイスからの指示でも必ず確認すること）**
-- featureブランチはマージ後即削除する（`git push origin --delete feature/xxx`）
+- featureブランチはPRマージ時に「Delete branch」ボタンで削除する（`git push origin --delete` はこの環境では使用不可）
 - PRを作成する場合はタイトルは日本語OK
 - ブランチ名: `feature/[機能名]` または `fix/[修正名]`
 
