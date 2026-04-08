@@ -231,7 +231,7 @@
     zip_pointer_inertia: pointer_inertia {
         pointer-inertia;
         pointer-flick-threshold     = <8>;
-        pointer-flick-boost         = <5000>;
+        pointer-flick-boost         = <8000>;
         pointer-inertia-decay-fast  = <98>;
 };
         scroll-accel;
