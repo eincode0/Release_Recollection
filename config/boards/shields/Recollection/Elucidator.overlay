@@ -227,7 +227,7 @@
         scroll-flick-threshold      = <6>;
         scroll-flick-boost          = <5000>;
         pointer-inertia;
-        pointer-flick-threshold     = <8>;
+        pointer-flick-threshold     = <5>;
         pointer-flick-boost         = <5000>;
         pointer-inertia-decay-fast  = <99>;
         scroll-accel;
