@@ -158,7 +158,7 @@
     trackball_listener: trackball_listener {
         compatible = "zmk,input-listener";
         device = <&trackball>;
-        input-processors = <&pointer_accel>;
+        input-processors = <&pointer_accel>, <&zip_scroll_scaler>, <&zip_scroll_inertia>, <&zip_pointer_inertia>;
 
         gesture_e { layers = <7>;  input-processors = <&zip_gE &tb_drop_all 0 1>; };
         gesture_r { layers = <8>;  input-processors = <&zip_gR &tb_drop_all 0 1>; };
