@@ -224,11 +224,11 @@
         scroll-inertia-slow-spd     = <1>;
         scroll-inertia-fast-spd     = <10>;
         scroll-inertia-tick-ms      = <16>;
-        scroll-flick-threshold      = <6>;
-        scroll-flick-boost          = <5000>;
+        scroll-flick-threshold      = <1>;
+        scroll-flick-boost          = <8000>;
         pointer-inertia;
-        pointer-flick-threshold     = <5>;
-        pointer-flick-boost         = <5000>;
+        pointer-flick-threshold     = <1>;
+        pointer-flick-boost         = <8000>;
         pointer-inertia-decay-fast  = <99>;
         scroll-accel;
         scroll-accel-max-mult       = <6>;
