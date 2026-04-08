@@ -220,7 +220,7 @@
         arrows-repeat-rate-ms   = <100>;
         scroll-inertia;
         scroll-inertia-decay        = <80>;
-        scroll-inertia-decay-fast   = <97>;
+        scroll-inertia-decay-fast   = <99.2>;
         scroll-inertia-slow-spd     = <1>;
         scroll-inertia-fast-spd     = <10>;
         scroll-inertia-tick-ms      = <16>;
@@ -229,7 +229,7 @@
         pointer-inertia;
         pointer-flick-threshold     = <8>;
         pointer-flick-boost         = <1024>;
-        pointer-inertia-decay-fast  = <98>;
+        pointer-inertia-decay-fast  = <99.2>;
         scroll-accel;
         scroll-accel-max-mult       = <6>;
         scroll-accel-threshold      = <15>;
