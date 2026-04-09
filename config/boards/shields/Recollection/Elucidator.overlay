@@ -1,11 +1,5 @@
 /* ===============================
  * Elucidator.overlay
- *
- *  - SCROLL(layer5)  : driver side (scroll-layers, inertia/flick/accel)
- *  - SNIPE(layer15)  : driver side (snipe-layers)
- *  - gesture(7-14)   : gesture recognition + REL stop
- *  - arrows(layer3)  : trackball to arrow keys
- *  - page(layer6)    : trackball to PageUp/Down/Home/End
  * =============================== */
 
 #include "Recollection.dtsi"
@@ -34,6 +28,15 @@
 
 / {
     input_processors {
+        /* リスナーで指定されていた不足分のスケーラーを定義 */
+        zip_scroll_scaler: zip_scroll_scaler {
+            compatible = "zmk,input-processor-scaler";
+            #input-processor-cells = <2>;
+            type = <INPUT_EV_REL>;
+            codes = <INPUT_REL_WHEEL INPUT_REL_HWHEEL>;
+            track-remainders;
+        };
+
         tb_drop_all: tb_drop_all {
             compatible = "zmk,input-processor-scaler";
             #input-processor-cells = <2>;
@@ -41,6 +44,7 @@
             codes = <INPUT_REL_X INPUT_REL_Y INPUT_REL_WHEEL INPUT_REL_HWHEEL>;
         };
 
+        /* ジェスチャー定義群 */
         zip_gE: zip_gE {
             compatible = "zmk,input-processor-mouse-gesture";
             #input-processor-cells = <0>;
@@ -152,13 +156,12 @@
             left  { pattern = <GESTURE_LEFT>;  bindings = <&gW_left>;  };
             right { pattern = <GESTURE_RIGHT>; bindings = <&gW_right>; };
         };
-
     };
 
     trackball_listener: trackball_listener {
         compatible = "zmk,input-listener";
         device = <&trackball>;
-        input-processors = <&pointer_accel>, <&zip_scroll_scaler>, <&zip_scroll_inertia>, <&zip_pointer_inertia>;
+        input-processors = <&pointer_accel>, <&zip_scroll_scaler 1 1>, <&zip_scroll_inertia>, <&zip_pointer_inertia>;
 
         gesture_e { layers = <7>;  input-processors = <&zip_gE &tb_drop_all 0 1>; };
         gesture_r { layers = <8>;  input-processors = <&zip_gR &tb_drop_all 0 1>; };
@@ -205,35 +208,38 @@
         snipe-layers  = <15>;
         scroll-layers = <5>;
         arrows-profiles = <
-            2   1020 1021 1023 1022  40  0  1  0  /* layer 2: sel-up/sel-down/sel-left/sel-right, one_shot=0 */
-            3    103  108  105  106  40  0  1  0  /* layer 3: arrows, one_shot=0 */
-            6   1060 1061   58   90 200  1  1  1  /* layer 6: MissionCtrl/AppExpose/LANG2(英数)/LANG1(かな), one_shot=1 */
+            2   1020 1021 1023 1022  40  0  1  0
+            3    103  108  105  106  40  0  1  0
+            6   1060 1061   58   90 200  1  1  1
         >;
         arrows-alt-profiles = <
-            3  1000  1004    14  111 120  0  1  1  /* layer 3 ALT: Undo/Redo/BS/Del, one_shot=1 */
-            2  1005  1003  1001 1002 120  0  1  1  /* layer 2 ALT: Cmd+A/V/X/C, one_shot=1 */
-            6  1066  1067  1071 1070 200  0  1  0  /* layer 6 ALT: Desktop左(F15)/Desktop右(F14)/Swapper逆/Swapper正 */
+            3  1000  1004    14  111 120  0  1  1
+            2  1005  1003  1001 1002 120  0  1  1
+            6  1066  1067  1071 1070 200  0  1  0
         >;
         arrows-no-repeat-layers = <2 3 4 6>;
         arrows-tick             = <30>;
         arrows-repeat-delay-ms  = <250>;
         arrows-repeat-rate-ms   = <100>;
-    zip_scroll_inertia: scroll_inertia {
-        scroll-inertia;
-        scroll-inertia-decay        = <80>;
-        scroll-inertia-decay-fast   = <99>;
-        scroll-inertia-slow-spd     = <1>;
-        scroll-inertia-fast-spd     = <10>;
-        scroll-inertia-tick-ms      = <16>;
-        scroll-flick-threshold      = <8>;
-        scroll-flick-boost          = <8000>;
-};
-    zip_pointer_inertia: pointer_inertia {
-        pointer-inertia;
-        pointer-flick-threshold     = <3>;
-        pointer-flick-boost         = <8000>;
-        pointer-inertia-decay-fast  = <98>;
-};
+
+        zip_scroll_inertia: scroll_inertia {
+            scroll-inertia;
+            scroll-inertia-decay        = <80>;
+            scroll-inertia-decay-fast   = <99>;
+            scroll-inertia-slow-spd     = <1>;
+            scroll-inertia-fast-spd     = <10>;
+            scroll-inertia-tick-ms      = <16>;
+            scroll-flick-threshold      = <8>;
+            scroll-flick-boost          = <8000>;
+        };
+
+        zip_pointer_inertia: pointer_inertia {
+            pointer-inertia;
+            pointer-flick-threshold     = <3>;
+            pointer-flick-boost         = <8000>;
+            pointer-inertia-decay-fast  = <98>;
+        };
+
         scroll-accel;
         scroll-accel-max-mult       = <6>;
         scroll-accel-threshold      = <15>;
@@ -258,5 +264,3 @@
     min-factor = <1200>;
     sensor-dpi = <1600>;
 };
-
-
