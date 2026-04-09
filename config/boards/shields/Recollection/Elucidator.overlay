@@ -28,14 +28,7 @@
 
 / {
     input_processors {
-        /* リスナーで指定されていた不足分のスケーラーを定義 */
-        zip_scroll_scaler: zip_scroll_scaler {
-            compatible = "zmk,input-processor-scaler";
-            #input-processor-cells = <2>;
-            type = <INPUT_EV_REL>;
-            codes = <INPUT_REL_WHEEL INPUT_REL_HWHEEL>;
-            track-remainders;
-        };
+        /* zip_scroll_scaler は他で定義済みのため削除しました */
 
         tb_drop_all: tb_drop_all {
             compatible = "zmk,input-processor-scaler";
@@ -161,7 +154,8 @@
     trackball_listener: trackball_listener {
         compatible = "zmk,input-listener";
         device = <&trackball>;
-        input-processors = <&pointer_accel>, <&zip_scroll_scaler 1 1>, <&zip_scroll_inertia>, <&zip_pointer_inertia>;
+        /* 参照先をRecollection.dtsi側の定義（おそらく引数なし）に合わせます */
+        input-processors = <&pointer_accel>, <&zip_scroll_scaler>, <&zip_scroll_inertia>, <&zip_pointer_inertia>;
 
         gesture_e { layers = <7>;  input-processors = <&zip_gE &tb_drop_all 0 1>; };
         gesture_r { layers = <8>;  input-processors = <&zip_gR &tb_drop_all 0 1>; };
