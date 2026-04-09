@@ -226,13 +226,13 @@
         scroll-inertia-fast-spd     = <10>;
         scroll-inertia-tick-ms      = <16>;
         scroll-flick-threshold      = <8>;
-        scroll-flick-boost          = <10000>;
+        scroll-flick-boost          = <8000>;
 };
     zip_pointer_inertia: pointer_inertia {
         pointer-inertia;
-        pointer-flick-threshold     = <5>;
-        pointer-flick-boost         = <10000>;
-        pointer-inertia-decay-fast  = <985>;
+        pointer-flick-threshold     = <3>;
+        pointer-flick-boost         = <8000>;
+        pointer-inertia-decay-fast  = <98>;
 };
         scroll-accel;
         scroll-accel-max-mult       = <6>;
