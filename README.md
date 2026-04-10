@@ -289,6 +289,8 @@
 | 2026-04-10 | pointer-inertia-decay 95→75（低速慣性の引きずりを抑制、BLEラグの体感改善） |
 | 2026-04-10 | ポインタ慣性を再有効化（zip_pointer_inertia を input-processors に復元） |
 | 2026-04-10 | Dark_Repulser MAX_INT 12→6（Elucidatorと一致させる、7.5ms固定） |
+| 2026-04-10 | BLE 2M PHY有効化（PHY_2M + AUTO_PHY_UPDATE、左右両側）接続イベントの空中時間を短縮し分割接続安定化 |
+| 2026-04-10 | PMW3610起動遅延追加: INIT_POWER_UP_EXTRA_DELAY_MS=1000（起動時センサー初期化失敗を修正） |
 
 ══════════════════════════════════════════════
 
