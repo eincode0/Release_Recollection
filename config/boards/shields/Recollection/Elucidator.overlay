@@ -239,9 +239,9 @@
             pointer-flick-boost         = <40000>;
             pointer-inertia-decay       = <95>;
             pointer-inertia-decay-fast  = <97>;
-            pointer-inertia-slow-spd    = <5>;
+            pointer-inertia-slow-spd    = <8>;
             pointer-inertia-fast-spd    = <30>;
-            pointer-inertia-tick-ms     = <8>;
+            pointer-inertia-tick-ms     = <16>;
         };
 
         scroll-accel;
@@ -263,7 +263,7 @@
     sensitivity = <1200>;
     max-factor = <8000>;
     acceleration-exponent = <2>;
-    speed-threshold = <50>;
+    speed-threshold = <300>;
     speed-max = <3500>;
     min-factor = <1200>;
     sensor-dpi = <1600>;
