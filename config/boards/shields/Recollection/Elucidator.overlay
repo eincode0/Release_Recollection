@@ -224,13 +224,13 @@
 
         zip_scroll_inertia: scroll_inertia {
             scroll-inertia;
-            scroll-inertia-decay        = <80>;
-            scroll-inertia-decay-fast   = <99>;
+            scroll-inertia-decay        = <75>;
+            scroll-inertia-decay-fast   = <98>;
             scroll-inertia-slow-spd     = <1>;
-            scroll-inertia-fast-spd     = <10>;
+            scroll-inertia-fast-spd     = <15>;
             scroll-inertia-tick-ms      = <8>;
-            scroll-flick-threshold      = <8>;
-            scroll-flick-boost          = <8000>;
+            scroll-flick-threshold      = <5>;
+            scroll-flick-boost          = <12000>;
         };
 
         zip_pointer_inertia: pointer_inertia {
