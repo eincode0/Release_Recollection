@@ -237,8 +237,8 @@
             pointer-inertia;
             pointer-flick-threshold     = <10>;
             pointer-flick-boost         = <20000>;
-            pointer-inertia-decay       = <85>;
-            pointer-inertia-decay-fast  = <99>;
+            pointer-inertia-decay       = <75>;
+            pointer-inertia-decay-fast  = <98>;
             pointer-inertia-slow-spd    = <1>;
             pointer-inertia-fast-spd    = <30>;
             pointer-inertia-tick-ms     = <8>;
