@@ -283,6 +283,7 @@
 | 2026-04-05 | BT_PERIPHERAL_PREF_MIN_INT=6 / MAX_INT=12 を再追加（7.5〜15ms範囲指定）。前回は15ms固定でトラックボールに悪影響→今回は範囲指定で再試験 |
 | 2026-04-07 | pointer_accel チューニング: min-factor 1800→1200 / max-factor 3000→8000 / acceleration-exponent 1→2（低速を精密化、フリック時の加速を強化） |
 | 2026-04-07 | ポインタ慣性（pointer-inertia）実装: 強フリック時のみ発動、スクロール慣性より強め（decay-fast 98）。ドライバ更新 f6616ba |
+| 2026-04-10 | gS_right: Shift側バインドを LG(LS(NUMBER_5)) → LC(LG(LS(NUMBER_5))) に変更（Ctrl+Win+Shift+5 で Mission Control的操作） |
 
 ══════════════════════════════════════════════
 
