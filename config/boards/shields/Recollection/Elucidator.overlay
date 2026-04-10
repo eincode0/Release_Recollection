@@ -240,7 +240,7 @@
             pointer-inertia-decay       = <95>;
             pointer-inertia-decay-fast  = <97>;
             pointer-inertia-slow-spd    = <5>;
-            pointer-inertia-fast-spd    = <50>;
+            pointer-inertia-fast-spd    = <30>;
             pointer-inertia-tick-ms     = <8>;
         };
 
