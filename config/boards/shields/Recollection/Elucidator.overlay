@@ -235,7 +235,7 @@
 
         zip_pointer_inertia: pointer_inertia {
             pointer-inertia;
-            pointer-flick-threshold     = <6>;
+            pointer-flick-threshold     = <8>;
             pointer-flick-boost         = <20000>;
             pointer-inertia-decay       = <75>;
             pointer-inertia-decay-fast  = <98>;
