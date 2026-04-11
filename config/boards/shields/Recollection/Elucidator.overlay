@@ -79,7 +79,7 @@
         compatible = "zmk,input-listener";
         device = <&trackball>;
         /* ここで定義した慣性を呼び出します */
-        input-processors = <&pointer_accel>, <&zip_scroll_inertia>, <&zip_pointer_inertia>;
+        input-processors = <&pointer_accel>;
 
         gesture_e { layers = <7>;  input-processors = <&zip_gE &tb_drop_all 0 1>; };
         gesture_r { layers = <8>;  input-processors = <&zip_gR &tb_drop_all 0 1>; };
