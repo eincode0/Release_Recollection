@@ -118,7 +118,7 @@
         reg = <0>;
         spi-max-frequency = <2000000>;
         irq-gpios    = <&gpio0 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
-        cpi = <1600>;
+        cpi = <3200>;
         force-awake;
         force-awake-4ms-mode;
         snipe-layers  = <15>;
@@ -144,7 +144,7 @@
 &pointer_accel {
     input-type = <INPUT_EV_REL>;
     codes = <INPUT_REL_X INPUT_REL_Y>;
-    sensitivity = <1200>;
+    sensitivity = <600>;
     max-factor = <15000>;
     acceleration-exponent = <4>;
     speed-threshold = <50>;
