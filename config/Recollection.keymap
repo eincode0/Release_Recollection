@@ -482,7 +482,7 @@
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
-            bindings = <&kp LG(LS(NUMBER_5))>, <&kp LG(LS(NUMBER_5))>;
+            bindings = <&kp LG(LS(NUMBER_5))>, <&kp LC(LG(LS(NUMBER_5)))>;
         };
 
         gM_up: gM_up {
