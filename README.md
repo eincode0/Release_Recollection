@@ -299,6 +299,7 @@
 | 2026-04-11 | west.yml: 6モジュール（zmk-rgbled-widget / zmk-pointing-acceleration-alpha / zmk-behavior-insomnia / zmk-helpers / zmk-tri-state / zmk-auto-layer）の revision を main から各最新コミットハッシュに固定 |
 | 2026-04-11 | Dark_Repulser.conf: CONFIG_ZMK_STUDIO=y を削除（ペリフェラル側では不要） |
 | 2026-04-11 | Dark_Repulser.conf: CONFIG_ZMK_POINTING_SMOOTH_SCROLLING=y を追加（Elucidatorと設定を統一） |
+| 2026-04-11 | 左右両側: DLE有効化（DATA_LENGTH_MAX=251 / ACL_RX/TX_SIZE=251）1パケット最大データ量を拡張しスループット・スプリット通信安定化 |
 
 ══════════════════════════════════════════════
 
