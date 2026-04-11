@@ -146,9 +146,9 @@
     codes = <INPUT_REL_X INPUT_REL_Y>;
     sensitivity = <200>;
     max-factor = <200>;
-    acceleration-exponent = <4>;
+    acceleration-exponent = <2>;
     speed-threshold = <0>;
-    speed-max = <5000>;
-    min-factor = <60000>;
+    speed-max = <60000>;
+    min-factor = <1200>;
     sensor-dpi = <1600>;
 };
