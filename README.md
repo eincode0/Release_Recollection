@@ -242,7 +242,7 @@
 
 | 設定 | 値 | 対象 | 効果 |
 |---|---|---|---|
-| Experimental Conn | 無効 | R・L両側 | 安定版(LkeyMouse/kabutokoma)は未設定 |
+| Experimental Conn | L側(Dark_Repulser)のみ有効、R側無効 | R・L両側 | L側で接続安定化のため有効化 |
 | NFCT_PINS_AS_GPIOS | 有効 | R・L両側 | NFC無線とBLEの干渉防止（安定版2つともあり） |
 | BT_GAP_AUTO_UPDATE_CONN_PARAMS | 有効 | R・L両側 | 接続後に自動パラメータ再交渉（kabutokoma準拠） |
 | BT_CONN_PARAM_UPDATE_TIMEOUT | 1000ms | R・L両側 | 接続から1秒後にパラメータ更新要求 |
@@ -252,8 +252,8 @@
 | BT Max Conn | 5 | R側（Central） | 4プロファイル + 1スプリット接続（プロファイル数+1が正しい設定） |
 | BT Max Paired | 5 | R側（Central） | プロファイル切替用（Mac/iPhone等） |
 | BT_PERIPHERAL_PREF_MIN_INT | 6 (7.5ms) | R側 | 接続インターバル下限。前回MAX_INT=12固定は削除済み→今回は範囲指定で再試験 |
-| BT_PERIPHERAL_PREF_MAX_INT | 12 (15ms) | R側 | 接続インターバル上限 |
-| Insomnia pingInterval | 5秒 | R側のみ | keepaliveを高頻度化 |
+| BT_PERIPHERAL_PREF_MAX_INT | 6 (7.5ms) | R・L両側 | 接続インターバル上限（L側もR側と同期） |
+| Insomnia pingInterval | 5秒 | R・L両側 | keepaliveを高頻度化（L側にも追加） |
 
 ### MOTION SENSOR CONFIG ── トラックボールセンサー（Elucidator.conf）
 
@@ -262,6 +262,7 @@
 | 設定 | 値 | 効果 |
 |---|---|---|
 | PMW3610 REST移行時間 | 1000ms | 操作停止後すばやく省電力モードへ |
+| PMW3610 ポーリングレート | 125Hz (POLLING_RATE_125) | 起動遅延を削除しポーリングレート固定モードに変更 |
 
 ### THREAD STACK ── スレッドスタック（クラッシュ対策）
 
@@ -284,6 +285,7 @@
 | 2026-04-07 | pointer_accel チューニング: min-factor 1800→1200 / max-factor 3000→8000 / acceleration-exponent 1→2（低速を精密化、フリック時の加速を強化） |
 | 2026-04-07 | ポインタ慣性（pointer-inertia）実装: 強フリック時のみ発動、スクロール慣性より強め（decay-fast 98）。ドライバ更新 f6616ba |
 | 2026-04-10 | gS_right: Shift側バインドを LG(LS(NUMBER_5)) → LC(LG(LS(NUMBER_5))) に変更（Ctrl+Win+Shift+5 で Mission Control的操作） |
+| 2026-04-11 | gS_right: Shift側バインドを LC(LG(LS(NUMBER_5))) → LG(LS(NUMBER_5)) に差し戻し（通常・Shift両方とも同じバインド） |
 | 2026-04-10 | ドライバ修正: 通常カーソルの2サンプル蓄積を廃止し低速時のぬるつきラグを解消。各モーションを即時報告（250Hz直結）。west.yml → c09a555 |
 | 2026-04-10 | BLE接続インターバル最適化: MAX_INT 12→6（15ms→7.5ms固定）、低速トラボのBLEラグを解消 |
 | 2026-04-10 | pointer-inertia-decay 95→75（低速慣性の引きずりを抑制、BLEラグの体感改善） |
@@ -291,6 +293,9 @@
 | 2026-04-10 | Dark_Repulser MAX_INT 12→6（Elucidatorと一致させる、7.5ms固定） |
 | 2026-04-10 | BLE 2M PHY有効化（PHY_2M + AUTO_PHY_UPDATE、左右両側）接続イベントの空中時間を短縮し分割接続安定化 |
 | 2026-04-10 | PMW3610起動遅延追加: INIT_POWER_UP_EXTRA_DELAY_MS=1000（起動時センサー初期化失敗を修正） |
+| 2026-04-11 | Dark_Repulser: BLE設定をElucidatorに合わせて統一（EXPERIMENTAL_CONN有効化、PREF_MAX_INT=6、INSOMNIA追加、STUDIO有効化） |
+| 2026-04-11 | Elucidator.conf: INIT_POWER_UP_EXTRA_DELAY_MS=1000 → POLLING_RATE_125=y に変更（ポーリングレート固定モードへ移行） |
+| 2026-04-11 | Elucidator.overlay: input-processors からscroll系・pointer_inertia を除去（pointer_accel のみに）、pointer_inertia パラメータ調整: threshold 12→6 / boost 20000→40000 / decay-fast 97→99 / slow-spd 8→3 / fast-spd 50→30 |
 
 ══════════════════════════════════════════════
 
