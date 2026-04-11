@@ -235,11 +235,11 @@
 
         zip_pointer_inertia: pointer_inertia {
             pointer-inertia;
-            pointer-flick-threshold     = <10>;
-            pointer-flick-boost         = <20000>;
-            pointer-inertia-decay       = <85>;
+            pointer-flick-threshold     = <6>;
+            pointer-flick-boost         = <40000>;
+            pointer-inertia-decay       = <75>;
             pointer-inertia-decay-fast  = <99>;
-            pointer-inertia-slow-spd    = <1>;
+            pointer-inertia-slow-spd    = <3>;
             pointer-inertia-fast-spd    = <30>;
             pointer-inertia-tick-ms     = <8>;
         };
@@ -263,7 +263,7 @@
     sensitivity = <1200>;
     max-factor = <8000>;
     acceleration-exponent = <2>;
-    speed-threshold = <300>;
+    speed-threshold = <50>;
     speed-max = <3500>;
     min-factor = <1200>;
     sensor-dpi = <1600>;
