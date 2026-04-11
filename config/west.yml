@@ -41,30 +41,30 @@ manifest:
 
     - name: zmk-rgbled-widget
       remote: caksoylar
-      revision: main
+      revision: b0b8cc2
       path: modules/zmk-rgbled-widget
     - name: zmk-pointing-acceleration-alpha
       remote: nuovotaka
-      revision: main
+      revision: 780dfcd
       path: modules/zmk-pointing-acceleration-alpha
     - name: zmk-behavior-insomnia
       remote: badjeff
-      revision: main
+      revision: 0ce76ae
       path: modules/zmk-behavior-insomnia
 
     - name: zmk-helpers                       # ⑦ keymap 記述ヘルパーマクロ
       remote: urob
-      revision: main
+      revision: 7e0219e
       path: modules/zmk-helpers
 
     - name: zmk-tri-state                     # ⑧ Swapper（スマート Cmd+Tab）
       remote: urob
-      revision: main
+      revision: 2007896
       path: modules/zmk-tri-state
 
     - name: zmk-auto-layer                    # ⑨ Smart Num（数字入力で自動レイヤー）
       remote: urob
-      revision: main
+      revision: dfa7c69
       path: modules/zmk-auto-layer
 
   self:
