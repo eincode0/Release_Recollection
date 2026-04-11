@@ -57,11 +57,11 @@
             pointer-inertia;
             pointer-flick-threshold     = <6>;
             pointer-flick-boost         = <40000>;
-            pointer-inertia-decay       = <75>;
+            pointer-inertia-decay       = <65>;
             pointer-inertia-decay-fast  = <99>;
             pointer-inertia-slow-spd    = <3>;
             pointer-inertia-fast-spd    = <30>;
-            pointer-inertia-tick-ms     = <8>;
+            pointer-inertia-tick-ms     = <5>;
         };
 
         /* ジェスチャー定義（変更なし） */
