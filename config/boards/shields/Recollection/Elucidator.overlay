@@ -144,11 +144,11 @@
 &pointer_accel {
     input-type = <INPUT_EV_REL>;
     codes = <INPUT_REL_X INPUT_REL_Y>;
-    sensitivity = <400>;
-    max-factor = <15000>;
+    sensitivity = <200>;
+    max-factor = <200>;
     acceleration-exponent = <4>;
-    speed-threshold = <50>;
+    speed-threshold = <0>;
     speed-max = <5000>;
-    min-factor = <1200>;
+    min-factor = <60000>;
     sensor-dpi = <1600>;
 };
