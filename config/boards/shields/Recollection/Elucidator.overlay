@@ -155,7 +155,7 @@
     trackball_listener: trackball_listener {
         compatible = "zmk,input-listener";
         device = <&trackball>;
-        /* zip_scroll_scaler は Recollection.dtsi 側の仕様（引数なし）で参照 */
+        /* 【重要】慣性プロセッサをここに並べることで機能が有効になります */
         input-processors = <&pointer_accel>, <&zip_scroll_inertia>, <&zip_pointer_inertia>;
 
         gesture_e { layers = <7>;  input-processors = <&zip_gE &tb_drop_all 0 1>; };
@@ -223,6 +223,8 @@
         arrows-repeat-rate-ms   = <100>;
 
         zip_scroll_inertia: scroll_inertia {
+            compatible = "zmk,input-processor-scroll-inertia";
+            #input-processor-cells = <0>;
             scroll-inertia;
             scroll-inertia-decay        = <75>;
             scroll-inertia-decay-fast   = <98>;
@@ -234,6 +236,8 @@
         };
 
         zip_pointer_inertia: pointer_inertia {
+            compatible = "zmk,input-processor-pointer-inertia";
+            #input-processor-cells = <0>;
             pointer-inertia;
             pointer-flick-threshold     = <6>;
             pointer-flick-boost         = <40000>;
