@@ -55,12 +55,12 @@
             compatible = "zmk,input-processor-pointer-inertia";
             #input-processor-cells = <0>;
             pointer-inertia;
-            pointer-flick-threshold     = <6>;
-            pointer-flick-boost         = <40000>;
-            pointer-inertia-decay       = <65>;
-            pointer-inertia-decay-fast  = <99>;
-            pointer-inertia-slow-spd    = <3>;
-            pointer-inertia-fast-spd    = <30>;
+            pointer-flick-threshold     = <5>;
+            pointer-flick-boost         = <80000>;
+            pointer-inertia-decay       = <40>;
+            pointer-inertia-decay-fast  = <97>;
+            pointer-inertia-slow-spd    = <1>;
+            pointer-inertia-fast-spd    = <10>;
             pointer-inertia-tick-ms     = <5>;
         };
 
