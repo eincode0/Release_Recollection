@@ -298,6 +298,7 @@
 | 2026-04-11 | Elucidator.overlay: input-processors からscroll系・pointer_inertia を除去（pointer_accel のみに）、pointer_inertia パラメータ調整: threshold 12→6 / boost 20000→40000 / decay-fast 97→99 / slow-spd 8→3 / fast-spd 50→30 |
 | 2026-04-11 | west.yml: 6モジュール（zmk-rgbled-widget / zmk-pointing-acceleration-alpha / zmk-behavior-insomnia / zmk-helpers / zmk-tri-state / zmk-auto-layer）の revision を main から各最新コミットハッシュに固定 |
 | 2026-04-11 | Dark_Repulser.conf: CONFIG_ZMK_STUDIO=y を削除（ペリフェラル側では不要） |
+| 2026-04-11 | Dark_Repulser.conf: CONFIG_ZMK_POINTING_SMOOTH_SCROLLING=y を追加（Elucidatorと設定を統一） |
 
 ══════════════════════════════════════════════
 
