@@ -144,7 +144,7 @@
 &pointer_accel {
     input-type = <INPUT_EV_REL>;
     codes = <INPUT_REL_X INPUT_REL_Y>;
-    sensitivity = <600>;
+    sensitivity = <400>;
     max-factor = <15000>;
     acceleration-exponent = <4>;
     speed-threshold = <50>;
