@@ -54,12 +54,12 @@ manifest:
 
     - name: zmk-helpers                       # ⑦ keymap 記述ヘルパーマクロ
       remote: urob
-      revision: 7e0219e
+      revision: "7e0219e"
       path: modules/zmk-helpers
 
     - name: zmk-tri-state                     # ⑧ Swapper（スマート Cmd+Tab）
       remote: urob
-      revision: 2007896
+      revision: "2007896"
       path: modules/zmk-tri-state
 
     - name: zmk-auto-layer                    # ⑨ Smart Num（数字入力で自動レイヤー）
