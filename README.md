@@ -301,6 +301,7 @@
 | 2026-04-11 | Dark_Repulser.conf: CONFIG_ZMK_POINTING_SMOOTH_SCROLLING=y を追加（Elucidatorと設定を統一） |
 | 2026-04-11 | 左右両側: DLE有効化（DATA_LENGTH_MAX=251 / ACL_RX/TX_SIZE=251）1パケット最大データ量を拡張しスループット・スプリット通信安定化 |
 | 2026-04-11 | 左右両側: INSOMNIA_PING_INTERVAL 5000→3000ms（supervision timeout 6秒に対するマージンを確保し切断リスクを低減） |
+| 2026-04-11 | Dark_Repulser: スプリット接続インターバルを7.5ms固定→10〜12.5ms（MIN_INT=8/MAX_INT=10）に変更し、ホスト接続とのBLEスケジューリング競合を低減 |
 
 ══════════════════════════════════════════════
 
