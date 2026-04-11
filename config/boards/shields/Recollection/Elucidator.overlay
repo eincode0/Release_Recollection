@@ -55,12 +55,12 @@
             compatible = "zmk,input-processor-pointer-inertia";
             #input-processor-cells = <0>;
             pointer-inertia;
-            pointer-flick-threshold     = <5>;
-            pointer-flick-boost         = <80000>;
+            pointer-flick-threshold     = <2>;
+            pointer-flick-boost         = <450000>;
             pointer-inertia-decay       = <40>;
-            pointer-inertia-decay-fast  = <97>;
+            pointer-inertia-decay-fast  = <99>;
             pointer-inertia-slow-spd    = <1>;
-            pointer-inertia-fast-spd    = <10>;
+            pointer-inertia-fast-spd    = <1>;
             pointer-inertia-tick-ms     = <5>;
         };
 
@@ -144,11 +144,11 @@
 &pointer_accel {
     input-type = <INPUT_EV_REL>;
     codes = <INPUT_REL_X INPUT_REL_Y>;
-    sensitivity = <200>;
-    max-factor = <600>;
-    acceleration-exponent = <3>;
+    sensitivity = <100>;
+    max-factor = <150000>;
+    acceleration-exponent = <4>;
     speed-threshold = <10>;
     speed-max = <30000>;
-    min-factor = <200>;
+    min-factor = <100>;
     sensor-dpi = <3200>;
 };
