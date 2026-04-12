@@ -117,7 +117,7 @@
 
         scroll-accel;
         scroll-accel-max-mult = <6>;
-        scroll-accel-threshold = <15>;
+        scroll-accel-threshold = <30>;
         evt-type = <INPUT_EV_REL>;
         x-input-code = <INPUT_REL_X>;
         y-input-code = <INPUT_REL_Y>;
