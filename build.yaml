@@ -25,3 +25,5 @@ include:
   - board: xiao_ble/nrf52840/zmk
     shield: Dark_Repulser rgbled_adapter
     cmake-args: -DCONFIG_ZMK_USB_LOGGING=y
+  - board: xiao_ble/nrf52840/zmk
+    shield: settings_reset
