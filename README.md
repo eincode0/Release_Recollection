@@ -280,30 +280,6 @@
 
 | DATE | ENTRY |
 |---|---|
-| 2026-04-05 | west.yml: zmk-pmw3610-driver を 1286ad4 に更新（CONFIG_PMW3610_ALT_POLLING_RATE_125/250 Kconfig choice 追加） |
-| 2026-04-05 | BT_PERIPHERAL_PREF_MIN_INT=6 / MAX_INT=12 を再追加（7.5〜15ms範囲指定）。前回は15ms固定でトラックボールに悪影響→今回は範囲指定で再試験 |
-| 2026-04-07 | pointer_accel チューニング: min-factor 1800→1200 / max-factor 3000→8000 / acceleration-exponent 1→2（低速を精密化、フリック時の加速を強化） |
-| 2026-04-07 | ポインタ慣性（pointer-inertia）実装: 強フリック時のみ発動、スクロール慣性より強め（decay-fast 98）。ドライバ更新 f6616ba |
-| 2026-04-10 | gS_right: Shift側バインドを LG(LS(NUMBER_5)) → LC(LG(LS(NUMBER_5))) に変更（Ctrl+Win+Shift+5 で Mission Control的操作） |
-| 2026-04-11 | gS_right: Shift側バインドを LC(LG(LS(NUMBER_5))) → LG(LS(NUMBER_5)) に差し戻し（通常・Shift両方とも同じバインド） |
-| 2026-04-10 | ドライバ修正: 通常カーソルの2サンプル蓄積を廃止し低速時のぬるつきラグを解消。各モーションを即時報告（250Hz直結）。west.yml → c09a555 |
-| 2026-04-10 | BLE接続インターバル最適化: MAX_INT 12→6（15ms→7.5ms固定）、低速トラボのBLEラグを解消 |
-| 2026-04-10 | pointer-inertia-decay 95→75（低速慣性の引きずりを抑制、BLEラグの体感改善） |
-| 2026-04-10 | ポインタ慣性を再有効化（zip_pointer_inertia を input-processors に復元） |
-| 2026-04-10 | Dark_Repulser MAX_INT 12→6（Elucidatorと一致させる、7.5ms固定） |
-| 2026-04-10 | BLE 2M PHY有効化（PHY_2M + AUTO_PHY_UPDATE、左右両側）接続イベントの空中時間を短縮し分割接続安定化 |
-| 2026-04-10 | PMW3610起動遅延追加: INIT_POWER_UP_EXTRA_DELAY_MS=1000（起動時センサー初期化失敗を修正） |
-| 2026-04-11 | Dark_Repulser: BLE設定をElucidatorに合わせて統一（EXPERIMENTAL_CONN有効化、PREF_MAX_INT=6、INSOMNIA追加、STUDIO有効化） |
-| 2026-04-11 | Elucidator.conf: INIT_POWER_UP_EXTRA_DELAY_MS=1000 → POLLING_RATE_125=y に変更（ポーリングレート固定モードへ移行） |
-| 2026-04-11 | Elucidator.overlay: input-processors からscroll系・pointer_inertia を除去（pointer_accel のみに）、pointer_inertia パラメータ調整: threshold 12→6 / boost 20000→40000 / decay-fast 97→99 / slow-spd 8→3 / fast-spd 50→30 |
-| 2026-04-11 | west.yml: 6モジュール（zmk-rgbled-widget / zmk-pointing-acceleration-alpha / zmk-behavior-insomnia / zmk-helpers / zmk-tri-state / zmk-auto-layer）の revision を main から各最新コミットハッシュに固定 |
-| 2026-04-11 | Dark_Repulser.conf: CONFIG_ZMK_STUDIO=y を削除（ペリフェラル側では不要） |
-| 2026-04-11 | Dark_Repulser.conf: CONFIG_ZMK_POINTING_SMOOTH_SCROLLING=y を追加（Elucidatorと設定を統一） |
-| 2026-04-11 | 左右両側: DLE有効化（DATA_LENGTH_MAX=251 / ACL_RX/TX_SIZE=251）1パケット最大データ量を拡張しスループット・スプリット通信安定化 |
-| 2026-04-11 | 左右両側: INSOMNIA_PING_INTERVAL 5000→3000ms（supervision timeout 6秒に対するマージンを確保し切断リスクを低減） |
-| 2026-04-11 | Dark_Repulser: スプリット接続インターバルを7.5ms固定→10〜12.5ms（MIN_INT=8/MAX_INT=10）に変更し、ホスト接続とのBLEスケジューリング競合を低減 |
-| 2026-04-11 | Elucidator.overlay: zip_pointer_inertia を削除（未使用）、pointer_accel の min-factor 100→500（低速時の実効CPI 320→1600に改善） |
-
 ══════════════════════════════════════════════
 
 ## ◆ INITIALIZATION PROTOCOL ── ビルド
