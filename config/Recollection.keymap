@@ -335,14 +335,14 @@
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
-            bindings = <&kp F15>, <&kp F11>;
+            bindings = <&kp F14>, <&kp F11>;
         };
 
         gD_right: gD_right {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
-            bindings = <&kp F14>, <&kp F20>;
+            bindings = <&kp F15>, <&kp F20>;
         };
 
         gW_up: gW_up {
