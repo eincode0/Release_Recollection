@@ -55,7 +55,7 @@
         zip_gE: zip_gE { compatible = "zmk,input-processor-mouse-gesture"; #input-processor-cells = <0>; stroke-size = <60>; movement-threshold = <6>; idle-timeout-ms = <110>; gesture-cooldown-ms = <130>; enable-eager-mode; up { pattern = <GESTURE_UP>; bindings = <&gE_up>; }; down { pattern = <GESTURE_DOWN>; bindings = <&gE_down>; }; left { pattern = <GESTURE_LEFT>; bindings = <&gE_left>; }; right { pattern = <GESTURE_RIGHT>; bindings = <&gE_right>; }; };
         zip_gR: zip_gR { compatible = "zmk,input-processor-mouse-gesture"; #input-processor-cells = <0>; stroke-size = <60>; movement-threshold = <6>; idle-timeout-ms = <110>; gesture-cooldown-ms = <130>; enable-eager-mode; up { pattern = <GESTURE_UP>; bindings = <&gR_up>; }; down { pattern = <GESTURE_DOWN>; bindings = <&gR_down>; }; left { pattern = <GESTURE_LEFT>; bindings = <&gR_left>; }; right { pattern = <GESTURE_RIGHT>; bindings = <&gR_right>; }; };
         zip_gS: zip_gS { compatible = "zmk,input-processor-mouse-gesture"; #input-processor-cells = <0>; stroke-size = <60>; movement-threshold = <6>; idle-timeout-ms = <110>; gesture-cooldown-ms = <130>; enable-eager-mode; up { pattern = <GESTURE_UP>; bindings = <&gS_up>; }; down { pattern = <GESTURE_DOWN>; bindings = <&gS_down>; }; left { pattern = <GESTURE_LEFT>; bindings = <&gS_left>; }; right { pattern = <GESTURE_RIGHT>; bindings = <&gS_right>; }; };
-        zip_gM: zip_gM { compatible = "zmk,input-processor-mouse-gesture"; #input-processor-cells = <0>; stroke-size = <60>; movement-threshold = <6>; idle-timeout-ms = <110>; gesture-cooldown-ms = <130>; enable-eager-mode; up { pattern = <GESTURE_UP>; bindings = <&gM_up>; }; down { pattern = <GESTURE_DOWN>; bindings = <&gM_down>; }; left { pattern = <GESTURE_LEFT>; bindings = <&gM_left>; }; right { pattern = <GESTURE_RIGHT>; bindings = <&gM_right>; }; };
+        zip_gB: zip_gB { compatible = "zmk,input-processor-mouse-gesture"; #input-processor-cells = <0>; stroke-size = <60>; movement-threshold = <6>; idle-timeout-ms = <110>; gesture-cooldown-ms = <130>; enable-eager-mode; up { pattern = <GESTURE_UP>; bindings = <&gB_up>; }; down { pattern = <GESTURE_DOWN>; bindings = <&gB_down>; }; left { pattern = <GESTURE_LEFT>; bindings = <&gB_left>; }; right { pattern = <GESTURE_RIGHT>; bindings = <&gB_right>; }; };
         zip_gT: zip_gT { compatible = "zmk,input-processor-mouse-gesture"; #input-processor-cells = <0>; stroke-size = <60>; movement-threshold = <6>; idle-timeout-ms = <110>; gesture-cooldown-ms = <130>; enable-eager-mode; up { pattern = <GESTURE_UP>; bindings = <&gT_up>; }; down { pattern = <GESTURE_DOWN>; bindings = <&gT_down>; }; left { pattern = <GESTURE_LEFT>; bindings = <&gT_left>; }; right { pattern = <GESTURE_RIGHT>; bindings = <&gT_right>; }; };
         zip_gA: zip_gA { compatible = "zmk,input-processor-mouse-gesture"; #input-processor-cells = <0>; stroke-size = <60>; movement-threshold = <6>; idle-timeout-ms = <110>; gesture-cooldown-ms = <130>; enable-eager-mode; up { pattern = <GESTURE_UP>; bindings = <&gA_up>; }; down { pattern = <GESTURE_DOWN>; bindings = <&gA_down>; }; left { pattern = <GESTURE_LEFT>; bindings = <&gA_left>; }; right { pattern = <GESTURE_RIGHT>; bindings = <&gA_right>; }; };
         zip_gD: zip_gD { compatible = "zmk,input-processor-mouse-gesture"; #input-processor-cells = <0>; stroke-size = <60>; movement-threshold = <6>; idle-timeout-ms = <110>; gesture-cooldown-ms = <130>; enable-eager-mode; up { pattern = <GESTURE_UP>; bindings = <&gD_up>; }; down { pattern = <GESTURE_DOWN>; bindings = <&gD_down>; }; left { pattern = <GESTURE_LEFT>; bindings = <&gD_left>; }; right { pattern = <GESTURE_RIGHT>; bindings = <&gD_right>; }; };
@@ -78,7 +78,7 @@
         gesture_e { layers = <7>;  input-processors = <&zip_gE &tb_drop_all 0 1>; };
         gesture_r { layers = <8>;  input-processors = <&zip_gR &tb_drop_all 0 1>; };
         gesture_s { layers = <9>;  input-processors = <&zip_gS &tb_drop_all 0 1>; };
-        gesture_m { layers = <10>; input-processors = <&zip_gM &tb_drop_all 0 1>; };
+        gesture_b { layers = <10>; input-processors = <&zip_gB &tb_drop_all 0 1>; };
         gesture_t { layers = <11>; input-processors = <&zip_gT &tb_drop_all 0 1>; };
         gesture_a { layers = <12>; input-processors = <&zip_gA &tb_drop_all 0 1>; };
         gesture_d { layers = <13>; input-processors = <&zip_gD &tb_drop_all 0 1>; };
@@ -118,7 +118,7 @@
         snipe-layers  = <15>;
         scroll-layers = <5>;
         arrows-profiles = < 2 1020 1021 1023 1022 40 0 1 0 3 103 108 105 106 40 0 1 0 6 1060 1061 58 90 200 1 1 1 >;
-        arrows-alt-profiles = < 3 1000 1004 14 111 120 0 1 1 2 1005 1003 1001 1002 120 0 1 1 6 1066 1067 1071 1070 200 0 1 0 >;
+        arrows-alt-profiles = < 3 1000 1004 14 111 120 0 1 1 2 1005 1003 1001 1002 120 0 1 1 6 165 163 114 115 200 0 1 0 >;
         arrows-no-repeat-layers = <2 3 4 6>;
         arrows-tick = <30>;
         arrows-repeat-delay-ms = <250>;
