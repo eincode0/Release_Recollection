@@ -224,6 +224,7 @@
 | zmk-pmw3610-driver | eincode0/zmk-pmw3610-driver | PMW3610 トラックボールドライバー |
 | zmk-listeners | ssbb/zmk-listeners | レイヤーリスナー |
 | zmk-mouse-gesture | kot149/zmk-mouse-gesture | マウスジェスチャー認識 |
+| zmk-scroll-snap | kot149/zmk-scroll-snap | スクロール軸スナップ（X/Y軸整列） |
 | zmk-rgbled-widget | caksoylar/zmk-rgbled-widget | RGB LED インジケーター |
 | zmk-pointing-acceleration-alpha | nuovotaka/zmk-pointing-acceleration-alpha | ポインタ加速度 |
 | zmk-behavior-insomnia | badjeff/zmk-behavior-insomnia | BLE 接続中スリープ防止 |
@@ -280,6 +281,8 @@
 
 | DATE | ENTRY |
 |---|---|
+| 2026-04-14 | `zmk-scroll-snap` モジュール導入。SCROLLレイヤー（L5）でX/Y軸スナップを有効化し、縦スクロール時の横流れを抑制 |
+
 ══════════════════════════════════════════════
 
 ## ◆ INITIALIZATION PROTOCOL ── ビルド
