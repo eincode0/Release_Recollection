@@ -37,7 +37,7 @@
 | [ Synthesis 07 ] | GESTURE_E | ジェスチャー（E キー長押し）|
 | [ Synthesis 08 ] | GESTURE_R | ジェスチャー（R キー長押し）|
 | [ Synthesis 09 ] | GESTURE_S | ジェスチャー（S キー長押し）|
-| [ Synthesis 10 ] | GESTURE_M | ジェスチャー（M キー長押し）|
+| [ Synthesis 10 ] | GESTURE_B | ジェスチャー（B キー長押し）|
 | [ Synthesis 11 ] | GESTURE_T | ジェスチャー（T キー長押し）|
 | [ Synthesis 12 ] | GESTURE_A | ジェスチャー（A キー長押し）|
 | [ Synthesis 13 ] | GESTURE_D | ジェスチャー（D キー長押し）|
@@ -93,14 +93,14 @@
 
 ──────────────────────────────────────────────
 
-### ◆ SWORD SKILL : HOWLING OCTAVE  [ KEY : M ] ── GESTURE_M（M キー長押し）― 音響剣技
+### ◆ SWORD SKILL : HOWLING OCTAVE  [ KEY : B ] ── GESTURE_B（B キー長押し）― 音響剣技
 
-*8連の咆哮が空間を震わせる。音量と輝度を意のままに操る。*
+*8連の咆哮が空間を震わせる。輝度と消音を意のままに操る。*
 
 | 方向 | 通常 | Shift 同時押し |
 |---|---|---|
-| ↑ 上 | 音量上げる | `F13` |
-| ↓ 下 | 音量下げる | ミュート |
+| ↑ 上 | `F19` | `F13` |
+| ↓ 下 | ミュート | ミュート |
 | ← 左 | 輝度下げる | `F19` |
 | → 右 | 輝度上げる | `F18` |
 
@@ -176,7 +176,7 @@
 |---|---|---|---|---|---|
 | 2 ARROW_SIGN | `Cmd+A` | `Cmd+V` | `Cmd+X` | `Cmd+C` | あり |
 | 3 NUM | `Undo` | `Redo` | `BS` | `Del` | あり |
-| 6 Bluetooth | Desktop左(F15) | Desktop右(F14) | Swapper逆(Cmd+Shift+Tab) | Swapper正(Cmd+Tab) | なし |
+| 6 Bluetooth | 前のトラック(`C_PREV`) | 次のトラック(`C_NEXT`) | 音量下げる(`C_VOL_DN`) | 音量上げる(`C_VOL_UP`) | なし |
 
 > **[ SYSTEM ]** **one_shot** — 有効時、センサーの動きに対してキーが 1 度だけ送出される。
 > 押しっぱなし状態にはならない。連続入力が不要な操作に適用される。
@@ -204,7 +204,7 @@
 | 7 GESTURE_E | 3 |
 | 8 GESTURE_R | 4 |
 | 9 GESTURE_S | 5 |
-| 10 GESTURE_M | 0 |
+| 10 GESTURE_B | 0 |
 | 11 GESTURE_T | 6 |
 | 12 GESTURE_A | 7 |
 | 13 GESTURE_D | 1 |
@@ -282,6 +282,7 @@
 | DATE | ENTRY |
 |---|---|
 | 2026-04-14 | `zmk-scroll-snap` モジュール導入。SCROLLレイヤー（L5）でX/Y軸スナップを有効化し、縦スクロール時の横流れを抑制 |
+| 2026-04-14 | GESTURE_M → GESTURE_B リネーム（トリガーキー M → B）。gB_up=F19 / gB_down=Mute に変更。Bluetooth レイヤー（L6）の arrows-alt-profiles をメディア操作（C_PREV/C_NEXT/C_VOL_DN/C_VOL_UP）へ変更。ドライバに Consumer page メディアキー対応追加 |
 
 ══════════════════════════════════════════════
 

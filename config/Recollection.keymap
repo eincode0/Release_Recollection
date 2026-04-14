@@ -11,7 +11,7 @@
  *    7 GESTURE_E
  *    8 GESTURE_R
  *    9 GESTURE_S
- *   10 GESTURE_M
+ *   10 GESTURE_B
  *   11 GESTURE_T
  *   12 GESTURE_A
  *   13 GESTURE_D
@@ -485,28 +485,28 @@
             bindings = <&kp LG(LS(NUMBER_5))>, <&kp LG(LS(NUMBER_5))>;
         };
 
-        gM_up: gM_up {
+        gB_up: gB_up {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
-            bindings = <&kp C_VOLUME_UP>, <&kp F13>;
+            bindings = <&kp F19>, <&kp F13>;
         };
 
-        gM_down: gM_down {
+        gB_down: gB_down {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
-            bindings = <&kp C_VOLUME_DOWN>, <&kp C_MUTE>;
+            bindings = <&kp C_MUTE>, <&kp C_MUTE>;
         };
 
-        gM_left: gM_left {
+        gB_left: gB_left {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
             bindings = <&kp C_BRI_DN>, <&kp F19>;
         };
 
-        gM_right: gM_right {
+        gB_right: gB_right {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
@@ -521,7 +521,7 @@
             bindings = <
 &mt LEFT_SHIFT Q     &gesture_mo_kp 14 W  &gesture_mo_kp 7 E   &gesture_mo_kp 8 R   &gesture_mo_kp 11 T                                    &kp Y        &kp U                &gesture_mo_kp 5 I  &kp O               &mt RIGHT_SHIFT P
 &gesture_mo_kp 12 A  &gesture_mo_kp 9 S   &gesture_mo_kp 13 D  &kp F                &lt 6 G              &smart_num 16      &kp AT_SIGN    &kp H        &kp J                &gesture_mo_kp 5 K  &gesture_mo_kp 4 L  &mt LEFT_GUI MINUS
-&kp Z                &kp X                &kp C                &gesture_mo_kp 15 V  &kp B                &kp TAB            &kp COLON      &kp N        &gesture_mo_kp 10 M  &kp COMMA           &kp PERIOD          &mt LEFT_CONTROL PLUS
+&kp Z                &kp X                &kp C                &gesture_mo_kp 15 V  &gesture_mo_kp 10 B  &kp TAB            &kp COLON      &kp N        &kp M                &kp COMMA           &kp PERIOD          &mt LEFT_CONTROL PLUS
 &kp LCTRL            &kp LEFT_GUI         &kp LEFT_ALT         &lt 3 SPACE          &mkp MB1             &lt 2 CAPS         &kp BACKSPACE  &lt 1 ENTER                                                               &mt LEFT_ALT DELETE
             >;
 
@@ -625,7 +625,7 @@
             >;
         };
 
-        GESTURE_M {
+        GESTURE_B {
             bindings = <
 &trans  &trans  &trans  &trans          &trans                                      &trans  &trans  &kp LEFT_SHIFT  &trans          &trans
 &trans  &trans  &trans  &trans          &trans          &trans              &trans  &trans  &trans  &kp LEFT_SHIFT  &kp LEFT_SHIFT  &trans
