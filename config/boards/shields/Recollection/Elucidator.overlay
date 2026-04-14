@@ -114,7 +114,6 @@
         irq-gpios    = <&gpio0 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
         cpi = <3200>;
         force-awake;
-        force-awake-4ms-mode;
         snipe-layers  = <15>;
         scroll-layers = <5>;
         arrows-profiles = < 2 1020 1021 1023 1022 40 0 1 0 3 103 108 105 106 40 0 1 0 6 1060 1061 58 90 200 1 1 1 >;
