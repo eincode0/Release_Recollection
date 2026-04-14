@@ -27,11 +27,11 @@ layers:
   - X
   - C
   - {t: V, h: SNIPE}
-  - B
+  - {t: B, h: GESTURE_B}
   - TAB
   - ':'
   - N
-  - {t: M, h: GESTURE_M}
+  - M
   - ','
   - .
   - {t: +, h: LEFT CONTROL}
@@ -440,7 +440,7 @@ layers:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
-  GESTURE_M:
+  GESTURE_B:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
@@ -462,16 +462,16 @@ layers:
   - {t: ▽, type: trans}
   - LEFT SHIFT
   - LEFT SHIFT
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {type: held}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
