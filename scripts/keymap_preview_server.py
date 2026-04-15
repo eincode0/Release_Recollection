@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 """Keymap preview server with auto-refresh.
 
-Watches config/Recollection.keymap and keymap_drawer.yaml for changes,
-regenerates keymap.svg via keymap-drawer, and serves an HTML preview
-page at http://localhost:3000.
+Watches config/Recollection.keymap, config/keymap/**/*.dtsi and
+keymap_drawer.yaml for changes, regenerates keymap.svg via keymap-drawer,
+and serves an HTML preview page at http://localhost:3000.
 """
 
+import glob as _glob
 import http.server
 import os
 import subprocess
@@ -17,6 +18,9 @@ PORT = 3000
 WATCH_FILES = [
     "config/Recollection.keymap",
     "keymap_drawer.yaml",
+]
+WATCH_PATTERNS = [
+    "config/keymap/**/*.dtsi",
 ]
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -90,7 +94,7 @@ def regenerate():
 
 
 def get_mtime():
-    """Latest mtime among watched files (as int ms)."""
+    """Latest mtime among watched files and glob patterns (as int ms)."""
     t = 0.0
     for rel in WATCH_FILES:
         p = os.path.join(ROOT, rel)
@@ -98,6 +102,12 @@ def get_mtime():
             t = max(t, os.path.getmtime(p))
         except FileNotFoundError:
             pass
+    for pattern in WATCH_PATTERNS:
+        for p in _glob.glob(os.path.join(ROOT, pattern), recursive=True):
+            try:
+                t = max(t, os.path.getmtime(p))
+            except FileNotFoundError:
+                pass
     return int(t * 1000)
 
 
@@ -160,5 +170,6 @@ if __name__ == "__main__":
 
     server = http.server.HTTPServer(("localhost", PORT), Handler)
     print(f"[preview] Serving at http://localhost:{PORT}", flush=True)
-    print(f"[preview] Watching: {', '.join(WATCH_FILES)}", flush=True)
+    all_watched = WATCH_FILES + WATCH_PATTERNS
+    print(f"[preview] Watching: {', '.join(all_watched)}", flush=True)
     server.serve_forever()

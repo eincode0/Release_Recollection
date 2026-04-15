@@ -1,0 +1,36 @@
+/* ============================================================
+ * 42_gestures_media.dtsi — メディア・輝度ジェスチャー (gB)
+ *
+ * behaviors { } の内側でインクルードされる。
+ *   gB: 輝度 / 音量 / メディア操作系（B キー長押し）
+ * ============================================================ */
+
+/* --- gB: メディア・輝度操作 --- */
+
+gB_up: gB_up {
+    compatible = "zmk,behavior-mod-morph";
+    #binding-cells = <0>;
+    mods = <(MOD_LSFT|MOD_RSFT)>;
+    bindings = <&kp C_BRI_UP>, <&kp F13>;
+};
+
+gB_down: gB_down {
+    compatible = "zmk,behavior-mod-morph";
+    #binding-cells = <0>;
+    mods = <(MOD_LSFT|MOD_RSFT)>;
+    bindings = <&kp C_BRI_DN>, <&kp C_MUTE>;
+};
+
+gB_left: gB_left {
+    compatible = "zmk,behavior-mod-morph";
+    #binding-cells = <0>;
+    mods = <(MOD_LSFT|MOD_RSFT)>;
+    bindings = <&kp C_VOL_DN>, <&kp F19>;
+};
+
+gB_right: gB_right {
+    compatible = "zmk,behavior-mod-morph";
+    #binding-cells = <0>;
+    mods = <(MOD_LSFT|MOD_RSFT)>;
+    bindings = <&kp C_VOL_UP>, <&kp F18>;
+};

@@ -294,6 +294,7 @@
 | 2026-04-15 | ポインタ加速カーブを修正。max-factor: 150000→8000 / speed-max: 30000→2000 / min-factor: 500→700。speed-max が高すぎてカーブが機能していなかった問題を解消 |
 | 2026-04-15 | R・L両側で `CONFIG_LOG=n` を設定。ログサブシステムを無効化し、CPU・フラッシュ消費を削減（デバッグ時は `CONFIG_LOG=y / CONFIG_ZMK_LOG_LEVEL=4` に戻す） |
 | 2026-04-15 | `CONFIG_ZMK_STUDIO=n` に変更。Studio は調整時のみ有効化（`CONFIG_ZMK_STUDIO=y / CONFIG_ZMK_STUDIO_LOCKING=n`）し、通常稼働時のオーバーヘッドを削減 |
+| 2026-04-15 | `config/Recollection.keymap` をインクルード入口に再構成。combos / macros / behaviors / gestures / layers の実装を `config/keymap/**/*.dtsi` へ責務分割。`keymap_preview_server.py` の監視対象に `config/keymap/**/*.dtsi` を追加 |
 
 ══════════════════════════════════════════════
 
