@@ -138,10 +138,10 @@
     input-type = <INPUT_EV_REL>;
     codes = <INPUT_REL_X INPUT_REL_Y>;
     sensitivity = <1000>;
-    max-factor = <150000>;
+    max-factor = <8000>;
     acceleration-exponent = <2>;
     speed-threshold = <10>;
-    speed-max = <30000>;
-    min-factor = <500>;
+    speed-max = <2000>;
+    min-factor = <700>;
     sensor-dpi = <3200>;
 };

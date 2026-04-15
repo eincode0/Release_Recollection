@@ -248,8 +248,8 @@
 | BT_GAP_AUTO_UPDATE_CONN_PARAMS | 有効 | R・L両側 | 接続後に自動パラメータ再交渉（kabutokoma準拠） |
 | BT_CONN_PARAM_UPDATE_TIMEOUT | 1000ms | R・L両側 | 接続から1秒後にパラメータ更新要求 |
 | TX Power | +8dBm | R・L両側 | 最大送信出力 |
-| Split BLE Latency | ZMKデフォルト | R側（Central） | 明示指定なし（安定版LkeyMouseに倣う） |
-| Split BLE Timeout | ZMKデフォルト | R側（Central） | 明示指定なし（TIMEOUT=1000が再接続失敗の原因の可能性） |
+| Split BLE Latency | 0 | R側（Central） | デフォルト 30 から 0 へ変更（Left 側キー入力の遅延パケット許容をゼロに） |
+| Split BLE Timeout | 600 | R側（Central） | ホスト向け TIMEOUT と統一 |
 | BT Max Conn | 5 | R側（Central） | 4プロファイル + 1スプリット接続（プロファイル数+1が正しい設定） |
 | BT Max Paired | 5 | R側（Central） | プロファイル切替用（Mac/iPhone等） |
 | BT_PERIPHERAL_PREF_MIN_INT | 6 (7.5ms) | R側 | 接続インターバル下限。前回MAX_INT=12固定は削除済み→今回は範囲指定で再試験 |
@@ -290,6 +290,8 @@
 | 2026-04-15 | GESTURE_B の通常ジェスチャーを刷新。上: 輝度UP / 下: 輝度DN / 左: 音量DN / 右: 音量UP に変更 |
 | 2026-04-15 | README 誤記修正。GESTURE_D 左右通常キー（F14↔F15 入れ替わり）、GESTURE_W Shift上下（Home→F17、End→F11）を実コードに合わせ訂正 |
 | 2026-04-15 | README 誤記修正。Experimental Conn の対象（L側→R側 Central）、Insomnia pingInterval（5秒→3秒）を実設定値に合わせ訂正 |
+| 2026-04-15 | Split BLE Latency を 0 に設定（L→R 間のデフォルト 30 パケット遅延許容を排除）、Split BLE Timeout を 600 に設定（ホスト向けと統一） |
+| 2026-04-15 | ポインタ加速カーブを修正。max-factor: 150000→8000 / speed-max: 30000→2000 / min-factor: 500→700。speed-max が高すぎてカーブが機能していなかった問題を解消 |
 
 ══════════════════════════════════════════════
 
