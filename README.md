@@ -176,7 +176,7 @@
 |---|---|---|---|---|---|
 | 2 ARROW_SIGN | `Cmd+A` | `Cmd+V` | `Cmd+X` | `Cmd+C` | あり |
 | 3 NUM | `Undo` | `Redo` | `BS` | `Del` | あり |
-| 6 Bluetooth | 前のトラック(`C_PREV`) | 次のトラック(`C_NEXT`) | 音量下げる(`C_VOL_DN`) | 音量上げる(`C_VOL_UP`) | なし |
+| 6 Bluetooth | 再生/停止(`C_PP`) | 停止(`C_STOP`) | 前のトラック(`C_PREV`) | 次のトラック(`C_NEXT`) | なし |
 
 > **[ SYSTEM ]** **one_shot** — 有効時、センサーの動きに対してキーが 1 度だけ送出される。
 > 押しっぱなし状態にはならない。連続入力が不要な操作に適用される。
@@ -288,6 +288,7 @@
 | 2026-04-14 | `force-awake-4ms-mode` を削除。BLE 接続インターバル 7.5ms に対し 4ms サンプリングが生じさせていたポインタジャンプを解消。`force-awake` は維持しスリープ遅延ゼロを継続 |
 | 2026-04-15 | Bluetooth レイヤー（L6）の arrows-profiles 上下を変更。上: `MissionCtrl` → `強制終了(Cmd+Opt+Esc)` / 下: `AppExpose` → `画面ロック(Ctrl+Cmd+Q)` |
 | 2026-04-15 | GESTURE_B の通常ジェスチャーを刷新。上: 輝度UP / 下: 輝度DN / 左: 音量DN / 右: 音量UP に変更 |
+| 2026-04-15 | Bluetooth レイヤー（L6）arrows-alt-profiles を変更。上: 再生/停止(C_PP) / 下: 停止(C_STOP) / 左: 前トラック(C_PREV) / 右: 次トラック(C_NEXT) |
 | 2026-04-15 | README 誤記修正。GESTURE_D 左右（F15↔F14 入れ替え）、GESTURE_W Shift上下（Home→F17、End→F11）を実コードに合わせ訂正 |
 
 ══════════════════════════════════════════════
