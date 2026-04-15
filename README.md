@@ -293,6 +293,7 @@
 | 2026-04-15 | Split BLE Latency を 0 に設定（L→R 間のデフォルト 30 パケット遅延許容を排除）、Split BLE Timeout を 600 に設定（ホスト向けと統一） |
 | 2026-04-15 | ポインタ加速カーブを修正。max-factor: 150000→8000 / speed-max: 30000→2000 / min-factor: 500→700。speed-max が高すぎてカーブが機能していなかった問題を解消 |
 | 2026-04-15 | R・L両側で `CONFIG_LOG=n` を設定。ログサブシステムを無効化し、CPU・フラッシュ消費を削減（デバッグ時は `CONFIG_LOG=y / CONFIG_ZMK_LOG_LEVEL=4` に戻す） |
+| 2026-04-15 | `CONFIG_ZMK_STUDIO=n` に変更。Studio は調整時のみ有効化（`CONFIG_ZMK_STUDIO=y / CONFIG_ZMK_STUDIO_LOCKING=n`）し、通常稼働時のオーバーヘッドを削減 |
 
 ══════════════════════════════════════════════
 
