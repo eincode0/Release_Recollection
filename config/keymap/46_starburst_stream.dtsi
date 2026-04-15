@@ -1,36 +1,34 @@
 /* ============================================================
- * 42_gestures_media.dtsi — メディア・輝度ジェスチャー (gB)
+ * 46_starburst_stream.dtsi — SWORD SKILL : STARBURST STREAM  [ KEY : D ]
  *
  * behaviors { } の内側でインクルードされる。
- *   gB: 輝度 / 音量 / メディア操作系（B キー長押し）
+ * Mission Control / 輝度調整 / スペース移動系（D キー長押し）
  * ============================================================ */
 
-/* --- gB: メディア・輝度操作 --- */
-
-gB_up: gB_up {
+gD_up: gD_up {
     compatible = "zmk,behavior-mod-morph";
     #binding-cells = <0>;
     mods = <(MOD_LSFT|MOD_RSFT)>;
-    bindings = <&kp C_BRI_UP>, <&kp F13>;
+    bindings = <&kp LC(UP_ARROW)>, <&kp F12>;
 };
 
-gB_down: gB_down {
+gD_down: gD_down {
     compatible = "zmk,behavior-mod-morph";
     #binding-cells = <0>;
     mods = <(MOD_LSFT|MOD_RSFT)>;
-    bindings = <&kp C_BRI_DN>, <&kp C_MUTE>;
+    bindings = <&kp LG(H)>, <&kp LC(DOWN_ARROW)>;
 };
 
-gB_left: gB_left {
+gD_left: gD_left {
     compatible = "zmk,behavior-mod-morph";
     #binding-cells = <0>;
     mods = <(MOD_LSFT|MOD_RSFT)>;
-    bindings = <&kp C_VOL_DN>, <&kp F19>;
+    bindings = <&kp F14>, <&kp F11>;
 };
 
-gB_right: gB_right {
+gD_right: gD_right {
     compatible = "zmk,behavior-mod-morph";
     #binding-cells = <0>;
     mods = <(MOD_LSFT|MOD_RSFT)>;
-    bindings = <&kp C_VOL_UP>, <&kp F18>;
+    bindings = <&kp F15>, <&kp F20>;
 };

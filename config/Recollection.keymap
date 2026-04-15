@@ -49,14 +49,15 @@
         /* --- レイヤー制御系 behavior --- */
         #include "keymap/31_behaviors_layers.dtsi"
 
-        /* --- ジェスチャー behavior --- */
-        #include "keymap/40_gestures_edit.dtsi"
-        #include "keymap/41_gestures_capture.dtsi"
-        #include "keymap/42_gestures_media.dtsi"
-        #include "keymap/43_gestures_tabs.dtsi"
-        #include "keymap/44_gestures_apps.dtsi"
-        #include "keymap/45_gestures_space.dtsi"
-        #include "keymap/46_gestures_history.dtsi"
+        /* --- ジェスチャー behavior (剣技) --- */
+        #include "keymap/40_sharp_nail.dtsi"
+        #include "keymap/41_vorpal_strike.dtsi"
+        #include "keymap/42_the_eclipse.dtsi"
+        #include "keymap/43_howling_octave.dtsi"
+        #include "keymap/44_sonic_leap.dtsi"
+        #include "keymap/45_vertical_square.dtsi"
+        #include "keymap/46_starburst_stream.dtsi"
+        #include "keymap/47_horizontal.dtsi"
     };
 
     keymap {

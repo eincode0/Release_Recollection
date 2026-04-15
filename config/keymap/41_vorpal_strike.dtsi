@@ -1,36 +1,34 @@
 /* ============================================================
- * 43_gestures_tabs.dtsi — タブ操作ジェスチャー (gT)
+ * 41_vorpal_strike.dtsi — SWORD SKILL : VORPAL STRIKE  [ KEY : R ]
  *
  * behaviors { } の内側でインクルードされる。
- *   gT: タブ開閉・移動・ズーム系（T キー長押し）
+ * テキスト選択範囲操作系（R キー長押し）
  * ============================================================ */
 
-/* --- gT: タブ操作 --- */
-
-gT_up: gT_up {
+gR_up: gR_up {
     compatible = "zmk,behavior-mod-morph";
     #binding-cells = <0>;
     mods = <(MOD_LSFT|MOD_RSFT)>;
-    bindings = <&kp LG(T)>, <&kp LG(R)>;
+    bindings = <&kp LG(A)>, <&kp LG(LS(UP_ARROW))>;
 };
 
-gT_down: gT_down {
+gR_down: gR_down {
     compatible = "zmk,behavior-mod-morph";
     #binding-cells = <0>;
     mods = <(MOD_LSFT|MOD_RSFT)>;
-    bindings = <&kp LG(W)>, <&kp LG(F)>;
+    bindings = <&kp LG(X)>, <&kp LG(LS(DOWN_ARROW))>;
 };
 
-gT_left: gT_left {
+gR_left: gR_left {
     compatible = "zmk,behavior-mod-morph";
     #binding-cells = <0>;
     mods = <(MOD_LSFT|MOD_RSFT)>;
-    bindings = <&kp LC(LS(TAB))>, <&kp LG(MINUS)>;
+    bindings = <&kp LA(LS(LEFT_ARROW))>, <&kp LG(LS(LEFT_ARROW))>;
 };
 
-gT_right: gT_right {
+gR_right: gR_right {
     compatible = "zmk,behavior-mod-morph";
     #binding-cells = <0>;
     mods = <(MOD_LSFT|MOD_RSFT)>;
-    bindings = <&kp LC(TAB)>, <&kp LG(PLUS)>;
+    bindings = <&kp LA(LS(RIGHT_ARROW))>, <&kp LG(LS(RIGHT_ARROW))>;
 };

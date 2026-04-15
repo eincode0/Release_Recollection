@@ -1,36 +1,34 @@
 /* ============================================================
- * 41_gestures_capture.dtsi — スクリーンショットジェスチャー (gS)
+ * 44_sonic_leap.dtsi — SWORD SKILL : SONIC LEAP  [ KEY : T ]
  *
  * behaviors { } の内側でインクルードされる。
- *   gS: スクリーンショット系（S キー長押し）
+ * タブ開閉・移動・ズーム系（T キー長押し）
  * ============================================================ */
 
-/* --- gS: スクリーンショット --- */
-
-gS_up: gS_up {
+gT_up: gT_up {
     compatible = "zmk,behavior-mod-morph";
     #binding-cells = <0>;
     mods = <(MOD_LSFT|MOD_RSFT)>;
-    bindings = <&kp LG(LS(NUMBER_3))>, <&kp LC(LG(LS(NUMBER_3)))>;
+    bindings = <&kp LG(T)>, <&kp LG(R)>;
 };
 
-gS_down: gS_down {
+gT_down: gT_down {
     compatible = "zmk,behavior-mod-morph";
     #binding-cells = <0>;
     mods = <(MOD_LSFT|MOD_RSFT)>;
-    bindings = <&kp ESC>, <&kp ESC>;
+    bindings = <&kp LG(W)>, <&kp LG(F)>;
 };
 
-gS_left: gS_left {
+gT_left: gT_left {
     compatible = "zmk,behavior-mod-morph";
     #binding-cells = <0>;
     mods = <(MOD_LSFT|MOD_RSFT)>;
-    bindings = <&kp LG(LS(NUMBER_4))>, <&kp LC(LG(LS(NUMBER_4)))>;
+    bindings = <&kp LC(LS(TAB))>, <&kp LG(MINUS)>;
 };
 
-gS_right: gS_right {
+gT_right: gT_right {
     compatible = "zmk,behavior-mod-morph";
     #binding-cells = <0>;
     mods = <(MOD_LSFT|MOD_RSFT)>;
-    bindings = <&kp LG(LS(NUMBER_5))>, <&kp LG(LS(NUMBER_5))>;
+    bindings = <&kp LC(TAB)>, <&kp LG(PLUS)>;
 };
