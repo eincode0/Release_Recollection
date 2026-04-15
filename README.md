@@ -176,7 +176,7 @@
 |---|---|---|---|---|---|
 | 2 ARROW_SIGN | `Cmd+A` | `Cmd+V` | `Cmd+X` | `Cmd+C` | あり |
 | 3 NUM | `Undo` | `Redo` | `BS` | `Del` | あり |
-| 6 Bluetooth | 前のトラック(`C_PREV`) | 次のトラック(`C_NEXT`) | 音量下げる(`C_VOL_DN`) | 音量上げる(`C_VOL_UP`) | なし |
+| 6 Bluetooth | 再生/停止(`C_PP`) | 停止(`C_STOP`) | 前のトラック(`C_PREV`) | 次のトラック(`C_NEXT`) | なし |
 
 > **[ SYSTEM ]** **one_shot** — 有効時、センサーの動きに対してキーが 1 度だけ送出される。
 > 押しっぱなし状態にはならない。連続入力が不要な操作に適用される。
@@ -286,14 +286,10 @@
 | 2026-04-14 | `zmk-scroll-snap` モジュール導入。SCROLLレイヤー（L5）でX/Y軸スナップを有効化し、縦スクロール時の横流れを抑制 |
 | 2026-04-14 | GESTURE_M → GESTURE_B リネーム（トリガーキー M → B）。gB_up=F19 / gB_down=Mute に変更。Bluetooth レイヤー（L6）の arrows-alt-profiles をメディア操作（C_PREV/C_NEXT/C_VOL_DN/C_VOL_UP）へ変更。ドライバに Consumer page メディアキー対応追加 |
 | 2026-04-14 | `force-awake-4ms-mode` を削除。BLE 接続インターバル 7.5ms に対し 4ms サンプリングが生じさせていたポインタジャンプを解消。`force-awake` は維持しスリープ遅延ゼロを継続 |
-| 2026-04-15 | Bluetooth レイヤー（L6）の arrows-profiles 上下を変更。上: `MissionCtrl` → `強制終了(Cmd+Opt+Esc)` / 下: `AppExpose` → `画面ロック(Ctrl+Cmd+Q)`。ドライバにキーコード 1068/1069 追加 |
+| 2026-04-15 | Bluetooth レイヤー（L6）の arrows-profiles 上下を変更。上: `MissionCtrl` → `強制終了(Cmd+Opt+Esc)` / 下: `AppExpose` → `画面ロック(Ctrl+Cmd+Q)` |
 | 2026-04-15 | GESTURE_B の通常ジェスチャーを刷新。上: 輝度UP / 下: 輝度DN / 左: 音量DN / 右: 音量UP に変更 |
-| 2026-04-15 | README 誤記修正。GESTURE_D 左右通常キー（F14↔F15 入れ替わり）、GESTURE_W Shift上下（Home→F17、End→F11）を実コードに合わせ訂正 |
-| 2026-04-15 | README 誤記修正。Experimental Conn の対象（L側→R側 Central）、Insomnia pingInterval（5秒→3秒）を実設定値に合わせ訂正 |
-| 2026-04-15 | Split BLE Latency を 0 に設定（L→R 間のデフォルト 30 パケット遅延許容を排除）、Split BLE Timeout を 600 に設定（ホスト向けと統一） |
-| 2026-04-15 | ポインタ加速カーブを修正。max-factor: 150000→8000 / speed-max: 30000→2000 / min-factor: 500→700。speed-max が高すぎてカーブが機能していなかった問題を解消 |
-| 2026-04-15 | R・L両側で `CONFIG_LOG=n` を設定。ログサブシステムを無効化し、CPU・フラッシュ消費を削減（デバッグ時は `CONFIG_LOG=y / CONFIG_ZMK_LOG_LEVEL=4` に戻す） |
-| 2026-04-15 | `CONFIG_ZMK_STUDIO=n` に変更。Studio は調整時のみ有効化（`CONFIG_ZMK_STUDIO=y / CONFIG_ZMK_STUDIO_LOCKING=n`）し、通常稼働時のオーバーヘッドを削減 |
+| 2026-04-15 | Bluetooth レイヤー（L6）arrows-alt-profiles を変更。上: 再生/停止(C_PP) / 下: 停止(C_STOP) / 左: 前トラック(C_PREV) / 右: 次トラック(C_NEXT) |
+| 2026-04-15 | README 誤記修正。GESTURE_D 左右（F15↔F14 入れ替え）、GESTURE_W Shift上下（Home→F17、End→F11）を実コードに合わせ訂正 |
 
 ══════════════════════════════════════════════
 
