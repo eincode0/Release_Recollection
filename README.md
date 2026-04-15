@@ -168,7 +168,7 @@
 |---|---|---|---|---|---|---|
 | 2 ARROW_SIGN | 選択↑ | 選択↓ | 選択← | 選択→ | なし | 自動リピートなし |
 | 3 NUM | `↑` | `↓` | `←` | `→` | なし | 加速あり |
-| 6 Bluetooth | `MissionCtrl` | `AppExpose` | `LANG2(英数)` | `LANG1(かな)` | あり | 斜め無効・余り有効 |
+| 6 Bluetooth | `強制終了(Cmd+Opt+Esc)` | `画面ロック(Ctrl+Cmd+Q)` | `LANG2(英数)` | `LANG1(かな)` | あり | 斜め無効・余り有効 |
 
 ### ◆ ALT FORMATION ── Shift 同時押し時（arrows-alt-profiles）
 
@@ -286,6 +286,7 @@
 | 2026-04-14 | `zmk-scroll-snap` モジュール導入。SCROLLレイヤー（L5）でX/Y軸スナップを有効化し、縦スクロール時の横流れを抑制 |
 | 2026-04-14 | GESTURE_M → GESTURE_B リネーム（トリガーキー M → B）。gB_up=F19 / gB_down=Mute に変更。Bluetooth レイヤー（L6）の arrows-alt-profiles をメディア操作（C_PREV/C_NEXT/C_VOL_DN/C_VOL_UP）へ変更。ドライバに Consumer page メディアキー対応追加 |
 | 2026-04-14 | `force-awake-4ms-mode` を削除。BLE 接続インターバル 7.5ms に対し 4ms サンプリングが生じさせていたポインタジャンプを解消。`force-awake` は維持しスリープ遅延ゼロを継続 |
+| 2026-04-15 | Bluetooth レイヤー（L6）の arrows-profiles 上下を変更。上: `MissionCtrl` → `強制終了(Cmd+Opt+Esc)` / 下: `AppExpose` → `画面ロック(Ctrl+Cmd+Q)`。ドライバにキーコード 1068/1069 追加 |
 
 ══════════════════════════════════════════════
 
