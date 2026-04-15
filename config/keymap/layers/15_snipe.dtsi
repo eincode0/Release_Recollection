@@ -1,0 +1,12 @@
+/* ============================================================
+ * layers/15_snipe.dtsi — [ Synthesis 15 ] SNIPE
+ * ============================================================ */
+
+SNIPE {
+    bindings = <
+&trans  &trans           &trans           &trans          &trans                      &trans           &trans           &trans          &trans          &trans
+&trans  &trans           &msc MOVE_Y(8)   &trans          &trans  &trans      &trans  &msc MOVE_X(-8)  &msc MOVE_Y(-8)  &msc MOVE_Y(8)  &msc MOVE_X(8)  &trans
+&trans  &msc MOVE_X(-8)  &msc MOVE_Y(-8)  &msc MOVE_X(8)  &trans  &trans      &trans  &trans           &trans           &trans          &trans          &trans
+&trans  &trans           &trans           &trans          &trans  &trans      &trans  &trans                                                            &trans
+    >;
+};
