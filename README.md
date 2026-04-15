@@ -243,7 +243,7 @@
 
 | 設定 | 値 | 対象 | 効果 |
 |---|---|---|---|
-| Experimental Conn | L側(Dark_Repulser)のみ有効、R側無効 | R・L両側 | L側で接続安定化のため有効化 |
+| Experimental Conn | R側(Elucidator)のみ有効、L側無効 | R側（Central） | Central側でホスト向けBLE接続安定化のため有効化 |
 | NFCT_PINS_AS_GPIOS | 有効 | R・L両側 | NFC無線とBLEの干渉防止（安定版2つともあり） |
 | BT_GAP_AUTO_UPDATE_CONN_PARAMS | 有効 | R・L両側 | 接続後に自動パラメータ再交渉（kabutokoma準拠） |
 | BT_CONN_PARAM_UPDATE_TIMEOUT | 1000ms | R・L両側 | 接続から1秒後にパラメータ更新要求 |
@@ -254,7 +254,7 @@
 | BT Max Paired | 5 | R側（Central） | プロファイル切替用（Mac/iPhone等） |
 | BT_PERIPHERAL_PREF_MIN_INT | 6 (7.5ms) | R側 | 接続インターバル下限。前回MAX_INT=12固定は削除済み→今回は範囲指定で再試験 |
 | BT_PERIPHERAL_PREF_MAX_INT | 6 (7.5ms) | R・L両側 | 接続インターバル上限（L側もR側と同期） |
-| Insomnia pingInterval | 5秒 | R・L両側 | keepaliveを高頻度化（L側にも追加） |
+| Insomnia pingInterval | 3秒 | R・L両側 | keepaliveを高頻度化（L側にも追加） |
 
 ### MOTION SENSOR CONFIG ── トラックボールセンサー（Elucidator.conf）
 
@@ -289,6 +289,7 @@
 | 2026-04-15 | Bluetooth レイヤー（L6）の arrows-profiles 上下を変更。上: `MissionCtrl` → `強制終了(Cmd+Opt+Esc)` / 下: `AppExpose` → `画面ロック(Ctrl+Cmd+Q)`。ドライバにキーコード 1068/1069 追加 |
 | 2026-04-15 | GESTURE_B の通常ジェスチャーを刷新。上: 輝度UP / 下: 輝度DN / 左: 音量DN / 右: 音量UP に変更 |
 | 2026-04-15 | README 誤記修正。GESTURE_D 左右通常キー（F14↔F15 入れ替わり）、GESTURE_W Shift上下（Home→F17、End→F11）を実コードに合わせ訂正 |
+| 2026-04-15 | README 誤記修正。Experimental Conn の対象（L側→R側 Central）、Insomnia pingInterval（5秒→3秒）を実設定値に合わせ訂正 |
 
 ══════════════════════════════════════════════
 
