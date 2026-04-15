@@ -291,6 +291,7 @@
 | 2026-04-15 | README 誤記修正。GESTURE_D 左右通常キー（F14↔F15 入れ替わり）、GESTURE_W Shift上下（Home→F17、End→F11）を実コードに合わせ訂正 |
 | 2026-04-15 | README 誤記修正。Experimental Conn の対象（L側→R側 Central）、Insomnia pingInterval（5秒→3秒）を実設定値に合わせ訂正 |
 | 2026-04-15 | Split BLE Latency を 0 に設定（L→R 間のデフォルト 30 パケット遅延許容を排除）、Split BLE Timeout を 600 に設定（ホスト向けと統一） |
+| 2026-04-15 | ホスト BLE 接続不可のため `7011ac2` で追加した接続パラメータブロック（`BT_PERIPHERAL_PREF_*` / `ZMK_SPLIT_BLE_PREF_*`）を一時無効化。ZMK デフォルト値に戻して接続を復旧 |
 | 2026-04-15 | ポインタ加速カーブを修正。max-factor: 150000→8000 / speed-max: 30000→2000 / min-factor: 500→700。speed-max が高すぎてカーブが機能していなかった問題を解消 |
 | 2026-04-15 | R・L両側で `CONFIG_LOG=n` を設定。ログサブシステムを無効化し、CPU・フラッシュ消費を削減（デバッグ時は `CONFIG_LOG=y / CONFIG_ZMK_LOG_LEVEL=4` に戻す） |
 | 2026-04-15 | `CONFIG_ZMK_STUDIO=n` に変更。Studio は調整時のみ有効化（`CONFIG_ZMK_STUDIO=y / CONFIG_ZMK_STUDIO_LOCKING=n`）し、通常稼働時のオーバーヘッドを削減 |
