@@ -290,6 +290,7 @@
 | 2026-04-15 | GESTURE_B の通常ジェスチャーを刷新。上: 輝度UP / 下: 輝度DN / 左: 音量DN / 右: 音量UP に変更 |
 | 2026-04-15 | Bluetooth レイヤー（L6）arrows-alt-profiles を変更。上: 再生/停止(C_PP) / 下: 停止(C_STOP) / 左: 前トラック(C_PREV) / 右: 次トラック(C_NEXT) |
 | 2026-04-15 | README 誤記修正。GESTURE_D 左右（F15↔F14 入れ替え）、GESTURE_W Shift上下（Home→F17、End→F11）を実コードに合わせ訂正 |
+| 2026-04-17 | `CONFIG_ZMK_SPLIT_BLE_PREF_LATENCY=0` / `CONFIG_ZMK_SPLIT_BLE_PREF_TIMEOUT=600` を削除。ホスト BLE 接続不可の原因となっていたスプリット接続パラメータを排除 |
 
 ══════════════════════════════════════════════
 
