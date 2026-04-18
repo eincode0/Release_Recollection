@@ -38,9 +38,9 @@ layers:
   - LCTRL
   - LEFT GUI
   - LEFT ALT
-  - {t: SPACE, h: NUM}
-  - '&mkp MB1'
   - {t: CAPS, h: ARROW_SIGN}
+  - '&mkp MB1'
+  - {t: SPACE, h: NUM}
   - BACKSPACE
   - {t: ENTER, h: FUNCTION}
   - {t: DELETE, h: LEFT ALT}
@@ -126,9 +126,9 @@ layers:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
-  - {t: default, h: toggle}
+  - {t: default, h: toggle, type: held}
   - {t: ▽, type: trans}
-  - {type: held}
+  - {t: ▽, type: trans}
   - BACKSPACE
   - ENTER
   - '|'
@@ -170,9 +170,9 @@ layers:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
-  - {type: held}
   - {t: ▽, type: trans}
-  - {t: default, h: toggle}
+  - {t: ▽, type: trans}
+  - {t: default, h: toggle, type: held}
   - BACKSPACE
   - ENTER
   - Gui+Z
