@@ -292,6 +292,7 @@
 | 2026-04-15 | README 誤記修正。GESTURE_D 左右（F15↔F14 入れ替え）、GESTURE_W Shift上下（Home→F17、End→F11）を実コードに合わせ訂正 |
 | 2026-04-17 | `CONFIG_ZMK_SPLIT_BLE_PREF_LATENCY=0` / `CONFIG_ZMK_SPLIT_BLE_PREF_TIMEOUT=600` を削除。ホスト BLE 接続不可の原因となっていたスプリット接続パラメータを排除 |
 | 2026-04-18 | デフォルトレイヤー（L0）親指行を変更。左親指内側: `SPACE(L3→NUM)` → `CAPS(L2→ARROW_SIGN)` / 親指エンコーダ右: `CAPS(L2)` → `SPACE(L3)` にスワップ |
+| 2026-04-18 | ジェスチャー縦横判定を改善。`zmk-mouse-gesture` をフォーク（`eincode0`）し `detect_direction()` を3:2比率に変更。斜め方向は判定せず蓄積継続することで誤判定を抑制 |
 
 ══════════════════════════════════════════════
 

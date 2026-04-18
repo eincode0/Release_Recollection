@@ -35,8 +35,8 @@ manifest:
       path: modules/zmk-listeners
 
     - name: zmk-mouse-gesture
-      remote: kot149
-      revision: v1
+      remote: eincode0
+      revision: c493b1657a5b319e89e6f063e81a30dc531b3c00
       path: modules/zmk-mouse-gesture
 
     - name: zmk-scroll-snap
