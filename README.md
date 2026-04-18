@@ -295,6 +295,7 @@
 | 2026-04-18 | ジェスチャー縦横判定を改善。`zmk-mouse-gesture` をフォーク（`eincode0`）し `detect_direction()` を3:2比率に変更。斜め方向は判定せず蓄積継続することで誤判定を抑制 |
 | 2026-04-18 | ビルド613以降のホスト BLE 不接続を修復。ビルド612の誤った削除を取り消し、`CONFIG_ZMK_SPLIT_BLE_PREF_LATENCY=0` / `CONFIG_ZMK_SPLIT_BLE_PREF_TIMEOUT=600` をビルド598相当で復活 |
 | 2026-04-18 | ホスト BLE 接続を恒久修復。動作する debug uf2 (USB Logging 有効版) との差分調査で `CONFIG_ZMK_USB_LOGGING=y` が BLE 接続維持に必要と判明し、両側で常時 ON 化 |
+| 2026-04-18 | デフォルトレイヤー（L0）親指行を再調整。`&lt 2 CAPS` と `&lt 3 SPACE` を入れ替え、さらに `&mkp MB1` とも入れ替え。最終配置は左から `&lt 2 ESC` / `&lt 3 SPACE` / `&mkp MB1`。tap 側を CAPS → ESC に変更し、エディタ/ダイアログ操作の即応性を強化 |
 
 ══════════════════════════════════════════════
 
