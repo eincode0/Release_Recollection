@@ -36,7 +36,7 @@ manifest:
 
     - name: zmk-mouse-gesture
       remote: eincode0
-      revision: c493b1657a5b319e89e6f063e81a30dc531b3c00
+      revision: efc89e1c3d758fd782c7bbea429161f0d1fddad3
       path: modules/zmk-mouse-gesture
 
     - name: zmk-scroll-snap
