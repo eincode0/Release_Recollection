@@ -300,7 +300,8 @@
 | 2026-04-18 | スリープ復帰直後のカーソル遅延を緩和。`CONFIG_PMW3610_ALT_RUN_DOWNSHIFT_TIME_MS` 1000→3000 / `CONFIG_PMW3610_ALT_REST1_SAMPLE_TIME_MS` 20→10。RUN モードの維持時間を延ばし、REST 中のサンプリング間隔を半減 |
 | 2026-04-18 | `force-awake` バグ修正。ZMK IDLE 遷移時に `pmw3610_set_performance(enabled=false)` が呼ばれ force-awake ビット（0xF0）がクリアされセンサーが REST1 へ降格、不定期な遅延の根本原因となっていた。`config->force_awake` が真なら ZMK activity 状態に関わらず常に 0xF0 をセットするよう修正（ドライバ `ae758b74`） |
 | 2026-04-20 | `CONFIG_ZMK_IDLE_TIMEOUT` を 30000ms → 300000ms（5分）に変更（両側）。ZMK が IDLE に入るのを遅らせてスプリット BLE 接続のアイドル化を抑制し、動かし始めの遅延を改善 |
-| 2026-04-20 | USB_LOGGING 依存剥離の切り分けビルド②。`USB_LOGGING=n` + USB スタック系 3 点（`USB_DEVICE_STACK` / `USB_CDC_ACM` / `USB_DEVICE_INITIALIZE_AT_BOOT`）のみ明示。LOG サブシステムは無し。BLE 接続が戻れば「LOG ではなく USB 初期化タイミング」が真因と特定 |
+| 2026-04-20 | USB_LOGGING 依存剥離の切り分けビルド②。`USB_LOGGING=n` + USB スタック系 3 点（`USB_DEVICE_STACK` / `USB_CDC_ACM` / `USB_DEVICE_INITIALIZE_AT_BOOT`）のみ明示。LOG サブシステムは無し → BLE 接続回復せず。USB 初期化タイミング単独は真因ではないと判定 |
+| 2026-04-20 | USB_LOGGING 依存剥離の切り分けビルド③。`USB_LOGGING=n` + `CONFIG_LOG=y` のみ明示。USB スタックは無し。BLE 接続が戻れば「LOG サブシステム（処理スレッド/スケジューラ挙動）」が真因と特定 |
 
 ══════════════════════════════════════════════
 
