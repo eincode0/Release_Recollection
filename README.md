@@ -299,6 +299,7 @@
 | 2026-04-18 | デフォルトレイヤー（L0）親指行を再調整。`&lt 2 CAPS` と `&lt 3 SPACE` を入れ替え、さらに `&mkp MB1` とも入れ替え。最終配置は左から `&lt 2 ESC` / `&lt 3 SPACE` / `&mkp MB1`。tap 側を CAPS → ESC に変更し、エディタ/ダイアログ操作の即応性を強化 |
 | 2026-04-18 | スリープ復帰直後のカーソル遅延を緩和。`CONFIG_PMW3610_ALT_RUN_DOWNSHIFT_TIME_MS` 1000→3000 / `CONFIG_PMW3610_ALT_REST1_SAMPLE_TIME_MS` 20→10。RUN モードの維持時間を延ばし、REST 中のサンプリング間隔を半減 |
 | 2026-04-18 | `force-awake` バグ修正。ZMK IDLE 遷移時に `pmw3610_set_performance(enabled=false)` が呼ばれ force-awake ビット（0xF0）がクリアされセンサーが REST1 へ降格、不定期な遅延の根本原因となっていた。`config->force_awake` が真なら ZMK activity 状態に関わらず常に 0xF0 をセットするよう修正（ドライバ `ae758b74`） |
+| 2026-04-20 | `CONFIG_ZMK_IDLE_TIMEOUT` を 30000ms → 300000ms（5分）に変更（両側）。ZMK が IDLE に入るのを遅らせてスプリット BLE 接続のアイドル化を抑制し、動かし始めの遅延を改善 |
 
 ══════════════════════════════════════════════
 
