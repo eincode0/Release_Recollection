@@ -300,6 +300,7 @@
 | 2026-04-18 | スリープ復帰直後のカーソル遅延を緩和。`CONFIG_PMW3610_ALT_RUN_DOWNSHIFT_TIME_MS` 1000→3000 / `CONFIG_PMW3610_ALT_REST1_SAMPLE_TIME_MS` 20→10。RUN モードの維持時間を延ばし、REST 中のサンプリング間隔を半減 |
 | 2026-04-18 | `force-awake` バグ修正。ZMK IDLE 遷移時に `pmw3610_set_performance(enabled=false)` が呼ばれ force-awake ビット（0xF0）がクリアされセンサーが REST1 へ降格、不定期な遅延の根本原因となっていた。`config->force_awake` が真なら ZMK activity 状態に関わらず常に 0xF0 をセットするよう修正（ドライバ `ae758b74`） |
 | 2026-04-20 | `CONFIG_ZMK_IDLE_TIMEOUT` を 30000ms → 300000ms（5分）に変更（両側）。ZMK が IDLE に入るのを遅らせてスプリット BLE 接続のアイドル化を抑制し、動かし始めの遅延を改善 |
+| 2026-04-20 | USB_LOGGING 依存の BLE 接続を剥離する切り分けビルド。`CONFIG_ZMK_USB_LOGGING=y` 必須の真因は USB_LOGGING が裏で `MAIN_STACK_SIZE` 等を 2048 へ引き上げ BLE 初期化のスタック溢れを救っていた仮説。両側で `USB_LOGGING=n` に戻しつつ `CONFIG_MAIN_STACK_SIZE=2048` / `CONFIG_SYSTEM_WORKQUEUE_STACK_SIZE=2048` / `CONFIG_BT_RX_STACK_SIZE=2048` を明示指定 |
 
 ══════════════════════════════════════════════
 
