@@ -301,6 +301,7 @@
 | 2026-04-18 | `force-awake` バグ修正。ZMK IDLE 遷移時に `pmw3610_set_performance(enabled=false)` が呼ばれ force-awake ビット（0xF0）がクリアされセンサーが REST1 へ降格、不定期な遅延の根本原因となっていた。`config->force_awake` が真なら ZMK activity 状態に関わらず常に 0xF0 をセットするよう修正（ドライバ `ae758b74`） |
 | 2026-04-20 | `CONFIG_ZMK_IDLE_TIMEOUT` を 30000ms → 300000ms（5分）に変更（両側）。ZMK が IDLE に入るのを遅らせてスプリット BLE 接続のアイドル化を抑制し、動かし始めの遅延を改善 |
 | 2026-04-20 | ホスト BLE 接続維持の真因を特定し `USB_LOGGING` 依存を剥離。`CONFIG_ZMK_USB_LOGGING=y` 必須（2026-04-18, `2839600`）の正体は、同シンボルが裏で `select` していた **`CONFIG_LOG=y`（ログ処理スレッド）** が BLE 初期化のスケジューラ挙動を救っていたことと判明。USB スタック 3 点（`USB_DEVICE_STACK` / `USB_CDC_ACM` / `USB_DEVICE_INITIALIZE_AT_BOOT`）は不要と切り分け確定。両側で `USB_LOGGING=n` + `CONFIG_LOG=y` 構成へ移行し、USB CDC ACM の不要列挙を排除 |
+| 2026-04-21 | `west.yml` の pmw3610-driver revision を `c8ccf3f` → `74c851e` に更新。`ae758b74` の force-awake 常時維持修正がファームウェアに未反映だった（west.yml がそれより古い SHA を指していた）ため、修正を確実に適用。これが「たまに遅延する」の真因 |
 
 ══════════════════════════════════════════════
 
