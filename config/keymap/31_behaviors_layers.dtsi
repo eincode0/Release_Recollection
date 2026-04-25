@@ -8,6 +8,7 @@
 smart_snipe: smart_snipe {
     compatible = "zmk,behavior-auto-layer";
     #binding-cells = <1>;
+    continue-list = <>;
     ignore-modifiers;
 };
 
