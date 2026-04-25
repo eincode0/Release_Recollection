@@ -668,7 +668,7 @@ layers:
   - {t: T, h: GESTURE_T}
   - Y
   - U
-  - {t: I, h: SCROLL}
+  - {t: I, h: SNIPE_SCROLL}
   - O
   - {t: P, h: RIGHT SHIFT}
   - {t: A, h: GESTURE_A}
@@ -680,7 +680,7 @@ layers:
   - '@'
   - H
   - J
-  - {t: K, h: SCROLL}
+  - {t: K, h: SNIPE_SCROLL}
   - {t: L, h: MOUSE}
   - {t: '-', h: LEFT GUI}
   - Z
@@ -748,6 +748,50 @@ layers:
   - BACKSPACE
   - ENTER
   - {t: NUM_SMART, h: toggle}
+  SNIPE_SCROLL:
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {type: held}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
 combos:
 - p: [7, 8]
   k: {t: SCROLL, h: toggle}
