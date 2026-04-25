@@ -75,10 +75,6 @@
             >;
         };
 
-        snipe_scroller {
-            layers = <17>;
-            input-processors = <&zip_xy_to_scroll_mapper>;
-        };
 
         gesture_e { layers = <7>;  input-processors = <&zip_gE &tb_drop_all 0 1>; };
         gesture_r { layers = <8>;  input-processors = <&zip_gR &tb_drop_all 0 1>; };
