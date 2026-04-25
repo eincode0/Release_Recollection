@@ -308,6 +308,8 @@
 | 2026-04-25 | `conditional_layers` で SNIPE レイヤー（L15）への同時ホールド起動を追加。左親指 `&lt 2 ESC`（L2）と `&lt 3 SPACE`（L3）を同時ホールドで自動的に L15 が展開される。V キーのジェスチャーホールド（`gesture_mo_kp 15 V`）を廃止し `&kp V` に戻す |
 | 2026-04-25 | SNIPE（L15）をスマートスネイプ化。Tab ダブルタップで起動する `smart_snipe` behavior を追加。レイヤー内容をデフォルト複製に変更し、I/K スクロールジェスチャーを新設の SNIPE_SCROLL（L17）へ向けた。SNIPE_SCROLL は overlay の `snipe_scroller` によりトラックボールを低速スクロールに変換する |
 | 2026-04-25 | `CONFIG_ZMK_KEYMAP_LAYERS_MAX=18` を両側 .conf に追加。L17 追加によりデフォルト上限（16）を超えていたため BT 接続不可になっていた問題を修正 |
+| 2026-04-26 | 〈Arrows Profile〉拡張 — pmw3610 driver にスクロール出力経路を追加（`f1d9b30`）。コード `2000`(up)/`2001`(down)/`2002`(left)/`2003`(right) を `pmw3610_send_arrow_key` で受け取ると HID キー経路をバイパスし `input_report_rel(REL_WHEEL/REL_HWHEEL)` を直接発行 |
+| 2026-04-26 | SNIPE（L15）の K を `&lt 17 K` に変更。K ホールドで SNIPE_SCROLL（L17）へ遷移し、トラックボール動作が arrows-profiles 経由で純正スクロールホイールイベントになる（tick 40ms）。`input-listener` 側を一切触らない構成のため BT 接続への影響なし |
 
 ══════════════════════════════════════════════
 
