@@ -8,7 +8,7 @@
 smart_snipe: smart_snipe {
     compatible = "zmk,behavior-auto-layer";
     #binding-cells = <1>;
-    continue-list = <LSHFT RSHFT LCTRL RCTRL LALT RALT LGUI RGUI>;
+    continue-list = <LSHFT RSHFT LCTRL RCTRL LALT RALT LGUI RGUI I K>;
     ignore-modifiers;
 };
 
