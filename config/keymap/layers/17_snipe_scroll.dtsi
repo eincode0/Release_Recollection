@@ -1,0 +1,16 @@
+/* ============================================================
+ * layers/17_snipe_scroll.dtsi — [ Synthesis 17 ] SNIPE_SCROLL
+ *
+ * SNIPE（L15）内の I/K ジェスチャーから起動するスクロールレイヤー。
+ * キーはすべて &trans でデフォルトへ透過。
+ * トラックボールの X/Y → スクロール変換は overlay の snipe_scroller が担う。
+ * ============================================================ */
+
+SNIPE_SCROLL {
+    bindings = <
+&trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans                          &trans
+    >;
+};
