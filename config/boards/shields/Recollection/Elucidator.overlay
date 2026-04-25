@@ -75,6 +75,11 @@
             >;
         };
 
+        snipe_scroller {
+            layers = <17>;
+            input-processors = <&zip_xy_to_scroll_mapper>;
+        };
+
 
         gesture_e { layers = <7>;  input-processors = <&zip_gE &tb_drop_all 0 1>; };
         gesture_r { layers = <8>;  input-processors = <&zip_gR &tb_drop_all 0 1>; };
@@ -115,7 +120,7 @@
         irq-gpios    = <&gpio0 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
         cpi = <3200>;
         force-awake;
-        snipe-layers  = <15>;
+        snipe-layers  = <15 17>;
         scroll-layers = <5>;
         arrows-profiles = < 2 1020 1021 1023 1022 40 0 1 0 3 103 108 105 106 40 0 1 0 6 1068 1069 58 90 200 1 1 1 >;
         arrows-alt-profiles = < 3 1000 1004 14 111 120 0 1 1 2 1005 1003 1001 1002 120 0 1 1 6 164 166 165 163 200 0 1 0 >;
