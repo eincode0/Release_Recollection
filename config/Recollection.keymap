@@ -89,5 +89,6 @@
         #include "keymap/layers/14_gesture_w.dtsi"
         #include "keymap/layers/15_snipe.dtsi"
         #include "keymap/layers/16_num_smart.dtsi"
+        #include "keymap/layers/17_snipe_scroll.dtsi"
     };
 };
