@@ -8,8 +8,17 @@
 smart_snipe: smart_snipe {
     compatible = "zmk,behavior-auto-layer";
     #binding-cells = <1>;
-    continue-list = <LSHFT RSHFT LCTRL RCTRL LALT RALT LGUI RGUI>;
+    continue-list = <LSHFT RSHFT LCTRL RCTRL LALT RALT LGUI RGUI I K>;
     ignore-modifiers;
+};
+
+ht_snipe: ht_snipe {
+    compatible = "zmk,behavior-hold-tap";
+    #binding-cells = <2>;
+    flavor = "tap-preferred";
+    tapping-term-ms = <200>;
+    quick-tap-ms = <150>;
+    bindings = <&smart_snipe>, <&kp>;
 };
 
 lt_to_layer_0: lt_to_layer_0 {
