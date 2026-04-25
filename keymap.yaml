@@ -28,7 +28,7 @@ layers:
   - C
   - V
   - {t: B, h: GESTURE_B}
-  - TAB
+  - '&td_tab_snipe'
   - ':'
   - N
   - M
@@ -661,49 +661,49 @@ layers:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   SNIPE:
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - '&msc MOVE_Y(8)'
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - '&msc MOVE_X(-8)'
-  - '&msc MOVE_Y(-8)'
-  - '&msc MOVE_Y(8)'
-  - '&msc MOVE_X(8)'
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - '&msc MOVE_X(-8)'
-  - '&msc MOVE_Y(-8)'
-  - '&msc MOVE_X(8)'
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {type: held}
-  - {type: held}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
+  - {t: Q, h: LEFT SHIFT}
+  - {t: W, h: GESTURE_W}
+  - {t: E, h: GESTURE_E}
+  - {t: R, h: GESTURE_R}
+  - {t: T, h: GESTURE_T}
+  - Y
+  - U
+  - {t: I, h: SNIPE_SCROLL}
+  - O
+  - {t: P, h: RIGHT SHIFT}
+  - {t: A, h: GESTURE_A}
+  - {t: S, h: GESTURE_S}
+  - {t: D, h: GESTURE_D}
+  - F
+  - {t: G, h: Bluetooth}
+  - '&smart_num 16'
+  - '@'
+  - H
+  - J
+  - {t: K, h: SNIPE_SCROLL}
+  - {t: L, h: MOUSE}
+  - {t: '-', h: LEFT GUI}
+  - Z
+  - X
+  - C
+  - V
+  - {t: B, h: GESTURE_B}
+  - TAB
+  - ':'
+  - N
+  - M
+  - ','
+  - .
+  - {t: +, h: LEFT CONTROL}
+  - LCTRL
+  - LEFT GUI
+  - LEFT ALT
+  - {t: ESC, h: ARROW_SIGN, type: held}
+  - {t: SPACE, h: NUM, type: held}
+  - '&mkp MB1'
+  - BACKSPACE
+  - {t: ENTER, h: FUNCTION}
+  - {t: DELETE, h: LEFT ALT}
   NUM_SMART:
   - KP 5
   - KP 4
@@ -748,6 +748,50 @@ layers:
   - BACKSPACE
   - ENTER
   - {t: NUM_SMART, h: toggle}
+  SNIPE_SCROLL:
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {type: held}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
 combos:
 - p: [7, 8]
   k: {t: SCROLL, h: toggle}
