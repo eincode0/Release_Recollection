@@ -5,20 +5,6 @@
  * hold-tap でレイヤー0復帰するもの / auto-layer (smart_num)。
  * ============================================================ */
 
-smart_snipe: smart_snipe {
-    compatible = "zmk,behavior-auto-layer";
-    #binding-cells = <1>;
-    continue-list = <LSHFT RSHFT LCTRL RCTRL LALT RALT LGUI RGUI>;
-    ignore-modifiers;
-};
-
-td_tab_snipe: td_tab_snipe {
-    compatible = "zmk,behavior-tap-dance";
-    #binding-cells = <0>;
-    tapping-term-ms = <200>;
-    bindings = <&kp TAB>, <&smart_snipe 15>;
-};
-
 lt_to_layer_0: lt_to_layer_0 {
     compatible = "zmk,behavior-hold-tap";
     label = "LAYER_TAP_TO_0";
