@@ -20,9 +20,8 @@
  *   12  GESTURE_A
  *   13  GESTURE_D
  *   14  GESTURE_W
- *   15  SNIPE（デフォルト複製。K ホールドで L17 へ。CPI はドライバが自動低減）
+ *   15  SNIPE（デフォルト複製。CPI はドライバが自動低減）
  *   16  NUM_SMART（Smart Num: 数字キーで自動維持、それ以外で自動解除）
- *   17  SNIPE_SCROLL（K ホールド中のスクロール: arrows-profiles 2000-2003 で wheel 発行）
  *
  *  overlay 側で gesture を 7..14 に紐付け（gE/gR/gS/gB/gT/gA/gD/gW）
  * =============================== */
@@ -89,6 +88,5 @@
         #include "keymap/layers/14_gesture_w.dtsi"
         #include "keymap/layers/15_snipe.dtsi"
         #include "keymap/layers/16_num_smart.dtsi"
-        #include "keymap/layers/17_snipe_scroll.dtsi"
     };
 };
