@@ -72,5 +72,10 @@ manifest:
       revision: dfa7c69
       path: modules/zmk-auto-layer
 
+    - name: zmk-behavior-drag-lock            # ⑩〈Drag Lock〉MB1 トグル behavior
+      remote: eincode0
+      revision: main
+      path: modules/zmk-behavior-drag-lock
+
   self:
     path: config

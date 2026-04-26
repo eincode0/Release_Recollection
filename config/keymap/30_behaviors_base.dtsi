@@ -57,8 +57,8 @@ dragkey: dragkey {
 };
 
 /* 〈Drag Lock〉— ワンキーで MB1 押下/解放をトグル
- * 一度押し込めば剣の軌跡は維持される。実装は
- * src/behaviors/behavior_drag_lock.c (in-tree module)。 */
+ * 一度押し込めば剣の軌跡は維持される。実装は外部モジュール
+ * eincode0/zmk-behavior-drag-lock を west.yml で参照。 */
 drag_lock: drag_lock {
     compatible = "zmk,behavior-drag-lock";
     #binding-cells = <0>;
