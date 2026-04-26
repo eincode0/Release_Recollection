@@ -26,7 +26,7 @@ manifest:
 
     - name: zmk-pmw3610-driver
       remote: eincode0
-      revision: f1d9b30
+      revision: 071d9ff
       path: modules/zmk-pmw3610-driver
 
     - name: zmk-listeners
