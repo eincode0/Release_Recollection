@@ -320,6 +320,7 @@
 | 2026-04-26 | 通常カーソル CPI を `3200` → `2200` に変更（精密化）。`pointer_accel.sensor-dpi` も同値に同期。スクロール精度向上のため arrows-alt-profile L15 の tick を `40ms` → `80ms` に。1 ノッチあたり 2 倍の動きを要求するようになり、長文スクロールの誤差が減る |
 | 2026-04-26 | README 整備。SYNTHESIS REGISTRY から廃止済みの L17 SNIPE_SCROLL を削除、L15 SNIPE 説明に K ホールドスクロール機能を追記。ALT FORMATION テーブルに L15（SCROLL_UP/DOWN/LEFT/RIGHT）エントリ追加。CHARACTER PARAMETERS に CPI と tick の現行値を反映 |
 | 2026-04-26 | 〈Resolution Shift〉— ドライバに `cpi-layers` プロパティを新設（`60a0782`）。`<layer cpi ...>` の uint16 ペアで指定し、`zmk_layer_state_changed` イベントを購読してセンサー CPI を実行時切替。L4 MOUSE = 3200 を設定し、マウス操作時は通常 2200 から高 CPI に自動シフト |
+| 2026-04-26 | 〈Flick Burst〉— `pointer_accel` を強化。`max-factor` 8000 → 12000、`acceleration-exponent` 2 → 3。低速域は等倍を維持しつつ、強くフリックした瞬間だけ最大 ×12 まで一気に加速する曲線へ調整。精密操作と高速移動を両立 |
 
 ══════════════════════════════════════════════
 
