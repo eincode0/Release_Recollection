@@ -56,6 +56,15 @@ dragkey: dragkey {
     quick-tap-ms = <100>;
 };
 
+/* 〈Drag Lock〉— ワンキーで MB1 押下/解放をトグル
+ * 一度押し込めば剣の軌跡は維持される。実装は
+ * src/behaviors/behavior_drag_lock.c (in-tree module)。 */
+drag_lock: drag_lock {
+    compatible = "zmk,behavior-drag-lock";
+    label = "DRAG_LOCK";
+    #binding-cells = <0>;
+};
+
 g_shft: g_shft {
     compatible = "zmk,behavior-sticky-key";
     #binding-cells = <1>;

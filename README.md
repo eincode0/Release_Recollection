@@ -31,7 +31,7 @@
 | [ Synthesis 01 ] | FUNCTION | ファンクションキー・カーソル |
 | [ Synthesis 02 ] | ARROW_SIGN | 矢印・記号 |
 | [ Synthesis 03 ] | NUM | テンキー |
-| [ Synthesis 04 ] | MOUSE | マウス操作 |
+| [ Synthesis 04 ] | MOUSE | マウス操作（右親指最左に〈Drag Lock〉─ ワンキーで MB1 押下/解放トグル）|
 | [ Synthesis 05 ] | SCROLL | スクロール |
 | [ Synthesis 06 ] | Bluetooth | BT接続切替・bootloader |
 | [ Synthesis 07 ] | GESTURE_E | ジェスチャー（E キー長押し）|
@@ -325,6 +325,7 @@
 | 2026-04-26 | 〈Reflex Boost〉— キースキャンデバウンスを 5ms → 3ms に短縮（`CONFIG_ZMK_KSCAN_DEBOUNCE_PRESS_MS=3` / `RELEASE_MS=3` を両側）。キー押下/離しのレイテンシを直接削減 |
 | 2026-04-26 | 〈Adaptive Aura〉撤回 — `CONFIG_BT_CTLR_LE_POWER_CONTROL_SUPPORT` はプロンプトを持たない内部シンボル（select される側）で直接代入不可。xiao_ble は Nordic SDC を使うため経路自体が異なると判断し撤去 |
 | 2026-04-26 | 〈Bandwidth Surge〉— BLE ACL TX バッファを 3 → 10 / EVT RX バッファを 16 に増量（両側）。Zephyr の static assert（`BT_BUF_EVT_RX_COUNT > BT_BUF_ACL_TX_COUNT`）を満たすよう RX 側も同時に拡張。HID イベントバースト時のキュー詰まりを緩和 |
+| 2026-04-26 | 〈Drag Lock〉— C 実装の stateful behavior `zmk,behavior-drag-lock` を新設。`src/behaviors/behavior_drag_lock.c` で MB1 ホールド状態を内部フラグで保持し、ワンキー（L4 MOUSE 右親指最左、旧 `&drag_on` 位置）でトグル動作。リポジトリを ZMK in-tree module 化（`zephyr/module.yml` 拡張、`CMakeLists.txt` / `Kconfig` / `dts/bindings/behaviors/` を新設）|
 | 2026-04-26 | 〈Flick Burst〉さらに増幅。`max-factor` 12000 → 16000（×16）、`speed-max` 2000 → 1500。ピーク倍率を底上げしつつ、軽めのフリックでも最大倍率に届くよう感度を引き上げ |
 | 2026-04-26 | 〈Sealed Aim〉— SNIPE（L15）で `pointer_accel` をバイパスする per-layer override を追加。stock ZMK input-listener は `process-next` 未指定の override が一致すると base 処理をスキップする仕様を利用し、`snipe_pure { layers = <15>; input-processors = <&tb_drop_all 1 1>; };` を設置。SNIPE 中は加速曲線を完全無効化し、ドライバ側 SNIPE 分割の精度をそのまま手元へ届ける |
 

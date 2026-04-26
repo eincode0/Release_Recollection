@@ -1,0 +1,7 @@
+description: |
+  〈Drag Lock〉— Toggle MB1 hold state with a single key.
+  First tap presses MB1 and holds. Second tap releases MB1.
+
+compatible: "zmk,behavior-drag-lock"
+
+include: zero_param.yaml
