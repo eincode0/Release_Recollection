@@ -310,6 +310,7 @@
 | 2026-04-25 | `CONFIG_ZMK_KEYMAP_LAYERS_MAX=18` を両側 .conf に追加。L17 追加によりデフォルト上限（16）を超えていたため BT 接続不可になっていた問題を修正 |
 | 2026-04-26 | 〈Arrows Profile〉拡張 — pmw3610 driver にスクロール出力経路を追加（`f1d9b30`）。コード `2000`(up)/`2001`(down)/`2002`(left)/`2003`(right) を `pmw3610_send_arrow_key` で受け取ると HID キー経路をバイパスし `input_report_rel(REL_WHEEL/REL_HWHEEL)` を直接発行 |
 | 2026-04-26 | L17（SNIPE_SCROLL）追加で再び BT 接続不可が発生し撤去。原因不明だが L17 レイヤー追加自体が BT を阻害するパターンが 5回連続で再現。input-listener / arrows-profiles など試した経路に依存せず、L17 ファイル include の有無のみで切り分けられる。SNIPE 中のスクロールは諦めて K → 通常の `&kp K` に戻す |
+| 2026-04-26 | SNIPE スクロールを `arrows-alt-profiles` 経路で再実装。新レイヤー追加なしのため L17 問題を回避。`ht_arrows_alt` hold-tap behavior を新設し SNIPE の K を `&ht_arrows_alt 15 K` に。K タップ=K、K ホールドで `&arrows_alt 15`（L15 はすでに有効なので no-op）が alt_mode フラグを ON にし、arrows-alt-profiles の L15 エントリ（`2000-2003` 40ms）が発火してトラックボール→スクロールホイールイベント変換 |
 
 ══════════════════════════════════════════════
 

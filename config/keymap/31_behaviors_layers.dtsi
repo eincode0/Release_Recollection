@@ -33,6 +33,15 @@ lt_to_layer_0: lt_to_layer_0 {
     require-prior-idle-ms = <350>;
 };
 
+ht_arrows_alt: ht_arrows_alt {
+    compatible = "zmk,behavior-hold-tap";
+    #binding-cells = <2>;
+    flavor = "tap-preferred";
+    tapping-term-ms = <200>;
+    quick-tap-ms = <150>;
+    bindings = <&arrows_alt>, <&kp>;
+};
+
 smart_num: smart_num {
     compatible = "zmk,behavior-auto-layer";
     #binding-cells = <1>;
