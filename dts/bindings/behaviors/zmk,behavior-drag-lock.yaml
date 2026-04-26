@@ -8,11 +8,11 @@ compatible: "zmk,behavior-drag-lock"
 include: zero_param.yaml
 
 properties:
-  on-binding:
+  on-bindings:
     type: phandle-array
     required: true
     description: Behavior to invoke when locking (e.g. drag_on macro).
-  off-binding:
+  off-bindings:
     type: phandle-array
     required: true
     description: Behavior to invoke when unlocking (e.g. drag_off macro).

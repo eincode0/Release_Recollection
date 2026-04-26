@@ -24,8 +24,8 @@
 LOG_MODULE_REGISTER(behavior_drag_lock, CONFIG_ZMK_LOG_LEVEL);
 
 struct behavior_drag_lock_config {
-    struct zmk_behavior_binding on_binding;
-    struct zmk_behavior_binding off_binding;
+    struct zmk_behavior_binding on_bindings;
+    struct zmk_behavior_binding off_bindings;
 };
 
 /* Cardinal-tracked global state. Multiple instances share the same flag — by
@@ -39,11 +39,11 @@ static int on_drag_lock_binding_pressed(struct zmk_behavior_binding *binding,
 
     struct zmk_behavior_binding child;
     if (drag_locked) {
-        child = cfg->off_binding;
+        child = cfg->off_bindings;
         drag_locked = false;
         LOG_DBG("〈Drag Lock〉released — invoking off-binding");
     } else {
-        child = cfg->on_binding;
+        child = cfg->on_bindings;
         drag_locked = true;
         LOG_DBG("〈Drag Lock〉engaged — invoking on-binding");
     }
@@ -79,8 +79,8 @@ static int behavior_drag_lock_init(const struct device *dev) {
 
 #define DRAG_LOCK_INST(n)                                                                          \
     static const struct behavior_drag_lock_config behavior_drag_lock_cfg_##n = {                   \
-        .on_binding = EXTRACT_BINDING(DT_DRV_INST(n), on_binding),                                 \
-        .off_binding = EXTRACT_BINDING(DT_DRV_INST(n), off_binding),                               \
+        .on_bindings = EXTRACT_BINDING(DT_DRV_INST(n), on_bindings),                                 \
+        .off_bindings = EXTRACT_BINDING(DT_DRV_INST(n), off_bindings),                               \
     };                                                                                             \
     BEHAVIOR_DT_INST_DEFINE(n, behavior_drag_lock_init, NULL, NULL,                                \
                             &behavior_drag_lock_cfg_##n, POST_KERNEL,                              \

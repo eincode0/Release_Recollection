@@ -62,8 +62,8 @@ dragkey: dragkey {
 drag_lock: drag_lock {
     compatible = "zmk,behavior-drag-lock";
     #binding-cells = <0>;
-    on-binding = <&drag_on>;
-    off-binding = <&drag_off>;
+    on-bindings = <&drag_on>;
+    off-bindings = <&drag_off>;
 };
 
 g_shft: g_shft {
