@@ -321,6 +321,8 @@
 | 2026-04-26 | README 整備。SYNTHESIS REGISTRY から廃止済みの L17 SNIPE_SCROLL を削除、L15 SNIPE 説明に K ホールドスクロール機能を追記。ALT FORMATION テーブルに L15（SCROLL_UP/DOWN/LEFT/RIGHT）エントリ追加。CHARACTER PARAMETERS に CPI と tick の現行値を反映 |
 | 2026-04-26 | 〈Resolution Shift〉— ドライバに `cpi-layers` プロパティを新設（`60a0782`）。`<layer cpi ...>` の uint16 ペアで指定し、`zmk_layer_state_changed` イベントを購読してセンサー CPI を実行時切替。L4 MOUSE = 3200 を設定し、マウス操作時は通常 2200 から高 CPI に自動シフト |
 | 2026-04-26 | 〈Flick Burst〉— `pointer_accel` を強化。`max-factor` 8000 → 12000、`acceleration-exponent` 2 → 3。低速域は等倍を維持しつつ、強くフリックした瞬間だけ最大 ×12 まで一気に加速する曲線へ調整。精密操作と高速移動を両立 |
+| 2026-04-26 | 〈Connectivity Overdrive〉— Split BLE 受信ポーリングを高速化する `CONFIG_ZMK_SPLIT_BLE_RECV_SPEEDUP=y` を両側に追加。左右間のキー入力／ポインタイベントの伝達ラグを短縮 |
+| 2026-04-26 | 〈Tick Sync〉— Elucidator 側に `CONFIG_ZMK_MOUSE_TICK_DURATION=8` を追加。マウス内部処理周期を BLE 接続インターバル 7.5ms (`MIN_INT=6`) に近接させ、レポート送出のタイミングずれを抑制 |
 | 2026-04-26 | 〈Flick Burst〉さらに増幅。`max-factor` 12000 → 16000（×16）、`speed-max` 2000 → 1500。ピーク倍率を底上げしつつ、軽めのフリックでも最大倍率に届くよう感度を引き上げ |
 | 2026-04-26 | 〈Sealed Aim〉— SNIPE（L15）で `pointer_accel` をバイパスする per-layer override を追加。stock ZMK input-listener は `process-next` 未指定の override が一致すると base 処理をスキップする仕様を利用し、`snipe_pure { layers = <15>; input-processors = <&tb_drop_all 1 1>; };` を設置。SNIPE 中は加速曲線を完全無効化し、ドライバ側 SNIPE 分割の精度をそのまま手元へ届ける |
 
