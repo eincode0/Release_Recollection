@@ -42,9 +42,8 @@
 | [ Synthesis 12 ] | GESTURE_A | ジェスチャー（A キー長押し）|
 | [ Synthesis 13 ] | GESTURE_D | ジェスチャー（D キー長押し）|
 | [ Synthesis 14 ] | GESTURE_W | ジェスチャー（W キー長押し）|
-| [ Synthesis 15 ] | SNIPE | スマートスネイプ（Tab ダブルタップ or L2+L3 同時ホールドで起動。デフォルトと同一バインド、CPI 自動低減。クリック・キー入力で自動解除）|
+| [ Synthesis 15 ] | SNIPE | スマートスネイプ（Tab ホールド or L2+L3 同時ホールドで起動。デフォルトと同一バインド、CPI 自動低減。クリック・キー入力で自動解除。**K ホールド中はトラックボールがスクロールホイールに変換される**）|
 | [ Synthesis 16 ] | NUM_SMART | スマート数字入力（数字キーで自動維持） |
-| [ Synthesis 17 ] | SNIPE_SCROLL | スネイプスクロール（SNIPE 中の I/K ジェスチャーで起動。低速トラックボールスクロール）|
 
 ══════════════════════════════════════════════
 
@@ -171,13 +170,16 @@
 | 3 NUM | `↑` | `↓` | `←` | `→` | なし | 加速あり |
 | 6 Bluetooth | `強制終了(Cmd+Opt+Esc)` | `画面ロック(Ctrl+Cmd+Q)` | `LANG2(英数)` | `LANG1(かな)` | あり | 斜め無効・余り有効 |
 
-### ◆ ALT FORMATION ── Shift 同時押し時（arrows-alt-profiles）
+### ◆ ALT FORMATION ── Shift 同時押し or arrows_alt 起動時（arrows-alt-profiles）
 
 | SYNTHESIS | 上 | 下 | 左 | 右 | one_shot |
 |---|---|---|---|---|---|
+| 15 SNIPE | `SCROLL_UP` | `SCROLL_DOWN` | `SCROLL_LEFT` | `SCROLL_RIGHT` | なし |
 | 2 ARROW_SIGN | `Cmd+A` | `Cmd+V` | `Cmd+X` | `Cmd+C` | あり |
 | 3 NUM | `Undo` | `Redo` | `BS` | `Del` | あり |
 | 6 Bluetooth | 再生/停止(`C_PP`) | 停止(`C_STOP`) | 前のトラック(`C_PREV`) | 次のトラック(`C_NEXT`) | なし |
+
+> **[ SYSTEM ]** L15 はキーバインドではなく `&ht_arrows_alt 15 K`（K ホールド）で起動。ドライバ拡張コード `2000-2003` が `input_report_rel(REL_WHEEL/REL_HWHEEL)` を直接発行するためホスト側はマウスホイールとして認識する。
 
 > **[ SYSTEM ]** **one_shot** — 有効時、センサーの動きに対してキーが 1 度だけ送出される。
 > 押しっぱなし状態にはならない。連続入力が不要な操作に適用される。
@@ -268,6 +270,9 @@
 | PMW3610 ポーリングレート | 125Hz (POLLING_RATE_125) | 起動遅延を削除しポーリングレート固定モードに変更 |
 | PMW3610 force-awake | 有効 | スリープ移行を抑制し、起動遅延ゼロを維持 |
 | PMW3610 4ms モード | **無効**（削除済み） | BLE 7.5ms インターバルとのミスマッチによるポインタジャンプを防止 |
+| PMW3610 CPI | 2200 | 通常カーソル CPI（`pointer_accel.sensor-dpi` も同値）。SNIPE 中はドライバが自動低減 |
+| PMW3610 cpi-layers | `<4 3200>` | L4 MOUSE アクティブ時はセンサー CPI を 3200 に動的切替（〈Resolution Shift〉) |
+| arrows-alt L15 tick | 80ms | K ホールドスクロールの精密度。値が大きいほど 1 ノッチが大きい動きを要求 |
 
 ### THREAD STACK ── スレッドスタック（クラッシュ対策）
 
@@ -312,6 +317,9 @@
 | 2026-04-26 | L17（SNIPE_SCROLL）追加で再び BT 接続不可が発生し撤去。原因不明だが L17 レイヤー追加自体が BT を阻害するパターンが 5回連続で再現。input-listener / arrows-profiles など試した経路に依存せず、L17 ファイル include の有無のみで切り分けられる。SNIPE 中のスクロールは諦めて K → 通常の `&kp K` に戻す |
 | 2026-04-26 | SNIPE スクロールを `arrows-alt-profiles` 経路で再実装。新レイヤー追加なしのため L17 問題を回避。`ht_arrows_alt` hold-tap behavior を新設し SNIPE の K を `&ht_arrows_alt 15 K` に。K タップ=K、K ホールドで `&arrows_alt 15`（L15 はすでに有効なので no-op）が alt_mode フラグを ON にし、arrows-alt-profiles の L15 エントリ（`2000-2003` 40ms）が発火してトラックボール→スクロールホイールイベント変換 |
 | 2026-04-26 | ドライバ修正（`071d9ff`）— `snipe-layers` 分岐が L15 で先行ヒットして arrows 経路に到達しなかったため、`arrows_alt_mode` が ON の時は SNIPE 分岐をスキップする条件を追加。これで K ホールド中だけ SNIPE モードが一時無効化されてスクロールが発火するようになる |
+| 2026-04-26 | 通常カーソル CPI を `3200` → `2200` に変更（精密化）。`pointer_accel.sensor-dpi` も同値に同期。スクロール精度向上のため arrows-alt-profile L15 の tick を `40ms` → `80ms` に。1 ノッチあたり 2 倍の動きを要求するようになり、長文スクロールの誤差が減る |
+| 2026-04-26 | README 整備。SYNTHESIS REGISTRY から廃止済みの L17 SNIPE_SCROLL を削除、L15 SNIPE 説明に K ホールドスクロール機能を追記。ALT FORMATION テーブルに L15（SCROLL_UP/DOWN/LEFT/RIGHT）エントリ追加。CHARACTER PARAMETERS に CPI と tick の現行値を反映 |
+| 2026-04-26 | 〈Resolution Shift〉— ドライバに `cpi-layers` プロパティを新設（`60a0782`）。`<layer cpi ...>` の uint16 ペアで指定し、`zmk_layer_state_changed` イベントを購読してセンサー CPI を実行時切替。L4 MOUSE = 3200 を設定し、マウス操作時は通常 2200 から高 CPI に自動シフト |
 
 ══════════════════════════════════════════════
 
