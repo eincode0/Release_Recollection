@@ -61,7 +61,6 @@ dragkey: dragkey {
  * src/behaviors/behavior_drag_lock.c (in-tree module)。 */
 drag_lock: drag_lock {
     compatible = "zmk,behavior-drag-lock";
-    label = "DRAG_LOCK";
     #binding-cells = <0>;
 };
 

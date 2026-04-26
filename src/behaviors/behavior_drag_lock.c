@@ -14,12 +14,14 @@
 #include <drivers/behavior.h>
 #include <zephyr/logging/log.h>
 
-#include <dt-bindings/zmk/mouse.h>
 #include <zmk/behavior.h>
 #include <zmk/hid.h>
 #include <zmk/endpoints.h>
 
 LOG_MODULE_REGISTER(behavior_drag_lock, CONFIG_ZMK_LOG_LEVEL);
+
+/* MB1 (left mouse button) = button index 0 in ZMK HID API. */
+#define DRAG_LOCK_BUTTON_INDEX 0
 
 /* Cardinal-tracked global state. There is only one Drag Lock at any
  * time — multiple instances share the same lock flag. */
@@ -31,16 +33,16 @@ static int on_drag_lock_binding_pressed(struct zmk_behavior_binding *binding,
     ARG_UNUSED(event);
 
     if (drag_locked) {
-        zmk_hid_mouse_buttons_release(MB1);
+        zmk_hid_mouse_button_release(DRAG_LOCK_BUTTON_INDEX);
         drag_locked = false;
         LOG_DBG("〈Drag Lock〉released — MB1 freed");
     } else {
-        zmk_hid_mouse_buttons_press(MB1);
+        zmk_hid_mouse_button_press(DRAG_LOCK_BUTTON_INDEX);
         drag_locked = true;
         LOG_DBG("〈Drag Lock〉engaged — MB1 held");
     }
 
-    zmk_endpoints_send_mouse_report();
+    zmk_endpoint_send_mouse_report();
     return ZMK_BEHAVIOR_OPAQUE;
 }
 
