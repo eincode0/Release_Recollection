@@ -1,7 +1,18 @@
 description: |
   〈Drag Lock〉— Toggle MB1 hold state with a single key.
-  First tap presses MB1 and holds. Second tap releases MB1.
+  Internal state alternates between two child bindings:
+  first tap invokes on-binding (lock), next tap invokes off-binding (release).
 
 compatible: "zmk,behavior-drag-lock"
 
 include: zero_param.yaml
+
+properties:
+  on-binding:
+    type: phandle-array
+    required: true
+    description: Behavior to invoke when locking (e.g. drag_on macro).
+  off-binding:
+    type: phandle-array
+    required: true
+    description: Behavior to invoke when unlocking (e.g. drag_off macro).
