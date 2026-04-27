@@ -37,25 +37,29 @@
             codes = <INPUT_REL_X INPUT_REL_Y INPUT_REL_WHEEL INPUT_REL_HWHEEL>;
         };
 
-        zip_snipe_scroll_scaler: zip_snipe_scroll_scaler {
+        zip_scroll_scaler: zip_scroll_scaler {
             compatible = "zmk,input-processor-scaler";
             #input-processor-cells = <2>;
             type = <INPUT_EV_REL>;
             codes = <INPUT_REL_WHEEL INPUT_REL_HWHEEL>;
         };
 
-        /* --- スクロール慣性の定義 --- */
+        /* 〈Phantom Drift〉— iOS 風 慣性スクロール（mjmjm0101/zmk-input-processor-scroll-inertia）
+         * gain + blend = 1000 必須 / decay-* は 800-999 が推奨範囲（大ほど長く滑る） */
         zip_scroll_inertia: zip_scroll_inertia {
             compatible = "zmk,input-processor-scroll-inertia";
             #input-processor-cells = <0>;
-            scroll-inertia;
-            scroll-inertia-decay        = <75>;
-            scroll-inertia-decay-fast   = <98>;
-            scroll-inertia-slow-spd     = <1>;
-            scroll-inertia-fast-spd     = <15>;
-            scroll-inertia-tick-ms      = <8>;
-            scroll-flick-threshold      = <5>;
-            scroll-flick-boost          = <12000>;
+            axis        = <0>;     /* 0=2D / 1=Y / 2=X */
+            gain        = <400>;   /* 入力反応強め（default 300）*/
+            blend       = <600>;   /* gain+blend=1000 */
+            start       = <30>;    /* フリック発動を低めに（default 40）*/
+            move        = <60>;    /* 慣性開始閾値を低めに（default 80）*/
+            decay-fast  = <985>;   /* 高速域は早めに減衰（default 990）*/
+            decay-slow  = <992>;   /* 中速域 */
+            decay-tail  = <997>;   /* 低速域は長く滑る（iOS 風）*/
+            friction    = <25>;    /* 摩擦控えめ（default 35）*/
+            stop        = <5>;     /* 停止判定をギリギリまで遅らせる（default 7）*/
+            tick        = <8>;     /* 125Hz センサー想定 */
         };
 
         /* ジェスチャー定義（変更なし） */
@@ -78,8 +82,9 @@
             layers = <5>;
             input-processors = <
                 &zip_xy_to_scroll_mapper
-                &zip_snipe_scroll_scaler 1 2
+                &zip_scroll_scaler 1 2
                 &zip_scroll_snap
+                &zip_scroll_inertia
             >;
         };
 
@@ -135,9 +140,6 @@
         arrows-repeat-delay-ms = <250>;
         arrows-repeat-rate-ms = <100>;
 
-        scroll-accel;
-        scroll-accel-max-mult = <6>;
-        scroll-accel-threshold = <30>;
         evt-type = <INPUT_EV_REL>;
         x-input-code = <INPUT_REL_X>;
         y-input-code = <INPUT_REL_Y>;
