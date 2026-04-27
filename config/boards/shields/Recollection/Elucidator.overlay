@@ -46,12 +46,12 @@
             gain        = <400>;   /* 入力反応強め（default 300）*/
             blend       = <600>;   /* gain+blend=1000 */
             start       = <30>;    /* フリック発動を低めに（default 40）*/
-            move        = <60>;    /* 慣性開始閾値を低めに（default 80）*/
-            decay-fast  = <985>;   /* 高速域は早めに減衰（default 990）*/
-            decay-slow  = <992>;   /* 中速域 */
-            decay-tail  = <997>;   /* 低速域は長く滑る（iOS 風）*/
-            friction    = <25>;    /* 摩擦控えめ（default 35）*/
-            stop        = <5>;     /* 停止判定をギリギリまで遅らせる（default 7）*/
+            move        = <40>;    /* 慣性開始閾値をさらに低く（軽い動きでも発動）*/
+            decay-fast  = <993>;   /* 高速域も長持ち（default 990）*/
+            decay-slow  = <996>;   /* 中速域を伸ばす */
+            decay-tail  = <999>;   /* 低速域は最大限長く滑る（iOS 風 余韻）*/
+            friction    = <10>;    /* 摩擦をほぼゼロに近づける（default 35）*/
+            stop        = <2>;     /* 停止判定を極限まで遅らせる（default 7）*/
             tick        = <8>;     /* 125Hz センサー想定 */
         };
 
@@ -75,7 +75,7 @@
             layers = <5>;
             input-processors = <
                 &zip_xy_to_scroll_mapper
-                &zip_scroll_scaler 1 2
+                &zip_scroll_scaler 2 3
                 &zip_scroll_snap
                 &zip_scroll_inertia
             >;
