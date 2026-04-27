@@ -37,20 +37,19 @@
             codes = <INPUT_REL_X INPUT_REL_Y INPUT_REL_WHEEL INPUT_REL_HWHEEL>;
         };
 
-        /* 〈Phantom Drift Mk.IV〉— iOS 風 慣性スクロール（mjmjm0101/zmk-input-processor-scroll-inertia）
-         * 公式推奨配置: scaler の「前」に置く（mapper → inertia → scaler → snap）
-         * scale/scale-div は scaler の引数と一致させること（必須）
+        /* 〈Phantom Drift Mk.V〉— iOS 風 慣性スクロール（mjmjm0101/zmk-input-processor-scroll-inertia）
+         * scaler を chain から撤去し inertia を裸で動かす診断構成。
+         * scale/scale-div はデフォルト 1000/1000（末端配置と同等扱い）。
          * fast/slow=0 のとき decay-* は単一曲線扱い（iOS 風はこれで OK）*/
         zip_scroll_inertia: zip_scroll_inertia {
             compatible = "zmk,input-processor-scroll-inertia";
             #input-processor-cells = <0>;
             axis        = <0>;     /* 0=2D / 1=Y / 2=X */
-            scale       = <2>;     /* &zip_scroll_scaler 2 3 と一致させる */
-            scale-div   = <3>;
+            layer       = <5>;     /* L5 OFF 時に内部状態をリセット（他レイヤーへのリーク防止）*/
             gain        = <600>;   /* 入力追従を強化（default 300）*/
             blend       = <400>;   /* gain+blend=1000 */
-            start       = <30>;    /* フリック発動の最小ピーク速度（default 40）*/
-            move        = <30>;    /* 慣性発動に必要な総移動量（default 80）*/
+            start       = <15>;    /* 発動条件を低めに（default 40 → 大幅低減）*/
+            move        = <15>;    /* 軽い動作でも慣性発動 */
             decay-fast  = <992>;   /* iOS 風長滑り（公式推奨 990-995 単一曲線）*/
             decay-slow  = <992>;   /* fast/slow=0 のため実質 decay-tail と同等 */
             decay-tail  = <992>;
@@ -80,7 +79,6 @@
             input-processors = <
                 &zip_xy_to_scroll_mapper
                 &zip_scroll_inertia
-                &zip_scroll_scaler 2 3
                 &zip_scroll_snap
             >;
         };

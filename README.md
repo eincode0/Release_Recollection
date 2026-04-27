@@ -274,7 +274,7 @@
 | PMW3610 CPI | 2200 | 通常カーソル CPI（`pointer_accel.sensor-dpi` も同値）。SNIPE 中はドライバが自動低減 |
 | PMW3610 cpi-layers | `<4 3200>` | L4 MOUSE アクティブ時はセンサー CPI を 3200 に動的切替（〈Resolution Shift〉) |
 | arrows-alt L15 tick | 80ms | K ホールドスクロールの精密度。値が大きいほど 1 ノッチが大きい動きを要求 |
-| L5 SCROLL スケーラー | `2/3`（67%） | `zip_xy_to_scroll_mapper` 後段に標準 `&zip_scroll_scaler` を噛ませ、ホイール出力を 2/3 倍に絞る。慣性プロセッサに十分な速度を流入させつつ、過剰な初速を抑える |
+| L5 SCROLL スケーラー | **撤去** | Mk.V で診断のため `&zip_scroll_scaler` を chain から撤去。inertia を裸で動かし発動を検証 |
 | ドライバ scroll-accel | **削除** | 〈Phantom Drift〉慣性導入により倍率の重ね掛けを回避するためドライバ側加速を撤去 |
 
 ### PHANTOM DRIFT ── 慣性スクロール（zmk-input-processor-scroll-inertia）
@@ -284,10 +284,11 @@
 | プロパティ | 値 | 効果 |
 |---|---|---|
 | `axis` | 0（2D） | snap が決定した軸方向に沿って滑る |
-| `scale` / `scale-div` | 2 / 3 | 下流 `&zip_scroll_scaler 2 3` の引数と完全一致させる（公式推奨）|
+| `layer` | 5 | L5 OFF 時に内部状態をリセット。他レイヤーへの慣性イベントリーク防止 |
+| `scale` / `scale-div` | （未設定）| Mk.V で scaler 撤去に伴いデフォルト 1000/1000 へ。inertia がほぼ chain 末端のため等倍出力で正解 |
 | `gain` / `blend` | 600 / 400 | 入力追従を default(300) から強化。和は必ず 1000 |
-| `start` | 30 | フリック発動の最小ピーク速度（default 40 → 低め）|
-| `move` | 30 | 慣性開始に必要な総移動量（default 80 → 低減）|
+| `start` | 15 | フリック発動の最小ピーク速度（default 40 → 大幅低減）|
+| `move` | 15 | 慣性開始に必要な総移動量（default 80 → 大幅低減）|
 | `decay-fast` / `slow` / `tail` | 全て 992 | iOS 風単一曲線（公式推奨 990-995 帯）。`fast` / `slow` 境界が 0 のため 3 値は同等扱い |
 | `friction` | 0 | 線形摩擦を完全撤廃。純指数減衰のみで滑走（default 35）|
 | `stop` | 7 | 公式デフォルト。これ以下の速度は HID 量子化で 0 ティックとなり「不可視ドリフト」を起こすためカットオフ |
@@ -354,6 +355,8 @@
 | 2026-04-27 | 〈Phantom Drift Mk.II〉— 実機検証フィードバック「滑らない・小刻み・すぐ止まる」を受けてチューン強化。`decay-fast` 985→993 / `decay-slow` 992→996 / `decay-tail` 997→**999**（低速域を最大長持ち）/ `friction` 25→10 / `stop` 5→2（摩擦と停止判定をほぼ無効に）/ `move` 60→40（軽い動きでも慣性発動）。さらにスケーラーを `1/2` → `2/3` に緩和し、慣性プロセッサに流入する速度を確保。これで瞬間的な慣性パルスから iOS 風の連続的な滑走へ |
 | 2026-04-27 | 〈Phantom Drift Mk.III〉— Mk.II でも「すぐ止まる」継続。慣性式 `v[n+1] = decay/1000 × v[n] − friction` の **`friction` 定数項が低速時に支配的**となり、`decay=999`（ほぼ無減衰）でも `friction=10` がマイナスに突き落として即停止していたことが原因と特定。**`friction` を 0 に**して線形摩擦を完全撤廃、`stop` 2→1 / `gain`+`blend` 400+600→**600+400**（入力追従強化）/ `decay-fast` 993→996 / `decay-slow` 996→998 / `move` 40→20（軽い動作でも発動）。これで低速タイムでも `decay-tail=999` の純粋な指数減衰のみが効く |
 | 2026-04-27 | 〈Phantom Drift Mk.IV〉— Mk.III でもなお「滑らない」継続。公式 README 精読により**三重の根本誤配置**を発見：(1) inertia の配置位置 — 公式は `scaler の前` 推奨、我々は末端配置（精度劣化＋scaler が発するゼロ値が混入）/ (2) `scale`/`scale-div` 未設定 — `1000/1000` デフォルトは末端配置時のみ正しく、scaler 前配置では scaler 引数（2/3）と一致させる必要 / (3) `stop=1` が逆効果 — 「上げると滑らかに感じる」が公式指針。`stop=1` + `friction=0` + `decay-tail=999` の組み合わせが「HID 量子化以下の不可視ドリフト」を作って実質止まらず、低速域で出力 0 ticks のまま velocity だけ生きていた。さらに `fast`/`slow` 境界がデフォルト 0 のため `decay-fast/slow/tail` の使い分けは機能せず単一曲線扱いだった。これらを総合して完全リワーク：配置を `mapper → inertia → scaler → snap` に並べ替え、`scale=2 / scale-div=3` を inertia に追加、`decay-fast/slow/tail` を全て `992` に統一（iOS 風長滑りの公式推奨ライン）、`stop` 1→**7**、`move` 20→30 |
+| 2026-04-27 | 〈Phantom Drift〉— `layer = 5` を追加。慣性プロセッサの内部状態が L5 OFF 後も保持されると他レイヤーでホイールイベントが漏出する**レイヤー越境リーク**が起きるため、`layer = 5` を設定して L5 OFF 時に内部状態を強制リセット。慣性を L5 SCROLL 内に完全閉じ込めて確定挙動として確立 |
+| 2026-04-27 | 〈Phantom Drift Mk.V〉— Mk.IV 実機検証で **「スクロールに慣性が効いていない」** ことが判明（先に観測された「ポインターに慣性が乗る感」は実は `pointer_accel` の ×16 加速の余韻を慣性と誤認していた可能性大）。診断のため `&zip_scroll_scaler 2 3` を chain から完全撤去し、inertia の `scale`/`scale-div` も削除（デフォルト 1000/1000 = 末端配置と同等扱い）。`start` 30→**15** / `move` 30→**15** で発動条件を大幅低減し、生のスクロール量が直接 inertia を通る診断構成に。これで滑れば scaler 起因と確定、滑らなければモジュール側の問題として更に深掘り |
 
 ══════════════════════════════════════════════
 
