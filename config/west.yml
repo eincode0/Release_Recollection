@@ -16,6 +16,8 @@ manifest:
       url-base: https://github.com/badjeff
     - name: urob                              # ⑦⑧ zmk-helpers / zmk-tri-state
       url-base: https://github.com/urob
+    - name: mjmjm0101                         # ⑪ scroll-inertia
+      url-base: https://github.com/mjmjm0101
 
   projects:
     - name: zmk
@@ -71,6 +73,11 @@ manifest:
       remote: urob
       revision: dfa7c69
       path: modules/zmk-auto-layer
+
+    - name: zmk-input-processor-scroll-inertia    # ⑪〈Phantom Drift〉慣性スクロール
+      remote: mjmjm0101
+      revision: main
+      path: modules/zmk-input-processor-scroll-inertia
 
   self:
     path: config

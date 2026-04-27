@@ -233,6 +233,7 @@
 | zmk-behavior-insomnia | badjeff/zmk-behavior-insomnia | BLE 接続中スリープ防止 |
 | zmk-tri-state | urob/zmk-tri-state | アプリ切替スワッパー |
 | zmk-auto-layer | urob/zmk-auto-layer | Smart Num（数字入力で自動レイヤー維持） |
+| zmk-input-processor-scroll-inertia | mjmjm0101/zmk-input-processor-scroll-inertia | iOS 風 慣性スクロール（〈Phantom Drift〉）|
 
 ══════════════════════════════════════════════
 
@@ -273,7 +274,26 @@
 | PMW3610 CPI | 2200 | 通常カーソル CPI（`pointer_accel.sensor-dpi` も同値）。SNIPE 中はドライバが自動低減 |
 | PMW3610 cpi-layers | `<4 3200>` | L4 MOUSE アクティブ時はセンサー CPI を 3200 に動的切替（〈Resolution Shift〉) |
 | arrows-alt L15 tick | 80ms | K ホールドスクロールの精密度。値が大きいほど 1 ノッチが大きい動きを要求 |
-| L5 SCROLL スケーラー | `1/2`（半速） | `zip_xy_to_scroll_mapper` 後段にスケーラーを噛ませ、ホイール出力を 1/2 倍に絞り精密スクロール化 |
+| L5 SCROLL スケーラー | `2/3`（67%） | `zip_xy_to_scroll_mapper` 後段に標準 `&zip_scroll_scaler` を噛ませ、ホイール出力を 2/3 倍に絞る。慣性プロセッサに十分な速度を流入させつつ、過剰な初速を抑える |
+| ドライバ scroll-accel | **削除** | 〈Phantom Drift〉慣性導入により倍率の重ね掛けを回避するためドライバ側加速を撤去 |
+
+### PHANTOM DRIFT ── 慣性スクロール（zmk-input-processor-scroll-inertia）
+
+*指を離した後も剣閃が空を切る ── iOS 風の滑走をトラックボールに刻む。*
+
+| プロパティ | 値 | 効果 |
+|---|---|---|
+| `axis` | 0（2D） | snap が決定した軸方向に沿って滑る |
+| `scale` / `scale-div` | 2 / 3 | 下流 `&zip_scroll_scaler 2 3` の引数と完全一致させる（公式推奨）|
+| `gain` / `blend` | 600 / 400 | 入力追従を default(300) から強化。和は必ず 1000 |
+| `start` | 30 | フリック発動の最小ピーク速度（default 40 → 低め）|
+| `move` | 30 | 慣性開始に必要な総移動量（default 80 → 低減）|
+| `decay-fast` / `slow` / `tail` | 全て 992 | iOS 風単一曲線（公式推奨 990-995 帯）。`fast` / `slow` 境界が 0 のため 3 値は同等扱い |
+| `friction` | 0 | 線形摩擦を完全撤廃。純指数減衰のみで滑走（default 35）|
+| `stop` | 7 | 公式デフォルト。これ以下の速度は HID 量子化で 0 ティックとなり「不可視ドリフト」を起こすためカットオフ |
+| `tick` | 8ms | 125Hz センサーに同期した処理間隔 |
+
+> **[ SYSTEM ]** 配置順は **`mapper → inertia → scaler → snap`**（公式推奨）。inertia を scaler の前に置くことで速度トラッカーが大きい数で動作し精度が向上、scaler が発するゼロ値イベントの混入も回避される。
 
 ### THREAD STACK ── スレッドスタック（クラッシュ対策）
 
@@ -329,6 +349,11 @@
 | 2026-04-26 | 〈Flick Burst〉さらに増幅。`max-factor` 12000 → 16000（×16）、`speed-max` 2000 → 1500。ピーク倍率を底上げしつつ、軽めのフリックでも最大倍率に届くよう感度を引き上げ |
 | 2026-04-26 | 〈Sealed Aim〉— SNIPE（L15）で `pointer_accel` をバイパスする per-layer override を追加。stock ZMK input-listener は `process-next` 未指定の override が一致すると base 処理をスキップする仕様を利用し、`snipe_pure { layers = <15>; input-processors = <&tb_drop_all 1 1>; };` を設置。SNIPE 中は加速曲線を完全無効化し、ドライバ側 SNIPE 分割の精度をそのまま手元へ届ける |
 | 2026-04-27 | 〈Tempered Wheel〉— L5 SCROLL のホイール出力をスケーラー `&zip_snipe_scroll_scaler 1 2` で半速化。`zip_xy_to_scroll_mapper` の直後・`zip_scroll_snap` の前に挿入し、トラックボールの移動量をホイールイベントへ変換した直後に 1/2 倍へ縮約。長文スクロールでの行き過ぎを抑え、軸スナップ判定もより安定する |
+| 2026-04-27 | 〈Phantom Drift〉— iOS 風 慣性スクロールを正式導入。新規依存 `mjmjm0101/zmk-input-processor-scroll-inertia` を `west.yml` に追加し、L5 SCROLL の input-processors 末尾に `&zip_scroll_inertia` を接続。指を離した後もホイール出力が滑り続ける挙動を実装。`gain=400 / blend=600 / start=30 / move=60 / decay-fast=985 / decay-slow=992 / decay-tail=997 / friction=25 / stop=5` の「キビキビ」プロファイル。同時にドライバ側 `scroll-accel` 系 3 行（max-mult=6 / threshold=30）を撤去し倍率の重ね掛けを排除。自前の `zip_snipe_scroll_scaler` ノード（旧称）を削除し、ZMK 標準の `zip_scroll_scaler`（`track-remainders` 有効）を直接利用するよう整理。旧 overlay にあった `zip_scroll_inertia` ノードはモジュール未配線かつプロパティ名も旧 API の二重デッドコードだったため、現行 API に書き直して再生 |
+| 2026-04-27 | 〈Phantom Drift〉初回ビルドでラベル衝突を修正。`zip_scroll_scaler` を自前再定義したところ ZMK 標準の同名ノード（`/zip_scroll_scaler`）と二重宣言になり devicetree がエラー。自前ノードを削除して標準を直接参照する形に変更（標準は同 compatible/codes/cells に加え `track-remainders` も持つため機能的に上位互換）|
+| 2026-04-27 | 〈Phantom Drift Mk.II〉— 実機検証フィードバック「滑らない・小刻み・すぐ止まる」を受けてチューン強化。`decay-fast` 985→993 / `decay-slow` 992→996 / `decay-tail` 997→**999**（低速域を最大長持ち）/ `friction` 25→10 / `stop` 5→2（摩擦と停止判定をほぼ無効に）/ `move` 60→40（軽い動きでも慣性発動）。さらにスケーラーを `1/2` → `2/3` に緩和し、慣性プロセッサに流入する速度を確保。これで瞬間的な慣性パルスから iOS 風の連続的な滑走へ |
+| 2026-04-27 | 〈Phantom Drift Mk.III〉— Mk.II でも「すぐ止まる」継続。慣性式 `v[n+1] = decay/1000 × v[n] − friction` の **`friction` 定数項が低速時に支配的**となり、`decay=999`（ほぼ無減衰）でも `friction=10` がマイナスに突き落として即停止していたことが原因と特定。**`friction` を 0 に**して線形摩擦を完全撤廃、`stop` 2→1 / `gain`+`blend` 400+600→**600+400**（入力追従強化）/ `decay-fast` 993→996 / `decay-slow` 996→998 / `move` 40→20（軽い動作でも発動）。これで低速タイムでも `decay-tail=999` の純粋な指数減衰のみが効く |
+| 2026-04-27 | 〈Phantom Drift Mk.IV〉— Mk.III でもなお「滑らない」継続。公式 README 精読により**三重の根本誤配置**を発見：(1) inertia の配置位置 — 公式は `scaler の前` 推奨、我々は末端配置（精度劣化＋scaler が発するゼロ値が混入）/ (2) `scale`/`scale-div` 未設定 — `1000/1000` デフォルトは末端配置時のみ正しく、scaler 前配置では scaler 引数（2/3）と一致させる必要 / (3) `stop=1` が逆効果 — 「上げると滑らかに感じる」が公式指針。`stop=1` + `friction=0` + `decay-tail=999` の組み合わせが「HID 量子化以下の不可視ドリフト」を作って実質止まらず、低速域で出力 0 ticks のまま velocity だけ生きていた。さらに `fast`/`slow` 境界がデフォルト 0 のため `decay-fast/slow/tail` の使い分けは機能せず単一曲線扱いだった。これらを総合して完全リワーク：配置を `mapper → inertia → scaler → snap` に並べ替え、`scale=2 / scale-div=3` を inertia に追加、`decay-fast/slow/tail` を全て `992` に統一（iOS 風長滑りの公式推奨ライン）、`stop` 1→**7**、`move` 20→30 |
 
 ══════════════════════════════════════════════
 
