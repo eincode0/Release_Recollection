@@ -284,15 +284,16 @@
 | プロパティ | 値 | 効果 |
 |---|---|---|
 | `axis` | 0（2D） | snap が決定した軸方向に沿って滑る |
-| `gain` / `blend` | 600 / 400 | 入力追従を default(300) から大幅強化。和は必ず 1000 |
-| `start` | 30 | フリック発動の速度閾値（default 40 → 低め）|
-| `move` | 20 | 慣性開始に必要な総移動量（default 80 → 大幅低減、軽い動きでも発動）|
-| `decay-fast` | 996 | 高速域もほぼ無減衰寄り（default 990 → 上振れ）|
-| `decay-slow` | 998 | 中速域もほぼ無減衰寄り |
-| `decay-tail` | 999 | 低速域は最大限長く滑る（iOS 風 余韻の本体）|
-| `friction` | 0 | 線形摩擦を完全撤廃。低速時の即死を回避（default 35）|
-| `stop` | 1 | 停止判定を最低限まで（default 7 → 大幅低減）|
+| `scale` / `scale-div` | 2 / 3 | 下流 `&zip_scroll_scaler 2 3` の引数と完全一致させる（公式推奨）|
+| `gain` / `blend` | 600 / 400 | 入力追従を default(300) から強化。和は必ず 1000 |
+| `start` | 30 | フリック発動の最小ピーク速度（default 40 → 低め）|
+| `move` | 30 | 慣性開始に必要な総移動量（default 80 → 低減）|
+| `decay-fast` / `slow` / `tail` | 全て 992 | iOS 風単一曲線（公式推奨 990-995 帯）。`fast` / `slow` 境界が 0 のため 3 値は同等扱い |
+| `friction` | 0 | 線形摩擦を完全撤廃。純指数減衰のみで滑走（default 35）|
+| `stop` | 7 | 公式デフォルト。これ以下の速度は HID 量子化で 0 ティックとなり「不可視ドリフト」を起こすためカットオフ |
 | `tick` | 8ms | 125Hz センサーに同期した処理間隔 |
+
+> **[ SYSTEM ]** 配置順は **`mapper → inertia → scaler → snap`**（公式推奨）。inertia を scaler の前に置くことで速度トラッカーが大きい数で動作し精度が向上、scaler が発するゼロ値イベントの混入も回避される。
 
 ### THREAD STACK ── スレッドスタック（クラッシュ対策）
 
@@ -352,6 +353,7 @@
 | 2026-04-27 | 〈Phantom Drift〉初回ビルドでラベル衝突を修正。`zip_scroll_scaler` を自前再定義したところ ZMK 標準の同名ノード（`/zip_scroll_scaler`）と二重宣言になり devicetree がエラー。自前ノードを削除して標準を直接参照する形に変更（標準は同 compatible/codes/cells に加え `track-remainders` も持つため機能的に上位互換）|
 | 2026-04-27 | 〈Phantom Drift Mk.II〉— 実機検証フィードバック「滑らない・小刻み・すぐ止まる」を受けてチューン強化。`decay-fast` 985→993 / `decay-slow` 992→996 / `decay-tail` 997→**999**（低速域を最大長持ち）/ `friction` 25→10 / `stop` 5→2（摩擦と停止判定をほぼ無効に）/ `move` 60→40（軽い動きでも慣性発動）。さらにスケーラーを `1/2` → `2/3` に緩和し、慣性プロセッサに流入する速度を確保。これで瞬間的な慣性パルスから iOS 風の連続的な滑走へ |
 | 2026-04-27 | 〈Phantom Drift Mk.III〉— Mk.II でも「すぐ止まる」継続。慣性式 `v[n+1] = decay/1000 × v[n] − friction` の **`friction` 定数項が低速時に支配的**となり、`decay=999`（ほぼ無減衰）でも `friction=10` がマイナスに突き落として即停止していたことが原因と特定。**`friction` を 0 に**して線形摩擦を完全撤廃、`stop` 2→1 / `gain`+`blend` 400+600→**600+400**（入力追従強化）/ `decay-fast` 993→996 / `decay-slow` 996→998 / `move` 40→20（軽い動作でも発動）。これで低速タイムでも `decay-tail=999` の純粋な指数減衰のみが効く |
+| 2026-04-27 | 〈Phantom Drift Mk.IV〉— Mk.III でもなお「滑らない」継続。公式 README 精読により**三重の根本誤配置**を発見：(1) inertia の配置位置 — 公式は `scaler の前` 推奨、我々は末端配置（精度劣化＋scaler が発するゼロ値が混入）/ (2) `scale`/`scale-div` 未設定 — `1000/1000` デフォルトは末端配置時のみ正しく、scaler 前配置では scaler 引数（2/3）と一致させる必要 / (3) `stop=1` が逆効果 — 「上げると滑らかに感じる」が公式指針。`stop=1` + `friction=0` + `decay-tail=999` の組み合わせが「HID 量子化以下の不可視ドリフト」を作って実質止まらず、低速域で出力 0 ticks のまま velocity だけ生きていた。さらに `fast`/`slow` 境界がデフォルト 0 のため `decay-fast/slow/tail` の使い分けは機能せず単一曲線扱いだった。これらを総合して完全リワーク：配置を `mapper → inertia → scaler → snap` に並べ替え、`scale=2 / scale-div=3` を inertia に追加、`decay-fast/slow/tail` を全て `992` に統一（iOS 風長滑りの公式推奨ライン）、`stop` 1→**7**、`move` 20→30 |
 
 ══════════════════════════════════════════════
 
