@@ -43,15 +43,15 @@
             compatible = "zmk,input-processor-scroll-inertia";
             #input-processor-cells = <0>;
             axis        = <0>;     /* 0=2D / 1=Y / 2=X */
-            gain        = <400>;   /* 入力反応強め（default 300）*/
-            blend       = <600>;   /* gain+blend=1000 */
+            gain        = <600>;   /* 入力追従を強化（default 300）*/
+            blend       = <400>;   /* gain+blend=1000 */
             start       = <30>;    /* フリック発動を低めに（default 40）*/
-            move        = <40>;    /* 慣性開始閾値をさらに低く（軽い動きでも発動）*/
-            decay-fast  = <993>;   /* 高速域も長持ち（default 990）*/
-            decay-slow  = <996>;   /* 中速域を伸ばす */
+            move        = <20>;    /* 軽い動作でも慣性発動（default 80 → 大幅低減）*/
+            decay-fast  = <996>;   /* 高速域もほぼ無減衰寄り（default 990）*/
+            decay-slow  = <998>;   /* 中速域もほぼ無減衰寄り */
             decay-tail  = <999>;   /* 低速域は最大限長く滑る（iOS 風 余韻）*/
-            friction    = <10>;    /* 摩擦をほぼゼロに近づける（default 35）*/
-            stop        = <2>;     /* 停止判定を極限まで遅らせる（default 7）*/
+            friction    = <0>;     /* 線形摩擦を完全撤廃（低速での即死回避）*/
+            stop        = <1>;     /* 停止判定を最低限まで（default 7 → 1）*/
             tick        = <8>;     /* 125Hz センサー想定 */
         };
 

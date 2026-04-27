@@ -284,14 +284,14 @@
 | プロパティ | 値 | 効果 |
 |---|---|---|
 | `axis` | 0（2D） | snap が決定した軸方向に沿って滑る |
-| `gain` / `blend` | 400 / 600 | 入力反応を default(300) から強化。和は必ず 1000 |
+| `gain` / `blend` | 600 / 400 | 入力追従を default(300) から大幅強化。和は必ず 1000 |
 | `start` | 30 | フリック発動の速度閾値（default 40 → 低め）|
-| `move` | 40 | 慣性開始に必要な総移動量（default 80 → 大幅低減、軽い動きでも発動）|
-| `decay-fast` | 993 | 高速域も長持ち（default 990 → 上振れ）|
-| `decay-slow` | 996 | 中速域を伸ばす |
+| `move` | 20 | 慣性開始に必要な総移動量（default 80 → 大幅低減、軽い動きでも発動）|
+| `decay-fast` | 996 | 高速域もほぼ無減衰寄り（default 990 → 上振れ）|
+| `decay-slow` | 998 | 中速域もほぼ無減衰寄り |
 | `decay-tail` | 999 | 低速域は最大限長く滑る（iOS 風 余韻の本体）|
-| `friction` | 10 | クーロン摩擦をほぼゼロに（default 35 → 大幅低減）|
-| `stop` | 2 | 停止判定を極限まで遅らせる（default 7 → 大幅低減）|
+| `friction` | 0 | 線形摩擦を完全撤廃。低速時の即死を回避（default 35）|
+| `stop` | 1 | 停止判定を最低限まで（default 7 → 大幅低減）|
 | `tick` | 8ms | 125Hz センサーに同期した処理間隔 |
 
 ### THREAD STACK ── スレッドスタック（クラッシュ対策）
@@ -351,6 +351,7 @@
 | 2026-04-27 | 〈Phantom Drift〉— iOS 風 慣性スクロールを正式導入。新規依存 `mjmjm0101/zmk-input-processor-scroll-inertia` を `west.yml` に追加し、L5 SCROLL の input-processors 末尾に `&zip_scroll_inertia` を接続。指を離した後もホイール出力が滑り続ける挙動を実装。`gain=400 / blend=600 / start=30 / move=60 / decay-fast=985 / decay-slow=992 / decay-tail=997 / friction=25 / stop=5` の「キビキビ」プロファイル。同時にドライバ側 `scroll-accel` 系 3 行（max-mult=6 / threshold=30）を撤去し倍率の重ね掛けを排除。自前の `zip_snipe_scroll_scaler` ノード（旧称）を削除し、ZMK 標準の `zip_scroll_scaler`（`track-remainders` 有効）を直接利用するよう整理。旧 overlay にあった `zip_scroll_inertia` ノードはモジュール未配線かつプロパティ名も旧 API の二重デッドコードだったため、現行 API に書き直して再生 |
 | 2026-04-27 | 〈Phantom Drift〉初回ビルドでラベル衝突を修正。`zip_scroll_scaler` を自前再定義したところ ZMK 標準の同名ノード（`/zip_scroll_scaler`）と二重宣言になり devicetree がエラー。自前ノードを削除して標準を直接参照する形に変更（標準は同 compatible/codes/cells に加え `track-remainders` も持つため機能的に上位互換）|
 | 2026-04-27 | 〈Phantom Drift Mk.II〉— 実機検証フィードバック「滑らない・小刻み・すぐ止まる」を受けてチューン強化。`decay-fast` 985→993 / `decay-slow` 992→996 / `decay-tail` 997→**999**（低速域を最大長持ち）/ `friction` 25→10 / `stop` 5→2（摩擦と停止判定をほぼ無効に）/ `move` 60→40（軽い動きでも慣性発動）。さらにスケーラーを `1/2` → `2/3` に緩和し、慣性プロセッサに流入する速度を確保。これで瞬間的な慣性パルスから iOS 風の連続的な滑走へ |
+| 2026-04-27 | 〈Phantom Drift Mk.III〉— Mk.II でも「すぐ止まる」継続。慣性式 `v[n+1] = decay/1000 × v[n] − friction` の **`friction` 定数項が低速時に支配的**となり、`decay=999`（ほぼ無減衰）でも `friction=10` がマイナスに突き落として即停止していたことが原因と特定。**`friction` を 0 に**して線形摩擦を完全撤廃、`stop` 2→1 / `gain`+`blend` 400+600→**600+400**（入力追従強化）/ `decay-fast` 993→996 / `decay-slow` 996→998 / `move` 40→20（軽い動作でも発動）。これで低速タイムでも `decay-tail=999` の純粋な指数減衰のみが効く |
 
 ══════════════════════════════════════════════
 
