@@ -37,13 +37,6 @@
             codes = <INPUT_REL_X INPUT_REL_Y INPUT_REL_WHEEL INPUT_REL_HWHEEL>;
         };
 
-        zip_scroll_scaler: zip_scroll_scaler {
-            compatible = "zmk,input-processor-scaler";
-            #input-processor-cells = <2>;
-            type = <INPUT_EV_REL>;
-            codes = <INPUT_REL_WHEEL INPUT_REL_HWHEEL>;
-        };
-
         /* 〈Phantom Drift〉— iOS 風 慣性スクロール（mjmjm0101/zmk-input-processor-scroll-inertia）
          * gain + blend = 1000 必須 / decay-* は 800-999 が推奨範囲（大ほど長く滑る） */
         zip_scroll_inertia: zip_scroll_inertia {
