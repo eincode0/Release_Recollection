@@ -136,7 +136,7 @@
         arrows-repeat-rate-ms = <100>;
 
         scroll-accel;
-        scroll-accel-max-mult = <6>;
+        scroll-accel-max-mult = <0>;
         scroll-accel-threshold = <30>;
         evt-type = <INPUT_EV_REL>;
         x-input-code = <INPUT_REL_X>;
