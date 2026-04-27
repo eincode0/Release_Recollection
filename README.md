@@ -273,6 +273,7 @@
 | PMW3610 CPI | 2200 | 通常カーソル CPI（`pointer_accel.sensor-dpi` も同値）。SNIPE 中はドライバが自動低減 |
 | PMW3610 cpi-layers | `<4 3200>` | L4 MOUSE アクティブ時はセンサー CPI を 3200 に動的切替（〈Resolution Shift〉) |
 | arrows-alt L15 tick | 80ms | K ホールドスクロールの精密度。値が大きいほど 1 ノッチが大きい動きを要求 |
+| L5 SCROLL スケーラー | `1/2`（半速） | `zip_xy_to_scroll_mapper` 後段にスケーラーを噛ませ、ホイール出力を 1/2 倍に絞り精密スクロール化 |
 
 ### THREAD STACK ── スレッドスタック（クラッシュ対策）
 
@@ -327,6 +328,7 @@
 | 2026-04-26 | 〈Bandwidth Surge〉— BLE ACL TX バッファを 3 → 10 / EVT RX バッファを 16 に増量（両側）。Zephyr の static assert（`BT_BUF_EVT_RX_COUNT > BT_BUF_ACL_TX_COUNT`）を満たすよう RX 側も同時に拡張。HID イベントバースト時のキュー詰まりを緩和 |
 | 2026-04-26 | 〈Flick Burst〉さらに増幅。`max-factor` 12000 → 16000（×16）、`speed-max` 2000 → 1500。ピーク倍率を底上げしつつ、軽めのフリックでも最大倍率に届くよう感度を引き上げ |
 | 2026-04-26 | 〈Sealed Aim〉— SNIPE（L15）で `pointer_accel` をバイパスする per-layer override を追加。stock ZMK input-listener は `process-next` 未指定の override が一致すると base 処理をスキップする仕様を利用し、`snipe_pure { layers = <15>; input-processors = <&tb_drop_all 1 1>; };` を設置。SNIPE 中は加速曲線を完全無効化し、ドライバ側 SNIPE 分割の精度をそのまま手元へ届ける |
+| 2026-04-27 | 〈Tempered Wheel〉— L5 SCROLL のホイール出力をスケーラー `&zip_snipe_scroll_scaler 1 2` で半速化。`zip_xy_to_scroll_mapper` の直後・`zip_scroll_snap` の前に挿入し、トラックボールの移動量をホイールイベントへ変換した直後に 1/2 倍へ縮約。長文スクロールでの行き過ぎを抑え、軸スナップ判定もより安定する |
 
 ══════════════════════════════════════════════
 
