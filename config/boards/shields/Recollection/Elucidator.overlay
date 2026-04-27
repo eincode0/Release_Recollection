@@ -37,18 +37,26 @@
             codes = <INPUT_REL_X INPUT_REL_Y INPUT_REL_WHEEL INPUT_REL_HWHEEL>;
         };
 
-        /* 〈Phantom Drift Mk.VI〉— 公式推奨プリセット準拠（mjmjm0101/zmk-input-processor-scroll-inertia）
-         * scale/scale-div = 4/675 は PMW3610 + 125Hz 向けに公式が校正した値。
-         * 他のパラメータ（gain/blend/decay/friction/stop/tick/start/move 等）は
-         * 公式デフォルトをそのまま使い、min-events のみ短フリック発動のため下げる。*/
+        /* 〈Phantom Drift Mk.IV〉— iOS 風 慣性スクロール（mjmjm0101/zmk-input-processor-scroll-inertia）
+         * 公式推奨配置: scaler の「前」に置く（mapper → inertia → scaler → snap）
+         * scale/scale-div は scaler の引数と一致させること（必須）
+         * fast/slow=0 のとき decay-* は単一曲線扱い（iOS 風はこれで OK）*/
         zip_scroll_inertia: zip_scroll_inertia {
             compatible = "zmk,input-processor-scroll-inertia";
             #input-processor-cells = <0>;
             axis        = <0>;     /* 0=2D / 1=Y / 2=X */
-            layer       = <5>;     /* L5 OFF 時に内部状態をリセット（リーク防止）*/
-            scale       = <4>;     /* 公式推奨（&zip_scroll_scaler 4 675 と一致）*/
-            scale-div   = <675>;
-            min-events  = <3>;     /* 短いフリックでも arm 成立（default 10 → 3）*/
+            scale       = <2>;     /* &zip_scroll_scaler 2 3 と一致させる */
+            scale-div   = <3>;
+            gain        = <600>;   /* 入力追従を強化（default 300）*/
+            blend       = <400>;   /* gain+blend=1000 */
+            start       = <30>;    /* フリック発動の最小ピーク速度（default 40）*/
+            move        = <30>;    /* 慣性発動に必要な総移動量（default 80）*/
+            decay-fast  = <992>;   /* iOS 風長滑り（公式推奨 990-995 単一曲線）*/
+            decay-slow  = <992>;   /* fast/slow=0 のため実質 decay-tail と同等 */
+            decay-tail  = <992>;
+            friction    = <0>;     /* 線形摩擦を完全撤廃（純指数減衰のみ）*/
+            stop        = <7>;     /* 公式デフォルト。HID 量子化以下に潜らない閾値 */
+            tick        = <8>;     /* 125Hz センサー想定 */
         };
 
         /* ジェスチャー定義（変更なし） */
@@ -72,7 +80,8 @@
             input-processors = <
                 &zip_xy_to_scroll_mapper
                 &zip_scroll_inertia
-                &zip_scroll_scaler 4 675
+                &zip_scroll_scaler 2 3
+                &zip_scroll_snap
             >;
         };
 
