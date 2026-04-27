@@ -274,6 +274,24 @@
 | PMW3610 cpi-layers | `<4 3200>` | L4 MOUSE アクティブ時はセンサー CPI を 3200 に動的切替（〈Resolution Shift〉) |
 | arrows-alt L15 tick | 80ms | K ホールドスクロールの精密度。値が大きいほど 1 ノッチが大きい動きを要求 |
 | L5 SCROLL スケーラー | `1/2`（半速） | `zip_xy_to_scroll_mapper` 後段にスケーラーを噛ませ、ホイール出力を 1/2 倍に絞り精密スクロール化 |
+| ドライバ scroll-accel | **削除** | フリック時の加速は `scroll-flick-boost`（×2）が担うため scroll-accel 経路を撤去 |
+
+### PHANTOM DRIFT ── 慣性スクロール（PMW3610 ドライバネイティブ）
+
+*指を離した後も剣閃が空を切る ── ドライバ自身が 4 サンプル平均でフリックを検出し、速度連動減衰で滑走させる。*
+
+| プロパティ | 値 | 効果 |
+|---|---|---|
+| `scroll-inertia` | 有効 | 慣性スクロール機能を起動 |
+| `scroll-inertia-decay` | 75 | 低速時の減衰%（小ほど早く停止）|
+| `scroll-inertia-decay-fast` | 92 | 高速時の減衰%（大ほど長く滑る）|
+| `scroll-inertia-slow-spd` | 2 | 低速判定閾値（スクロール単位/tick）|
+| `scroll-inertia-fast-spd` | 6 | 高速判定閾値 |
+| `scroll-inertia-tick-ms` | 16 | 減衰タイマー間隔（ms ≒ 60fps）|
+| `scroll-flick-threshold` | 6 | 4 サンプル移動平均によるフリック検出閾値 |
+| `scroll-flick-boost` | 512 | フリック時の速度乗数（×256 固定小数点。512 = ×2.0）|
+
+> **[ SYSTEM ]** 値は全てドライバ YAML default。外部モジュールに依存せず、`&trackball` ノードに直接定義する駆動部統合構成。`scroll-layers = <5>` との連携前提のため、L5 SCROLL 中のみ慣性が乗る。
 
 ### THREAD STACK ── スレッドスタック（クラッシュ対策）
 
@@ -329,6 +347,7 @@
 | 2026-04-26 | 〈Flick Burst〉さらに増幅。`max-factor` 12000 → 16000（×16）、`speed-max` 2000 → 1500。ピーク倍率を底上げしつつ、軽めのフリックでも最大倍率に届くよう感度を引き上げ |
 | 2026-04-26 | 〈Sealed Aim〉— SNIPE（L15）で `pointer_accel` をバイパスする per-layer override を追加。stock ZMK input-listener は `process-next` 未指定の override が一致すると base 処理をスキップする仕様を利用し、`snipe_pure { layers = <15>; input-processors = <&tb_drop_all 1 1>; };` を設置。SNIPE 中は加速曲線を完全無効化し、ドライバ側 SNIPE 分割の精度をそのまま手元へ届ける |
 | 2026-04-27 | 〈Tempered Wheel〉— L5 SCROLL のホイール出力をスケーラー `&zip_snipe_scroll_scaler 1 2` で半速化。`zip_xy_to_scroll_mapper` の直後・`zip_scroll_snap` の前に挿入し、トラックボールの移動量をホイールイベントへ変換した直後に 1/2 倍へ縮約。長文スクロールでの行き過ぎを抑え、軸スナップ判定もより安定する |
+| 2026-04-28 | 〈Phantom Drift〉— iOS 風 慣性スクロールをドライバネイティブで導入。当初 `mjmjm0101/zmk-input-processor-scroll-inertia` を west.yml に追加し input-processor として組み込もうとしたが、**Mk.I〜VI まで 6 度の試行で「滑らない」「BLE 切断」を繰り返し迷走**（PR #55 に試行履歴）。最終的に **PMW3610 ドライバ fork (`eincode0/zmk-pmw3610-driver`) 自体に同名の `scroll-inertia` 機能が組み込み済み**だったことが判明（4 サンプル平均によるフリック検出 + 速度連動減衰タイマー実装）。外部モジュールを完全撤去し、ドライバ YAML default 値で `&trackball` ノードに直接定義する素直な構成へ移行。`scroll-accel` 系 3 行は撤去（フリック加速は `scroll-flick-boost` が担うため重複）|
 
 ══════════════════════════════════════════════
 
