@@ -53,6 +53,9 @@
         device = <&trackball>;
         input-processors = <&pointer_accel>;
 
+        /* 慣性スクロールOFF版: ボールの動きにそのまま追従。
+         * zip_xy_to_scroll_mapper の前段に未定義の divisor を挟まず、
+         * scroll-snap のみで縦横スナップ。スクロール量は SCRL_VAL で調整。*/
         scroller {
             layers = <5>;
             input-processors = <
@@ -113,18 +116,20 @@
         arrows-repeat-delay-ms = <250>;
         arrows-repeat-rate-ms = <100>;
 
-        /* 〈Phantom Drift〉— ドライバネイティブ慣性スクロール（PMW3610 fork 内蔵機能）
-         * 4 サンプル平均によるフリック検出 → 速度連動減衰タイマーで滑走。
-         * scroll-accel は撤去（フリック時の加速は scroll-flick-boost が担う）。
-         * 数値はドライバ YAML の default を明示記載。実機感触で調整可能。*/
+        /* 〈Phantom Drift〉慣性スクロール — 全面OFF
+         * 慣性タイマー由来のカクつきを根本除去。
+         * ボールを回している間だけスクロールが発生する素直な挙動に戻す。
+         * 必要なら下のブロックのコメントを外して再有効化可能。*/
+        /*
         scroll-inertia;
-        scroll-inertia-decay      = <82>;    /* 低速減衰%（default 75→82 で低速タイムを延長）*/
-        scroll-inertia-decay-fast = <97>;    /* 高速減衰%（default 92→97 で iOS 風長滑り）*/
-        scroll-inertia-slow-spd   = <2>;     /* 低速判定閾値 */
-        scroll-inertia-fast-spd   = <6>;     /* 高速判定閾値 */
-        scroll-inertia-tick-ms    = <8>;     /* 減衰タイマー間隔ms（default 16→8 で ≒120fps、BLE 7.5ms に近づけてカクつき解消）*/
-        scroll-flick-threshold    = <4>;     /* フリック検出閾値（default 6→4 で敏感に）*/
-        scroll-flick-boost        = <768>;   /* フリック速度乗数（default 512=×2.0 → 768=×3.0）*/
+        scroll-inertia-decay      = <75>;
+        scroll-inertia-decay-fast = <92>;
+        scroll-inertia-slow-spd   = <2>;
+        scroll-inertia-fast-spd   = <6>;
+        scroll-inertia-tick-ms    = <8>;
+        scroll-flick-threshold    = <6>;
+        scroll-flick-boost        = <512>;
+        */
 
         evt-type = <INPUT_EV_REL>;
         x-input-code = <INPUT_REL_X>;
@@ -145,3 +150,4 @@
     min-factor = <1000>;
     sensor-dpi = <2200>;
 };
+
