@@ -37,27 +37,6 @@
             codes = <INPUT_REL_X INPUT_REL_Y INPUT_REL_WHEEL INPUT_REL_HWHEEL>;
         };
 
-        zip_snipe_scroll_scaler: zip_snipe_scroll_scaler {
-            compatible = "zmk,input-processor-scaler";
-            #input-processor-cells = <2>;
-            type = <INPUT_EV_REL>;
-            codes = <INPUT_REL_WHEEL INPUT_REL_HWHEEL>;
-        };
-
-        /* --- スクロール慣性の定義 --- */
-        zip_scroll_inertia: zip_scroll_inertia {
-            compatible = "zmk,input-processor-scroll-inertia";
-            #input-processor-cells = <0>;
-            scroll-inertia;
-            scroll-inertia-decay        = <75>;
-            scroll-inertia-decay-fast   = <98>;
-            scroll-inertia-slow-spd     = <1>;
-            scroll-inertia-fast-spd     = <15>;
-            scroll-inertia-tick-ms      = <8>;
-            scroll-flick-threshold      = <5>;
-            scroll-flick-boost          = <12000>;
-        };
-
         /* ジェスチャー定義（変更なし） */
         zip_gE: zip_gE { compatible = "zmk,input-processor-mouse-gesture"; #input-processor-cells = <0>; stroke-size = <60>; movement-threshold = <6>; idle-timeout-ms = <110>; gesture-cooldown-ms = <130>; enable-eager-mode; up { pattern = <GESTURE_UP>; bindings = <&gE_up>; }; down { pattern = <GESTURE_DOWN>; bindings = <&gE_down>; }; left { pattern = <GESTURE_LEFT>; bindings = <&gE_left>; }; right { pattern = <GESTURE_RIGHT>; bindings = <&gE_right>; }; };
         zip_gR: zip_gR { compatible = "zmk,input-processor-mouse-gesture"; #input-processor-cells = <0>; stroke-size = <60>; movement-threshold = <6>; idle-timeout-ms = <110>; gesture-cooldown-ms = <130>; enable-eager-mode; up { pattern = <GESTURE_UP>; bindings = <&gR_up>; }; down { pattern = <GESTURE_DOWN>; bindings = <&gR_down>; }; left { pattern = <GESTURE_LEFT>; bindings = <&gR_left>; }; right { pattern = <GESTURE_RIGHT>; bindings = <&gR_right>; }; };
@@ -69,32 +48,32 @@
         zip_gW: zip_gW { compatible = "zmk,input-processor-mouse-gesture"; #input-processor-cells = <0>; stroke-size = <60>; movement-threshold = <6>; idle-timeout-ms = <110>; gesture-cooldown-ms = <130>; enable-eager-mode; up { pattern = <GESTURE_UP>; bindings = <&gW_up>; }; down { pattern = <GESTURE_DOWN>; bindings = <&gW_down>; }; left { pattern = <GESTURE_LEFT>; bindings = <&gW_left>; }; right { pattern = <GESTURE_RIGHT>; bindings = <&gW_right>; }; };
     };
 
-    trackball_listener: trackball_listener {
-        compatible = "zmk,input-listener";
-        device = <&trackball>;
-        input-processors = <&pointer_accel>;
+trackball_listener: trackball_listener {
+    compatible = "zmk,input-listener";
+    device = <&trackball>;
+    /* input-processors = <&pointer_accel>; */   /* ← 加速OFF: コメントアウト */
 
-        scroller {
-            layers = <5>;
-            input-processors = <
-                &zip_xy_to_scroll_mapper
-                &zip_snipe_scroll_scaler 1 2
-                &zip_scroll_snap
-            >;
-        };
-
-        /* SNIPE: pointer_accel をバイパスして純粋な精密移動に戻す */
-        snipe_pure { layers = <15>; input-processors = <&tb_drop_all 1 1>; };
-
-        gesture_e { layers = <7>;  input-processors = <&zip_gE &tb_drop_all 0 1>; };
-        gesture_r { layers = <8>;  input-processors = <&zip_gR &tb_drop_all 0 1>; };
-        gesture_s { layers = <9>;  input-processors = <&zip_gS &tb_drop_all 0 1>; };
-        gesture_b { layers = <10>; input-processors = <&zip_gB &tb_drop_all 0 1>; };
-        gesture_t { layers = <11>; input-processors = <&zip_gT &tb_drop_all 0 1>; };
-        gesture_a { layers = <12>; input-processors = <&zip_gA &tb_drop_all 0 1>; };
-        gesture_d { layers = <13>; input-processors = <&zip_gD &tb_drop_all 0 1>; };
-        gesture_w { layers = <14>; input-processors = <&zip_gW &tb_drop_all 0 1>; };
+    scroller {
+        layers = <5>;
+        input-processors = <
+            &zip_xy_to_scroll_mapper
+            &zip_scroll_snap
+        >;
     };
+
+    /* SNIPE: pointer_accel をバイパスして純粋な精密移動に戻す */
+    snipe_pure { layers = <15>; input-processors = <&tb_drop_all 1 1>; };
+
+    gesture_e { layers = <7>;  input-processors = <&zip_gE &tb_drop_all 0 1>; };
+    gesture_r { layers = <8>;  input-processors = <&zip_gR &tb_drop_all 0 1>; };
+    gesture_s { layers = <9>;  input-processors = <&zip_gS &tb_drop_all 0 1>; };
+    gesture_b { layers = <10>; input-processors = <&zip_gB &tb_drop_all 0 1>; };
+    gesture_t { layers = <11>; input-processors = <&zip_gT &tb_drop_all 0 1>; };
+    gesture_a { layers = <12>; input-processors = <&zip_gA &tb_drop_all 0 1>; };
+    gesture_d { layers = <13>; input-processors = <&zip_gD &tb_drop_all 0 1>; };
+    gesture_w { layers = <14>; input-processors = <&zip_gW &tb_drop_all 0 1>; };
+};
+
 
     layer_listeners {
         compatible = "zmk,layer-listeners";
@@ -123,7 +102,7 @@
         reg = <0>;
         spi-max-frequency = <2000000>;
         irq-gpios    = <&gpio0 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
-        cpi = <2200>;
+        cpi = <2400>;
         force-awake;
         snipe-layers  = <15>;
         scroll-layers = <5>;
@@ -135,9 +114,21 @@
         arrows-repeat-delay-ms = <250>;
         arrows-repeat-rate-ms = <100>;
 
-        scroll-accel;
-        scroll-accel-max-mult = <0>;
-        scroll-accel-threshold = <30>;
+        /* 〈Phantom Drift〉慣性スクロール — 全面OFF
+         * 慣性タイマー由来のカクつきを根本除去。
+         * ボールを回している間だけスクロールが発生する素直な挙動に戻す。
+         * 必要なら下のブロックのコメントを外して再有効化可能。*/
+        /*
+        scroll-inertia;
+        scroll-inertia-decay      = <75>;
+        scroll-inertia-decay-fast = <92>;
+        scroll-inertia-slow-spd   = <2>;
+        scroll-inertia-fast-spd   = <6>;
+        scroll-inertia-tick-ms    = <8>;
+        scroll-flick-threshold    = <6>;
+        scroll-flick-boost        = <512>;
+        */
+
         evt-type = <INPUT_EV_REL>;
         x-input-code = <INPUT_REL_X>;
         y-input-code = <INPUT_REL_Y>;
@@ -150,10 +141,14 @@
     input-type = <INPUT_EV_REL>;
     codes = <INPUT_REL_X INPUT_REL_Y>;
     sensitivity = <1000>;
-    max-factor = <16000>;
-    acceleration-exponent = <3>;
-    speed-threshold = <10>;
+    max-factor = <16000>;            /* Flick Burst維持 */
+    acceleration-exponent = <3>;     /* 維持 */
+    speed-threshold = <300>;         /* ★ 10 → 300: 低速の急峻加速を抑制 */
     speed-max = <1500>;
     min-factor = <1000>;
     sensor-dpi = <2200>;
 };
+
+
+
+
