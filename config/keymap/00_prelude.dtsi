@@ -17,7 +17,7 @@
 /* pointing.h の定義（デフォルト10）を上書き */
 
 #undef ZMK_POINTING_DEFAULT_SCRL_VAL
-#define ZMK_POINTING_DEFAULT_SCRL_VAL 3
+#define ZMK_POINTING_DEFAULT_SCRL_VAL 1
 
 &msc {
     time-to-max-speed-ms = <0>;
