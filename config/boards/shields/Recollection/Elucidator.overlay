@@ -142,14 +142,15 @@
 &pointer_accel {
     input-type = <INPUT_EV_REL>;
     codes = <INPUT_REL_X INPUT_REL_Y>;
-    sensitivity = <800>;             /* 1000 → 800: CPI上げた分を相殺 */
-    max-factor = <6000>;             /* 16000 → 6000: 高速時の飛びを抑制 */
-    acceleration-exponent = <2>;     /* 3 → 2: カーブを滑らかに */
-    speed-threshold = <3>;           /* 10 → 3: 低速から加速開始 */
+    sensitivity = <1000>;
+    max-factor = <16000>;            /* Flick Burst維持 */
+    acceleration-exponent = <3>;     /* 維持 */
+    speed-threshold = <300>;         /* ★ 10 → 300: 低速の急峻加速を抑制 */
     speed-max = <1500>;
-    min-factor = <1200>;             /* 1000 → 1200: 低速底上げ */
-    sensor-dpi = <2400>;             /* 2200 → 2400: cpi と一致させる */
+    min-factor = <1000>;
+    sensor-dpi = <2200>;
 };
+
 
 
 
