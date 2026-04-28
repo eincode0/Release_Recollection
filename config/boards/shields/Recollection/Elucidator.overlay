@@ -140,13 +140,13 @@
          * scroll-accel は撤去（フリック時の加速は scroll-flick-boost が担う）。
          * 数値はドライバ YAML の default を明示記載。実機感触で調整可能。*/
         scroll-inertia;
-        scroll-inertia-decay      = <75>;    /* 低速減衰%（小ほど早く停止、推奨 50-85）*/
-        scroll-inertia-decay-fast = <92>;    /* 高速減衰%（大ほど長く滑る、推奨 85-97）*/
-        scroll-inertia-slow-spd   = <2>;     /* 低速判定閾値（推奨 1-3）*/
-        scroll-inertia-fast-spd   = <6>;     /* 高速判定閾値（推奨 5-10）*/
-        scroll-inertia-tick-ms    = <16>;    /* 減衰タイマー間隔ms ≒60fps（推奨 10-33）*/
-        scroll-flick-threshold    = <6>;     /* 4サンプル平均フリック検出閾値（推奨 4-10）*/
-        scroll-flick-boost        = <512>;   /* フリック時速度乗数 ×256 固定小数点。512=2倍（推奨 256-768）*/
+        scroll-inertia-decay      = <82>;    /* 低速減衰%（default 75→82 で低速タイムを延長）*/
+        scroll-inertia-decay-fast = <97>;    /* 高速減衰%（default 92→97 で iOS 風長滑り）*/
+        scroll-inertia-slow-spd   = <2>;     /* 低速判定閾値 */
+        scroll-inertia-fast-spd   = <6>;     /* 高速判定閾値 */
+        scroll-inertia-tick-ms    = <8>;     /* 減衰タイマー間隔ms（default 16→8 で ≒120fps、BLE 7.5ms に近づけてカクつき解消）*/
+        scroll-flick-threshold    = <4>;     /* フリック検出閾値（default 6→4 で敏感に）*/
+        scroll-flick-boost        = <768>;   /* フリック速度乗数（default 512=×2.0 → 768=×3.0）*/
 
         evt-type = <INPUT_EV_REL>;
         x-input-code = <INPUT_REL_X>;
