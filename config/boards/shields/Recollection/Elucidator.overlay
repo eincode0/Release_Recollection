@@ -143,11 +143,12 @@
     input-type = <INPUT_EV_REL>;
     codes = <INPUT_REL_X INPUT_REL_Y>;
     sensitivity = <1000>;
-    max-factor = <16000>;
-    acceleration-exponent = <3>;
+    max-factor = <6000>;            /* 16000 → 6000: 加速上限を穏やかに */
+    acceleration-exponent = <2>;    /* 3 → 2: カーブを滑らかに */
     speed-threshold = <10>;
     speed-max = <1500>;
     min-factor = <1000>;
     sensor-dpi = <2200>;
 };
+
 
